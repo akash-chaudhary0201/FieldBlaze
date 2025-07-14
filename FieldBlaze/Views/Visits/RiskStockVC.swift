@@ -18,8 +18,8 @@ class RiskStockVC: UIViewController {
     }
     
     @IBAction func proceedAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Orders", bundle: nil)
-        if let nextController = storyboard.instantiateViewController(withIdentifier: "CreateSalesOrderController") as? CreateSalesOrderController{
+        let storyboard = UIStoryboard(name: "Visits", bundle: nil)
+        if let nextController = storyboard.instantiateViewController(withIdentifier: "VisitsTaskVC") as? VisitsTaskVC{
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }
@@ -27,6 +27,7 @@ class RiskStockVC: UIViewController {
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
     
     
 }

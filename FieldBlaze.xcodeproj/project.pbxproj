@@ -88,6 +88,7 @@
 		B407D5602E20D70A00CC1CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B407D55F2E20D70A00CC1CF3 /* LaunchScreen.storyboard */; };
 		B41A4A802E210EF1006AA834 /* RiskStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A4A7F2E210EF1006AA834 /* RiskStockVC.swift */; };
 		B47E41BE2E2532C400883779 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */; };
+		B47E41C02E253A4600883779 /* VisitsTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E41BF2E253A4600883779 /* VisitsTaskVC.swift */; };
 		B4C784392E24D4A6000C1AF6 /* ProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C784382E24D4A0000C1AF6 /* ProductsService.swift */; };
 		B4C7843D2E24D9EA000C1AF6 /* PriceBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */; };
 		B73B520D234FA65F001B069B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73B520C234FA65F001B069B /* SceneDelegate.swift */; };
@@ -183,6 +184,7 @@
 		B407D51B2E20D12000CC1CF3 /* VisitStockDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitStockDetailsVC.swift; sourceTree = "<group>"; };
 		B407D55F2E20D70A00CC1CF3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B41A4A7F2E210EF1006AA834 /* RiskStockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskStockVC.swift; sourceTree = "<group>"; };
+		B47E41BF2E253A4600883779 /* VisitsTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsTaskVC.swift; sourceTree = "<group>"; };
 		B4C784382E24D4A0000C1AF6 /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
 		B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceBook.swift; sourceTree = "<group>"; };
 		B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -481,6 +483,7 @@
 				B407D5112E20D0F500CC1CF3 /* Visits.storyboard */,
 				53BEA8D82DA7AF31002A151B /* TodaysVisitsVC.swift */,
 				B41A4A7F2E210EF1006AA834 /* RiskStockVC.swift */,
+				B47E41BF2E253A4600883779 /* VisitsTaskVC.swift */,
 			);
 			path = Visits;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				5303F0A92DA52CA400B4D528 /* AllData.swift in Sources */,
 				5303F06B2DA4FFDF00B4D528 /* Preferences.swift in Sources */,
 				5303F06C2DA4FFDF00B4D528 /* StatusBar.swift in Sources */,
+				B47E41C02E253A4600883779 /* VisitsTaskVC.swift in Sources */,
 				5303F06D2DA4FFDF00B4D528 /* TransitionContext.swift in Sources */,
 				53FEDC8A2DB513D80027220E /* GlobalData.swift in Sources */,
 				5303F06E2DA4FFDF00B4D528 /* BasicTransitionAnimator.swift in Sources */,
