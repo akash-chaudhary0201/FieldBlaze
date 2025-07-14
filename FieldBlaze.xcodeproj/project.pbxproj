@@ -77,7 +77,6 @@
 		B407D4DE2E20D02700CC1CF3 /* BeatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B407D4D42E20D02600CC1CF3 /* BeatService.swift */; };
 		B407D5122E20D0F500CC1CF3 /* Visits.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B407D5112E20D0F500CC1CF3 /* Visits.storyboard */; };
 		B407D51C2E20D12000CC1CF3 /* VisitStockDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B407D51B2E20D12000CC1CF3 /* VisitStockDetailsVC.swift */; };
-		B407D51D2E20D12000CC1CF3 /* CreateVisitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B407D5162E20D12000CC1CF3 /* CreateVisitVC.swift */; };
 		B407D51E2E20D12000CC1CF3 /* StartCheckInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B407D51A2E20D12000CC1CF3 /* StartCheckInVC.swift */; };
 		B407D51F2E20D12000CC1CF3 /* SingleVisitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B407D5192E20D12000CC1CF3 /* SingleVisitVC.swift */; };
 		B407D5202E20D12000CC1CF3 /* CreateNewVisitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B407D5152E20D12000CC1CF3 /* CreateNewVisitVC.swift */; };
@@ -88,7 +87,9 @@
 		B407D5272E20D28000CC1CF3 /* SwiftLoader in Frameworks */ = {isa = PBXBuildFile; productRef = B407D5262E20D28000CC1CF3 /* SwiftLoader */; };
 		B407D5602E20D70A00CC1CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B407D55F2E20D70A00CC1CF3 /* LaunchScreen.storyboard */; };
 		B41A4A802E210EF1006AA834 /* RiskStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A4A7F2E210EF1006AA834 /* RiskStockVC.swift */; };
-		B4DDC1392E20EFB4006D38DB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */; };
+		B47E41BE2E2532C400883779 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */; };
+		B4C784392E24D4A6000C1AF6 /* ProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C784382E24D4A0000C1AF6 /* ProductsService.swift */; };
+		B4C7843D2E24D9EA000C1AF6 /* PriceBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */; };
 		B73B520D234FA65F001B069B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73B520C234FA65F001B069B /* SceneDelegate.swift */; };
 		B77BD8A321125B510036B284 /* bootconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B77BD8A221125B510036B284 /* bootconfig.plist */; };
 		CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA8CA031F071B2300448B51 /* Images.xcassets */; };
@@ -175,7 +176,6 @@
 		B407D5132E20D12000CC1CF3 /* AddContactVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactVC.swift; sourceTree = "<group>"; };
 		B407D5142E20D12000CC1CF3 /* AllVisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllVisitsVC.swift; sourceTree = "<group>"; };
 		B407D5152E20D12000CC1CF3 /* CreateNewVisitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewVisitVC.swift; sourceTree = "<group>"; };
-		B407D5162E20D12000CC1CF3 /* CreateVisitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVisitVC.swift; sourceTree = "<group>"; };
 		B407D5172E20D12000CC1CF3 /* CustomerInsightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerInsightVC.swift; sourceTree = "<group>"; };
 		B407D5182E20D12000CC1CF3 /* MeetGreetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetGreetVC.swift; sourceTree = "<group>"; };
 		B407D5192E20D12000CC1CF3 /* SingleVisitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleVisitVC.swift; sourceTree = "<group>"; };
@@ -183,6 +183,8 @@
 		B407D51B2E20D12000CC1CF3 /* VisitStockDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitStockDetailsVC.swift; sourceTree = "<group>"; };
 		B407D55F2E20D70A00CC1CF3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B41A4A7F2E210EF1006AA834 /* RiskStockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskStockVC.swift; sourceTree = "<group>"; };
+		B4C784382E24D4A0000C1AF6 /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
+		B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceBook.swift; sourceTree = "<group>"; };
 		B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B73B520C234FA65F001B069B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B77BD8A221125B510036B284 /* bootconfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bootconfig.plist; sourceTree = "<group>"; };
@@ -191,8 +193,18 @@
 		D33B88402CA60F0E00892D80 /* QrCodeScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCodeScanController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B4C7843F2E24E479000C1AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Untitled.swift,
+			);
+			target = 4FD6C4731B754AF1002F9F90 /* FieldBlaze */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B407D4AD2E20CFE300CC1CF3 /* GlobalFunctions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = GlobalFunctions; sourceTree = "<group>"; };
+		B407D4AD2E20CFE300CC1CF3 /* GlobalFunctions */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (B4C7843F2E24E479000C1AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = GlobalFunctions; sourceTree = "<group>"; };
 		B407D4E22E20D03A00CC1CF3 /* Approvals */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Approvals; sourceTree = "<group>"; };
 		B407D4E72E20D03A00CC1CF3 /* Beats */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Beats; sourceTree = "<group>"; };
 		B407D4EC2E20D03A00CC1CF3 /* Orders */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orders; sourceTree = "<group>"; };
@@ -209,7 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4DDC1392E20EFB4006D38DB /* libsqlite3.tbd in Frameworks */,
+				B47E41BE2E2532C400883779 /* libsqlite3.tbd in Frameworks */,
 				7BCFCB4FE1F83AFFD907C3BF /* Pods_FieldBlaze.framework in Frameworks */,
 				B407D5272E20D28000CC1CF3 /* SwiftLoader in Frameworks */,
 			);
@@ -401,6 +413,8 @@
 		53A15AC32D9FC77D00BDA75D /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
+				B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */,
+				B4C784382E24D4A0000C1AF6 /* ProductsService.swift */,
 				B407D4CF2E20D02600CC1CF3 /* ApprovalService.swift */,
 				B407D4D02E20D02600CC1CF3 /* VisitsService.swift */,
 				B407D4D12E20D02600CC1CF3 /* ContactsServices.swift */,
@@ -459,7 +473,6 @@
 				B407D5132E20D12000CC1CF3 /* AddContactVC.swift */,
 				B407D5142E20D12000CC1CF3 /* AllVisitsVC.swift */,
 				B407D5152E20D12000CC1CF3 /* CreateNewVisitVC.swift */,
-				B407D5162E20D12000CC1CF3 /* CreateVisitVC.swift */,
 				B407D5172E20D12000CC1CF3 /* CustomerInsightVC.swift */,
 				B407D5182E20D12000CC1CF3 /* MeetGreetVC.swift */,
 				B407D5192E20D12000CC1CF3 /* SingleVisitVC.swift */,
@@ -568,6 +581,7 @@
 			mainGroup = 4FD6C46B1B754AF1002F9F90;
 			packageReferences = (
 				B407D5252E20D28000CC1CF3 /* XCRemoteSwiftPackageReference "SwiftLoader" */,
+				B47E41BD2E25163400883779 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 			);
 			productRefGroup = 4FD6C4751B754AF1002F9F90 /* Products */;
 			projectDirPath = "";
@@ -656,6 +670,7 @@
 				B407D4D82E20D02700CC1CF3 /* OrdersService.swift in Sources */,
 				B407D4D92E20D02700CC1CF3 /* TaskServices.swift in Sources */,
 				B407D4DA2E20D02700CC1CF3 /* StockTrackingService.swift in Sources */,
+				B4C7843D2E24D9EA000C1AF6 /* PriceBook.swift in Sources */,
 				B407D4DB2E20D02700CC1CF3 /* ContactsServices.swift in Sources */,
 				B407D4DC2E20D02700CC1CF3 /* VisitsService.swift in Sources */,
 				B407D4DD2E20D02700CC1CF3 /* SchemeService.swift in Sources */,
@@ -663,7 +678,6 @@
 				53A15A772D9FC75C00BDA75D /* Constant.swift in Sources */,
 				53A15A782D9FC75C00BDA75D /* Enum.swift in Sources */,
 				B407D51C2E20D12000CC1CF3 /* VisitStockDetailsVC.swift in Sources */,
-				B407D51D2E20D12000CC1CF3 /* CreateVisitVC.swift in Sources */,
 				B407D51E2E20D12000CC1CF3 /* StartCheckInVC.swift in Sources */,
 				B407D51F2E20D12000CC1CF3 /* SingleVisitVC.swift in Sources */,
 				B407D5202E20D12000CC1CF3 /* CreateNewVisitVC.swift in Sources */,
@@ -714,6 +728,7 @@
 				53A15AD82D9FC78E00BDA75D /* Validation.swift in Sources */,
 				53FEDC8D2DB514130027220E /* Customer.swift in Sources */,
 				53A15AD22D9FC78400BDA75D /* CustomTextField.swift in Sources */,
+				B4C784392E24D4A6000C1AF6 /* ProductsService.swift in Sources */,
 				53BEA8D32DA7AED9002A151B /* CustomTabBar.swift in Sources */,
 				53A15AD32D9FC78400BDA75D /* DropDownManager.swift in Sources */,
 				53A15AD42D9FC78400BDA75D /* Utility.swift in Sources */,
@@ -913,6 +928,14 @@
 		B407D5252E20D28000CC1CF3 /* XCRemoteSwiftPackageReference "SwiftLoader" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/leoru/SwiftLoader";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		B47E41BD2E25163400883779 /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;

@@ -42,8 +42,8 @@ class CustomersVC: UIViewController {
             backBtn?.isHidden = true
         }
         
-        await obj.getPriceBookNames()
-//        print("------------------------Books names array: \(obj.priceBookNames)")
+        await  PriceBookService.getPriceBookNames()
+        //        print("------------------------Books names array: \(obj.priceBookNames)")
         await obj.getZoneNames()
         await obj.getPaymentTermsNames()
         print("---------------------------------Payment Terms array:-----------\(obj.paymentTerms)")
@@ -88,7 +88,7 @@ extension CustomersVC: UITableViewDelegate, UITableViewDataSource {
         cell.typeLabl?.text = (customerDict.type?.isEmpty == false) ? customerDict.type : "N/A"
         cell.addOrderBtn?.layer.masksToBounds = false
         cell.addOrderBtn?.layer.cornerRadius = 7
-//        cell.delegate = self
+        //        cell.delegate = self
         return cell
     }
     

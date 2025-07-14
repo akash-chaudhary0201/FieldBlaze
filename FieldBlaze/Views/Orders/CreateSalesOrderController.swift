@@ -29,6 +29,7 @@ class CreateSalesOrderController: UIViewController {
     var pricebookDropDown = DropDown()
     var obj = CustomerService()
     var allPricebookNames:[String] = []
+    var selectedPriceBookId:String = ""
     
     override func viewDidLoad() {
         
@@ -38,10 +39,17 @@ class CreateSalesOrderController: UIViewController {
     //Function to update ui
     func updateUI(){
         Task{
-            await obj.getPriceBookNames()
+            await PriceBookService.getPriceBookNames()
             self.allPricebookNames = GlobalData.allPriceBooks.map{$0.priceBookName!}
             
             DropDownFunction.setupDropDown(dropDown: pricebookDropDown, anchor: pricebookView, dataSource: allPricebookNames, labelToUpdate: pricebookLabel)
+            
+            pricebookDropDown.selectionAction = { index, item in
+                self.selectedPriceBookId = GlobalData.allPriceBooks[index].id ?? ""
+                self.pricebookLabel.text = item
+                self.pricebookLabel.textColor = .black
+                print("Selected Pricebook label Id: \(self.selectedPriceBookId)")
+            }
         }
     }
     
@@ -65,4 +73,17 @@ class CreateSalesOrderController: UIViewController {
         pricebookDropDown.show()
     }
     
+    //Function to go to all Products page:
+    @IBAction func gotToAllProducts(_ sender: Any) {
+        
+        if selectedPriceBookId == ""{
+            AlertFunction.showErrorAlert("Please Select a Pricebook", self)
+        }else{
+            let storyboard = UIStoryboard(name: "Orders", bundle: nil)
+            if let nextController = storyboard.instantiateViewController(withIdentifier: "AllProductsVC") as? AllProductsVC{
+                nextController.priceBookId = self.selectedPriceBookId
+                self.navigationController?.pushViewController(nextController, animated: true)
+            }
+        }
+    }
 }

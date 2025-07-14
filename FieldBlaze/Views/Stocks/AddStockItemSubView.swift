@@ -32,8 +32,8 @@ class AddStockItemSubView: UIViewController, UITextFieldDelegate {
         searchProductLabel.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         Task{
-            await obj.getAllProducts()
-            //            print("------------Products: \(obj.allProducts)")
+//            await ProductsService.getAllProducts()
+            
             self.allProducts = GlobalData.allProducts
             
             productNames = self.allProducts.compactMap { $0.name }
@@ -89,7 +89,7 @@ class AddStockItemSubView: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let singleProduct = ProductModelToSendAsStock(id: matchedProduct.id, name: matchedProduct.name, quantity: quantity)
+        let singleProduct = ProductModelToSendAsStock(id: matchedProduct.id!, name: matchedProduct.name!, quantity: quantity)
         globalObj.globlaStockItemArray.append(singleProduct)
         
         searchProductLabel.text = ""

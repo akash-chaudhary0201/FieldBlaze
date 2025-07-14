@@ -33,6 +33,8 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        _ = DatabaseManager.shared
+        
         token = UserDefaults.standard.string(forKey: "accessToken")
         print("User Id: \(Defaults.userId!)")
         

@@ -27,11 +27,12 @@ class VisitStockDetailsVC: UIViewController {
         super.viewDidLoad()
         
         Task{
-            await obj.getAllProducts()
+            
+//            await ProductsService.getAllProducts()
             
             addeddProductsTable.separatorStyle = .none
             
-            self.allProductNames = GlobalData.allProducts.map{$0.name}
+            self.allProductNames = GlobalData.allProducts.map{$0.name ?? "ak"}
             
             DropDownFunction.setupDropDown(dropDown: allProductDropDown, anchor: productDropDownView, dataSource: allProductNames, labelToUpdate: selectProductLabel)
         }

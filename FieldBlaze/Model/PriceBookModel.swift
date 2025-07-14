@@ -9,6 +9,7 @@
 struct PriceBookModel{
     var id:String?
     var priceBookName:String?
+
     
     init(dict:[String:Any]){
         self.id = dict["Id"] as? String

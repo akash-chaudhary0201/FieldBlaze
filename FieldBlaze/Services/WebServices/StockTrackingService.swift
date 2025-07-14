@@ -158,49 +158,6 @@ class StockTrackingService{
         }
     }
     
-    //Function to get all the products:
-    func getAllProducts() async {
-        let soqlQuery = """
-            SELECT Id, Name from Product__c  
-            """
-        
-        guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-              let instanceUrl = Defaults.instanceUrl else {
-            return
-        }
-        
-        let fullUrl = "\(instanceUrl)/services/data/v59.0/query/?q=\(encodedQuery)"
-        
-        guard let url = URL(string: fullUrl) else {
-            return
-        }
-        
-        do{
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.addValue("Bearer \(Defaults.accessToken!)", forHTTPHeaderField: "Authorization")
-            
-            let(data, _) = try await URLSession.shared.data(for: request)
-            
-            GlobalData.allProducts.removeAll()
-            
-            if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
-               let stockRecords = jsonData["records"] as? [[String:Any]]{
-                
-                for singleRecord in stockRecords{
-                    if let name = singleRecord["Name"] as? String,
-                       let id = singleRecord["Id"] as? String{
-                        
-                        let product = FetchedProductsModel(id: id, name: name)
-                        GlobalData.allProducts.append(product)
-                        
-                    }
-                }
-            }
-        }catch{
-            print("Error in fetching details", error)
-        }
-    }
     
     //Function to create a stock:
     func createStock(_ requestBody :[String:Any]){
