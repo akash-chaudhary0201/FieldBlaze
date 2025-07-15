@@ -29,14 +29,9 @@ class CreateTaskVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        taskTitle?.label.text = "Add Task Title"
-        taskTitle?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        taskTitle?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        taskTitle?.setNormalLabelColor(UIColor.gray, for: .normal)
-        taskTitle?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
+        SetTextFields.setTextField(taskTitle, "Add Task Title")
         
         taskDescription.label.text = "Write the task's description"
-        //        taskDescription.placeholder = "Enter Your Remarks"
         taskDescription?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
         taskDescription?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
         taskDescription?.setNormalLabel(UIColor.gray, for: .normal)
@@ -59,23 +54,25 @@ class CreateTaskVC: UIViewController {
     //Button's function to add new task:
     @IBAction func addNewTaskAction(_ sender: Any) {
         
-        var config = SwiftLoader.Config()
-        config.size = 100
-        config.spinnerColor = .blue
-        config.foregroundColor = .black
-        config.foregroundAlpha = 0
-        SwiftLoader.setConfig(config: config)
-        SwiftLoader.show(title: "Adding...", animated: true)
+        if taskTitle.text == "" || priorityLabel.text == "" || taskDescription.textView.text == ""{
+            AlertFunction.showErrorAlert("Please fill all the details", self)
+        }
         
-        self.obj.createNewTask(taskTitle.text!, priorityLabel.text!, taskDescription.textView.text!) { status in
+        SwiftLoaderHelper.setLoader()
+        
+        let requestBody: [String: Any] = [
+            "Subject": taskTitle.text!,
+            "Priority": priorityLabel.text!,
+            "Description":taskDescription.textView.text!
+        ]
+        
+        GlobalPostRequest.commonPostFunction("v63.0/sobjects/Task", requestBody) { success, response in
             DispatchQueue.main.async {
                 SwiftLoader.hide()
-                if status {
-                    self.navigationController?.popViewController(animated: true)
+                if success {
+                    AlertFunction.showAlertAndPop("Task Addedd Successfully", self)
                 } else {
-                    let alert = UIAlertController(title: "Error", message: "Task creation failed.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alert, animated: true)
+                    AlertFunction.showErrorAlert("Error in Adding Task", self)
                 }
             }
         }

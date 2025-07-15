@@ -30,7 +30,7 @@ class SchemeVC: UIViewController {
         
         Task {
             await schemeObj.getAllSchemes()
-            self.allSchemesArray = schemeObj.schemesArray
+            self.allSchemesArray = GlobalData.allSchemes
             self.filteredSchemeArray = self.allSchemesArray
             self.schemesTable.reloadData()
         }
@@ -107,18 +107,18 @@ extension SchemeVC:UITableViewDelegate, UITableViewDataSource{
 
         cell.schemeNameLabel.text = singleScheme.schemeName
         cell.schemeType.text = singleScheme.schemeType
-        if singleScheme.minimumOrder == "<null>"{
+        if singleScheme.minimumOrder == nil{
             cell.minimumOrderValue.text = "0"
         }else{
-            cell.minimumOrderValue.text = singleScheme.minimumOrder
+            cell.minimumOrderValue.text = "\(singleScheme.minimumOrder!)"
         }
-        cell.duration.text = "\(singleScheme.startDate) to \(singleScheme.endDate)"
+        cell.duration.text = "\(singleScheme.startDate!) to \(singleScheme.endDate!)"
         cell.discountType.text = singleScheme.discountType
         cell.schemeCode.text = singleScheme.schemeCode
-        if singleScheme.schemeStatus == "1"{
+        if singleScheme.schemeStatus == true{
             cell.schemeStatus.text = "Active"
         }
-        cell.discountValue.text = singleScheme.discountValue
+        cell.discountValue.text = "\(singleScheme.discountValue!)"
         
         cell.selectionStyle = .none
         

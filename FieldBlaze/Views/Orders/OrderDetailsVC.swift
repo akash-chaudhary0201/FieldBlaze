@@ -13,6 +13,7 @@ class OrderDetailsVC: UIViewController {
     @IBOutlet weak var orderLineTabHeight: NSLayoutConstraint!
     @IBOutlet weak var orderLineItemsTable: UITableView!
     @IBOutlet weak var orderLineItemLabelTop: NSLayoutConstraint!
+    
     @IBOutlet weak var billingView: UIView!
     @IBOutlet weak var billingTable: UITableView!
     @IBOutlet weak var shippingTable: UITableView!
@@ -28,6 +29,11 @@ class OrderDetailsVC: UIViewController {
     var billingDetArray:[String] = ["Billing Street", "Billing City", "Billing Zip/Postal Code", "Billing State", "Billing Country"]
     var shippingDetArray:[String] = ["Shipping Street", "Shipping City", "Shipping Zip/Postal Code", "Shipping State", "Shipping Country"]
     
+    //Final amount labels:
+    @IBOutlet weak var amountAfterDiscount: UILabel!
+    @IBOutlet weak var amountWithGst: UILabel!
+    @IBOutlet weak var totalAmount: UILabel!
+    
     var singleOrder:[Orders] = []
     var salesOrderLineItemsArray:[SalesOrderLineItemsModel] = []
     
@@ -41,6 +47,9 @@ class OrderDetailsVC: UIViewController {
         shippingTopSpace.constant = -190
         orderLineItemLabelTop.constant = -190
         
+        firstTable.isScrollEnabled = false
+        orderLineItemsTable.isScrollEnabled = false
+        
         billingView.isHidden = true
         shippingView.isHidden = true
         
@@ -52,14 +61,12 @@ class OrderDetailsVC: UIViewController {
                     print("Completed")
                 }
             }
-            
             singleOrder = obj.singleOrder
-//            print("Single order: \(singleOrder)")
             salesOrderLineItemsArray =  obj.salesOrderLineItemArray
             print("------------------------Sales Order Line Count------------------: \(salesOrderLineItemsArray.count)")
             
             orderLineTabHeight.constant = CGFloat(salesOrderLineItemsArray.count * 210)
-        
+            
             DispatchQueue.main.async {
                 self.firstTable.reloadData()
                 self.billingTable.reloadData()
@@ -117,7 +124,7 @@ extension OrderDetailsVC:UITableViewDelegate,UITableViewDataSource{
         if tableView == firstTable{
             let cell = firstTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FirstTableCell
             cell.leftLabel.text = firstTableArray[indexPath.row]
-            let resultOrder = singleOrder.first
+            let resultOrder = GlobalData.allOrder.first
             
             if indexPath.row == 0{
                 cell.salesOrderLabel.text = resultOrder?.orderName
@@ -140,14 +147,14 @@ extension OrderDetailsVC:UITableViewDelegate,UITableViewDataSource{
             let cell = billingTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BillingTableCell
             cell.letLabel.text = billingDetArray[indexPath.row]
             
-            let resultOrder = singleOrder.first
-             
+            let resultOrder = GlobalData.allOrder.first
+            
             if indexPath.row == 0{
                 cell.rightLabel.text = resultOrder?.billingStreet
             }else if indexPath.row == 1{
                 cell.rightLabel.text = resultOrder?.billingCity
             }else if indexPath.row == 2{
-                cell.rightLabel.text = resultOrder?.billingZip
+                cell.rightLabel.text = "\(resultOrder?.billingZip ?? 0)"
             }else if indexPath.row == 3{
                 cell.rightLabel.text = resultOrder?.billingState
             }else if indexPath.row == 4{
@@ -161,14 +168,14 @@ extension OrderDetailsVC:UITableViewDelegate,UITableViewDataSource{
             let cell = shippingTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ShippingTableCell
             cell.leftLabel.text = shippingDetArray[indexPath.row]
             
-            let resultOrder = singleOrder.first
-             
+            let resultOrder = GlobalData.allOrder.first
+            
             if indexPath.row == 0{
                 cell.riightLabel.text = resultOrder?.shippingStreet
             }else if indexPath.row == 1{
                 cell.riightLabel.text = resultOrder?.shippingCity
             }else if indexPath.row == 2{
-                cell.riightLabel.text = resultOrder?.shippingZip
+                cell.riightLabel.text = "\(resultOrder?.shippingZip ?? 0)"
             }else if indexPath.row == 3{
                 cell.riightLabel.text = resultOrder?.shippingState
             }else if indexPath.row == 4{
@@ -182,12 +189,12 @@ extension OrderDetailsVC:UITableViewDelegate,UITableViewDataSource{
             let cell = orderLineItemsTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OrderLineTableCell
             
             let singleSalesItem = salesOrderLineItemsArray[indexPath.row]
-            cell.productNameLabel.text = singleSalesItem.RE_Product__r
-            cell.salesPriceLabel.text = singleSalesItem.CU_Sales_Price__c
-            cell.quantityLabel.text = singleSalesItem.NU_Quantity__c
-            cell.amountWithGSTLabel.text = singleSalesItem.CU_Amount_with_GST__c
-            cell.amountAfterDiscountLabel.text = singleSalesItem.CU_Amount_After_Discount__c
-            cell.finalAmountLabel.text = singleSalesItem.CU_Total_Price__c
+            cell.productNameLabel.text = singleSalesItem.productName
+            cell.salesPriceLabel.text = "\(singleSalesItem.cuSalesPrice!)"
+            cell.quantityLabel.text = "\(singleSalesItem.nuQuantity!)"
+            cell.amountWithGSTLabel.text = "\(singleSalesItem.cuAmountWithGST!)"
+            cell.amountAfterDiscountLabel.text = "\(singleSalesItem.cuAmountAfterDiscount!)"
+            cell.finalAmountLabel.text = "\(singleSalesItem.cuTotalPrice!)"
             
             cell.selectionStyle = .none
             
@@ -214,7 +221,7 @@ class ShippingTableCell:UITableViewCell{
 }
 
 class OrderLineTableCell:UITableViewCell{
-
+    
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var amountAfterDiscountLabel: UILabel!
     @IBOutlet weak var finalAmountLabel: UILabel!
@@ -224,5 +231,5 @@ class OrderLineTableCell:UITableViewCell{
     @IBOutlet weak var schemeLabel: UILabel!
     
 }
- 
+
 

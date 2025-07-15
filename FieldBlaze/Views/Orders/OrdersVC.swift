@@ -22,14 +22,15 @@ class OrdersVC: UIViewController {
         super.viewDidLoad()
         
         ordersTable.separatorStyle = .none
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         Task{
             await setUpUI()
         }
     }
     
     func setUpUI() async{
-        
         var config = SwiftLoader.Config()
         config.size = 100
         config.spinnerColor = .blue
@@ -40,12 +41,9 @@ class OrdersVC: UIViewController {
         
         await obj.getAllOrders(){ status in
             if status{
-                
                 SwiftLoader.hide()
             }
         }
-        allOrders = obj.ordersArray
-//        print("--------------------------Order array: \(allOrders)")
         ordersTable.reloadData()
     }
 
@@ -57,31 +55,29 @@ class OrdersVC: UIViewController {
 
 extension OrdersVC:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        allOrders.count
+        GlobalData.allOrder.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ordersTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OrderTableCell
-        let singleOrder = allOrders[indexPath.row]
+        let singleOrder =  GlobalData.allOrder[indexPath.row]
         cell.customerNameLabel.text = singleOrder.customerName
         cell.orderDateLabel.text = singleOrder.orderDate
         cell.orderNumberLabel.text = singleOrder.orderName
         cell.salesPersonLabel.text = singleOrder.salesPersonName
         
-        if singleOrder.totalOrderAmount == "<null>"{
+        if singleOrder.totalOrderAmount == 0.0{
             cell.orderAmountLabel.text = "Rs. 0"
         }else{
-            cell.orderAmountLabel.text = "Rs. \(singleOrder.totalOrderAmount!)"
+            cell.orderAmountLabel.text = "Rs. \(singleOrder.totalOrderAmount ?? 0)"
         }
-    
-        
         cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let singleOrder = allOrders[indexPath.row]
+        let singleOrder = GlobalData.allOrder[indexPath.row]
         let storyboard = UIStoryboard(name: "Orders", bundle: nil)
         if let selectedVC = storyboard.instantiateViewController(identifier: "OrderDetailsVC") as? OrderDetailsVC{
             selectedVC.orderId = singleOrder.id

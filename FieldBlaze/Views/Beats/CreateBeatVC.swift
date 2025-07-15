@@ -168,7 +168,7 @@ class CreateBeatVC: UIViewController {
         }
     }
     
-    //Function to create full to send in body of create beat api:
+    //Function to create full body to send in body of create beat api:
     func createApiBodyFunc() -> [String:Any]{
         let assignedCustomers: [[String: Any]] = selectedAccountId.enumerated().map { (index, accountId) in
             [
@@ -219,6 +219,7 @@ class CreateBeatVC: UIViewController {
             }
             SwiftLoaderHelper.setLoader()
             let requestBody = createApiBodyFunc()
+            
             obj2.createBeatPlan(requestBody) { st in
                 if st{
                     DispatchQueue.main.async {

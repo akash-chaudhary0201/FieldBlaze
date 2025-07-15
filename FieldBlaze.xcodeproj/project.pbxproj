@@ -584,7 +584,6 @@
 			mainGroup = 4FD6C46B1B754AF1002F9F90;
 			packageReferences = (
 				B407D5252E20D28000CC1CF3 /* XCRemoteSwiftPackageReference "SwiftLoader" */,
-				B47E41BD2E25163400883779 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 			);
 			productRefGroup = 4FD6C4751B754AF1002F9F90 /* Products */;
 			projectDirPath = "";
@@ -932,14 +931,6 @@
 		B407D5252E20D28000CC1CF3 /* XCRemoteSwiftPackageReference "SwiftLoader" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/leoru/SwiftLoader";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		B47E41BD2E25163400883779 /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/groue/GRDB.swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;

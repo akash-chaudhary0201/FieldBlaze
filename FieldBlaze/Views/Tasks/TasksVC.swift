@@ -23,19 +23,14 @@ class TasksVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         Task{
-            var config = SwiftLoader.Config()
-            config.size = 100
-            config.spinnerColor = .blue
-            config.foregroundColor = .black
-            config.foregroundAlpha = 0
-            SwiftLoader.setConfig(config: config)
-            SwiftLoader.show(title: "Loading...", animated: true)
+            SwiftLoaderHelper.setLoader()
             
-            await obj.getAllTasks(){ status in
-                SwiftLoader.hide()
+            await obj.getAllTasks(Defaults.userId!){ status in
+                if status{
+                    SwiftLoader.hide()
+                }
             }
-            self.allTasksArray = obj.allTasksArray
-            print("-----------------------------\(allTasksArray)")
+            self.allTasksArray = GlobalData.allTasks
             
             DispatchQueue.main.async {
                 self.tasksTabl.reloadData()

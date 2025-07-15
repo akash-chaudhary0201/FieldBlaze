@@ -17,4 +17,8 @@ class GlobalData: NSObject {
     static var allProducts = [FetchedProductsModel]()
     static var allContacts = [ContactsModel]()
     static var allPriceBooks = [PriceBookModel]()
+    static var allOrder = [Orders]()
+    static var salesOrderLineItem = [SalesOrderLineItemsModel]()
+    static var allSchemes = [SchemeModel]()
+    static var allTasks = [TaskModel]()
 }

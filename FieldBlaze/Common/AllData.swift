@@ -16,6 +16,7 @@ struct ActionItem {
 var actionCollectionData: [ActionItem] = [
     ActionItem(actionTitle: "Customers", actionImage: "customers"),
     ActionItem(actionTitle: "Order", actionImage: "order"),
+    ActionItem(actionTitle: "Schemes", actionImage: "schemes"),
     ActionItem(actionTitle: "Performance", actionImage: "performance"),
     ActionItem(actionTitle: "Work Day", actionImage: "WorkDay"),
     
@@ -32,6 +33,7 @@ var actionCollectionData: [ActionItem] = [
     ActionItem(actionTitle: "Leave", actionImage: "leave"),
     ActionItem(actionTitle: "Announcement", actionImage: "announcement"),
     ActionItem(actionTitle: "Notes", actionImage: "notes"),
+    ActionItem(actionTitle: "DSR Report", actionImage: "notes"),
     
 ]
 

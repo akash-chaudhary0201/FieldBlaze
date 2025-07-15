@@ -189,29 +189,29 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             if let selectedVC = storyboard.instantiateViewController(withIdentifier: "SchemeVC") as? SchemeVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
-        }else if indexPath.row == 7{
-            let storyboard = UIStoryboard(name: "Beats", bundle: nil)
-            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "BeatsVC") as? BeatsVC{
-                navigationController?.pushViewController(selectedVC, animated: true)
-            }
-        }else if indexPath.row == 9{
-            let storyboard = UIStoryboard(name: "Stocks", bundle: nil)
-            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "StocksVC") as? StocksVC{
-                navigationController?.pushViewController(selectedVC, animated: true)
-            }
         }else if indexPath.row == 5{
+            let storyboard = UIStoryboard(name: "Approvals", bundle: nil)
+            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "ApprovalsVC") as? ApprovalsVC{
+                navigationController?.pushViewController(selectedVC, animated: true)
+            }
+        }else if indexPath.row == 6{
             let storyboard = UIStoryboard(name: "Tasks", bundle: nil)
             if let selectedVC = storyboard.instantiateViewController(withIdentifier: "TasksVC") as? TasksVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
         }else if indexPath.row == 8{
-            let storyboard = UIStoryboard(name: "Visits", bundle: nil)
-            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "AllVisitsVC") as? AllVisitsVC{
+            let storyboard = UIStoryboard(name: "Beats", bundle: nil)
+            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "BeatsVC") as? BeatsVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
-        }else if indexPath.row == 4{
-            let storyboard = UIStoryboard(name: "Approvals", bundle: nil)
-            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "ApprovalsVC") as? ApprovalsVC{
+        }else if indexPath.row == 10{
+            let storyboard = UIStoryboard(name: "Stocks", bundle: nil)
+            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "StocksVC") as? StocksVC{
+                navigationController?.pushViewController(selectedVC, animated: true)
+            }
+        }else if indexPath.row == 9{
+            let storyboard = UIStoryboard(name: "Visits", bundle: nil)
+            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "AllVisitsVC") as? AllVisitsVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
         }
