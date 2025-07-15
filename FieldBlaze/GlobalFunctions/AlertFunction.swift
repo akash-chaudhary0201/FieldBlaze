@@ -25,5 +25,7 @@ class AlertFunction {
         }
 
         alertController.addAction(okAction)
+        
+        viewController.present(alertController, animated: true, completion: nil)
     }
 }

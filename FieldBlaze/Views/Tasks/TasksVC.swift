@@ -61,7 +61,9 @@ extension TasksVC:UITableViewDelegate, UITableViewDataSource{
         let cell = tasksTabl.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskCell
         let singleTask = allTasksArray[indexPath.row]
         
-        cell.taskDate.text = singleTask.date
+        let formateddDate = singleTask.date?.prefix(10)
+        
+        cell.taskDate.text = "\(formateddDate ?? "a")"
         cell.taskDescription.text = singleTask.description
         cell.taskTitle.text = singleTask.subject
         

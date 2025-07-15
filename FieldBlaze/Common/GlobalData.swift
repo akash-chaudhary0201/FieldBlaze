@@ -21,4 +21,5 @@ class GlobalData: NSObject {
     static var salesOrderLineItem = [SalesOrderLineItemsModel]()
     static var allSchemes = [SchemeModel]()
     static var allTasks = [TaskModel]()
+    static var allAnnouncements = [AnnouncementModel]()
 }

@@ -53,29 +53,28 @@ class CreateTaskVC: UIViewController {
     
     //Button's function to add new task:
     @IBAction func addNewTaskAction(_ sender: Any) {
-        
-        if taskTitle.text == "" || priorityLabel.text == "" || taskDescription.textView.text == ""{
-            AlertFunction.showErrorAlert("Please fill all the details", self)
-        }
-        
         SwiftLoaderHelper.setLoader()
         
-        let requestBody: [String: Any] = [
-            "Subject": taskTitle.text!,
-            "Priority": priorityLabel.text!,
-            "Description":taskDescription.textView.text!
-        ]
-        
-        GlobalPostRequest.commonPostFunction("v63.0/sobjects/Task", requestBody) { success, response in
-            DispatchQueue.main.async {
-                SwiftLoader.hide()
-                if success {
-                    AlertFunction.showAlertAndPop("Task Addedd Successfully", self)
-                } else {
-                    AlertFunction.showErrorAlert("Error in Adding Task", self)
+        if taskTitle.text == "" || priorityLabel.text == "" || taskDescription.textView.text == ""{
+            SwiftLoader.hide()
+            AlertFunction.showErrorAlert("Please fill all the details", self)
+        }else{
+            let requestBody: [String: Any] = [
+                "Subject": taskTitle.text!,
+                "Priority": priorityLabel.text!,
+                "Description":taskDescription.textView.text!
+            ]
+            
+            GlobalPostRequest.commonPostFunction("v63.0/sobjects/Task", requestBody) { success, response in
+                DispatchQueue.main.async {
+                    SwiftLoader.hide()
+                    if success {
+                        AlertFunction.showAlertAndPop("Task Addedd Successfully", self)
+                    } else {
+                        AlertFunction.showErrorAlert("Error in Adding Task", self)
+                    }
                 }
             }
         }
-        
     }
 }

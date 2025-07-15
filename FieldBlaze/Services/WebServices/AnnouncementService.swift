@@ -1,37 +1,34 @@
 //
-//  TaskServices.swift
+//  AnnouncementService.swift
 //  FieldBlaze
 //
-//  Created by Akash Chaudhary  on 03/06/25.
+//  Created by Akash Chaudhary  on 15/07/25.
 //  Copyright © 2025 FieldBlazeOrganizationName. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Foundation
 
-class TaskServices{
-    let webRequest = BaseWebService()
-    let endPoint = EndPoints()
-    
-    var singleTask:TaskModel?
-    
-    //Function to get all Tasks:
-    func getAllTasks(_ userId:String , completion:@escaping(Bool) ->  Void) async{
-        
+class AnnouncementService{
+    public static func getAllnnouncements(completion:@escaping (Bool) -> Void) async{
         let soqlQuery = """
-            SELECT Id, Status, Priority,Description,Subject,CreatedDate FROM Task WHERE OwnerId = '\(userId)' ORDER BY CreatedDate DESC
+            select Id, Name, Start_Date_DA__c, End_Date_DA__c, Description_TX__c, Type_PI__c, Announcement_Image__c from Announcement__c 
             """
         
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let instanceUrl = Defaults.instanceUrl else {
+            completion(false)
             return
         }
         
         let fullUrl = "\(instanceUrl)/services/data/v59.0/query/?q=\(encodedQuery)"
         
         guard let url = URL(string: fullUrl) else {
+            completion(false)
             return
         }
+        
+        GlobalData.allAnnouncements.removeAll()
         
         do{
             var request = URLRequest(url: url)
@@ -40,44 +37,38 @@ class TaskServices{
             
             let(data, _) = try await URLSession.shared.data(for: request)
             
-            GlobalData.allTasks.removeAll()
-            
             if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
-               let taskRecords = jsonData["records"] as? [[String:Any]]{
+               let stockRecords = jsonData["records"] as? [[String:Any]]{
                 
-                let formatter = DateFormatter()
-                formatter.dateFormat = "dd-MM-yyyy"
-                
-                for taskRecord in taskRecords{
-                    GlobalData.allTasks.append(TaskModel(dict: taskRecord))
+                for singleRecord in stockRecords{
+                    GlobalData.allAnnouncements.append(AnnouncementModel(dict: singleRecord))
                 }
                 completion(true)
-            }else {
-                completion(false)
             }
-            
         }catch{
-            print("Error: \(error)")
+            print("Error in fetching details", error)
             completion(false)
         }
     }
     
-    //Function to get a single task:
-    func getSingleTask(_ id:String, completion:@escaping(Bool) -> Void) async -> TaskModel?  {
+    //Function to get single announcement s based on id:
+    public static func getSingleAnnouncement(_ annId:String) async{
         let soqlQuery = """
-            select Id, Account.Name, CreatedDate, Priority,   Description, Subject from Task where Id = '\(id)'
+            select Id, Name, Start_Date_DA__c, End_Date_DA__c, Description_TX__c, Type_PI__c, Announcement_Image__c from Announcement__c where Id = '\(annId)'
             """
         
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let instanceUrl = Defaults.instanceUrl else {
-            return nil
+            return
         }
         
         let fullUrl = "\(instanceUrl)/services/data/v59.0/query/?q=\(encodedQuery)"
         
         guard let url = URL(string: fullUrl) else {
-            return nil
+            return
         }
+        
+        GlobalData.allAnnouncements.removeAll()
         
         do{
             var request = URLRequest(url: url)
@@ -87,16 +78,12 @@ class TaskServices{
             let(data, _) = try await URLSession.shared.data(for: request)
             
             if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
-               let taskRecords = jsonData["records"] as? [[String:Any]],
-               let firstRecord = taskRecords.first{
-                completion(true)
-                return TaskModel(dict: firstRecord)
+               let annRecord = jsonData["records"] as? [[String:Any]],
+               let firstRecord = annRecord.first{
+                GlobalData.allAnnouncements.append(AnnouncementModel(dict: firstRecord))
             }
         }catch{
-            print("Error")
-            completion(false)
+            print("Error in fetching details", error)
         }
-        return nil
     }
-    
 }

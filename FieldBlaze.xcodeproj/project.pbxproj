@@ -89,6 +89,8 @@
 		B41A4A802E210EF1006AA834 /* RiskStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A4A7F2E210EF1006AA834 /* RiskStockVC.swift */; };
 		B47E41BE2E2532C400883779 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */; };
 		B47E41C02E253A4600883779 /* VisitsTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E41BF2E253A4600883779 /* VisitsTaskVC.swift */; };
+		B4888B782E266C0900B1876C /* AnnouncementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4888B772E266C0000B1876C /* AnnouncementModel.swift */; };
+		B4888B7A2E266C2A00B1876C /* AnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4888B792E266C2500B1876C /* AnnouncementService.swift */; };
 		B4C784392E24D4A6000C1AF6 /* ProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C784382E24D4A0000C1AF6 /* ProductsService.swift */; };
 		B4C7843D2E24D9EA000C1AF6 /* PriceBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */; };
 		B73B520D234FA65F001B069B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73B520C234FA65F001B069B /* SceneDelegate.swift */; };
@@ -185,6 +187,8 @@
 		B407D55F2E20D70A00CC1CF3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B41A4A7F2E210EF1006AA834 /* RiskStockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskStockVC.swift; sourceTree = "<group>"; };
 		B47E41BF2E253A4600883779 /* VisitsTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsTaskVC.swift; sourceTree = "<group>"; };
+		B4888B772E266C0000B1876C /* AnnouncementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementModel.swift; sourceTree = "<group>"; };
+		B4888B792E266C2500B1876C /* AnnouncementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementService.swift; sourceTree = "<group>"; };
 		B4C784382E24D4A0000C1AF6 /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
 		B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceBook.swift; sourceTree = "<group>"; };
 		B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -216,6 +220,7 @@
 		B407D5402E20D64B00CC1CF3 /* Customers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Customers; sourceTree = "<group>"; };
 		B407D5592E20D6DC00CC1CF3 /* Home */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Home; sourceTree = "<group>"; };
 		B407D5652E20D8E300CC1CF3 /* Database */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Database; sourceTree = "<group>"; };
+		B4888B702E266AF100B1876C /* Announcements */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Announcements; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,6 +387,7 @@
 		5368A7602D9EA6B00080A196 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B4888B702E266AF100B1876C /* Announcements */,
 				B407D5592E20D6DC00CC1CF3 /* Home */,
 				B407D5402E20D64B00CC1CF3 /* Customers */,
 				B407D4E22E20D03A00CC1CF3 /* Approvals */,
@@ -415,6 +421,7 @@
 		53A15AC32D9FC77D00BDA75D /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
+				B4888B792E266C2500B1876C /* AnnouncementService.swift */,
 				B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */,
 				B4C784382E24D4A0000C1AF6 /* ProductsService.swift */,
 				B407D4CF2E20D02600CC1CF3 /* ApprovalService.swift */,
@@ -491,6 +498,7 @@
 		53FEDC8B2DB514070027220E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B4888B772E266C0000B1876C /* AnnouncementModel.swift */,
 				B407D4B52E20D01100CC1CF3 /* Approvals.swift */,
 				B407D4B62E20D01100CC1CF3 /* VisitsModel.swift */,
 				B407D4B72E20D01100CC1CF3 /* DistributerModel.swift */,
@@ -546,6 +554,7 @@
 				B407D5402E20D64B00CC1CF3 /* Customers */,
 				B407D5592E20D6DC00CC1CF3 /* Home */,
 				B407D5652E20D8E300CC1CF3 /* Database */,
+				B4888B702E266AF100B1876C /* Announcements */,
 			);
 			name = FieldBlaze;
 			productName = FieldBlaze;
@@ -702,6 +711,7 @@
 				B407D4C62E20D01100CC1CF3 /* PriceBookModel.swift in Sources */,
 				B407D4C72E20D01100CC1CF3 /* BeatModel.swift in Sources */,
 				B407D4C82E20D01100CC1CF3 /* VisitsModel.swift in Sources */,
+				B4888B7A2E266C2A00B1876C /* AnnouncementService.swift in Sources */,
 				B407D4C92E20D01100CC1CF3 /* DistributerModel.swift in Sources */,
 				B407D4CA2E20D01100CC1CF3 /* ProductModels.swift in Sources */,
 				B407D4CB2E20D01100CC1CF3 /* Scheme.swift in Sources */,
@@ -728,6 +738,7 @@
 				5303F06F2DA4FFDF00B4D528 /* UIView+Constraints.swift in Sources */,
 				4F13E93E237DD5D9005BCAE9 /* AccountsListView.swift in Sources */,
 				53A15AFA2D9FD38C00BDA75D /* TabbarView.swift in Sources */,
+				B4888B782E266C0900B1876C /* AnnouncementModel.swift in Sources */,
 				53A15AD82D9FC78E00BDA75D /* Validation.swift in Sources */,
 				53FEDC8D2DB514130027220E /* Customer.swift in Sources */,
 				53A15AD22D9FC78400BDA75D /* CustomTextField.swift in Sources */,

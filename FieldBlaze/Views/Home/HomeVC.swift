@@ -214,6 +214,11 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             if let selectedVC = storyboard.instantiateViewController(withIdentifier: "AllVisitsVC") as? AllVisitsVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
+        }else if indexPath.row == 14{
+            let storyboard = UIStoryboard(name: "Announcements", bundle: nil)
+            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "AnnouncementsVC") as? AnnouncementsVC{
+                navigationController?.pushViewController(selectedVC, animated: true)
+            }
         }
         
     }
