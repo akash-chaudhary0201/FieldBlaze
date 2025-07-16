@@ -93,6 +93,8 @@
 		B4888B7A2E266C2A00B1876C /* AnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4888B792E266C2500B1876C /* AnnouncementService.swift */; };
 		B4C784392E24D4A6000C1AF6 /* ProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C784382E24D4A0000C1AF6 /* ProductsService.swift */; };
 		B4C7843D2E24D9EA000C1AF6 /* PriceBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */; };
+		B4CAEC962E27DB8D009EAE79 /* ReturnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CAEC952E27DB88009EAE79 /* ReturnModel.swift */; };
+		B4CAEC982E27DCF0009EAE79 /* ReturnService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CAEC972E27DCEC009EAE79 /* ReturnService.swift */; };
 		B73B520D234FA65F001B069B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73B520C234FA65F001B069B /* SceneDelegate.swift */; };
 		B77BD8A321125B510036B284 /* bootconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B77BD8A221125B510036B284 /* bootconfig.plist */; };
 		CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA8CA031F071B2300448B51 /* Images.xcassets */; };
@@ -191,6 +193,8 @@
 		B4888B792E266C2500B1876C /* AnnouncementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementService.swift; sourceTree = "<group>"; };
 		B4C784382E24D4A0000C1AF6 /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
 		B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceBook.swift; sourceTree = "<group>"; };
+		B4CAEC952E27DB88009EAE79 /* ReturnModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnModel.swift; sourceTree = "<group>"; };
+		B4CAEC972E27DCEC009EAE79 /* ReturnService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnService.swift; sourceTree = "<group>"; };
 		B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B73B520C234FA65F001B069B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B77BD8A221125B510036B284 /* bootconfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bootconfig.plist; sourceTree = "<group>"; };
@@ -421,6 +425,7 @@
 		53A15AC32D9FC77D00BDA75D /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
+				B4CAEC972E27DCEC009EAE79 /* ReturnService.swift */,
 				B4888B792E266C2500B1876C /* AnnouncementService.swift */,
 				B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */,
 				B4C784382E24D4A0000C1AF6 /* ProductsService.swift */,
@@ -498,6 +503,7 @@
 		53FEDC8B2DB514070027220E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B4CAEC952E27DB88009EAE79 /* ReturnModel.swift */,
 				B4888B772E266C0000B1876C /* AnnouncementModel.swift */,
 				B407D4B52E20D01100CC1CF3 /* Approvals.swift */,
 				B407D4B62E20D01100CC1CF3 /* VisitsModel.swift */,
@@ -685,6 +691,7 @@
 				B407D4DB2E20D02700CC1CF3 /* ContactsServices.swift in Sources */,
 				B407D4DC2E20D02700CC1CF3 /* VisitsService.swift in Sources */,
 				B407D4DD2E20D02700CC1CF3 /* SchemeService.swift in Sources */,
+				B4CAEC982E27DCF0009EAE79 /* ReturnService.swift in Sources */,
 				B407D4DE2E20D02700CC1CF3 /* BeatService.swift in Sources */,
 				53A15A772D9FC75C00BDA75D /* Constant.swift in Sources */,
 				53A15A782D9FC75C00BDA75D /* Enum.swift in Sources */,
@@ -736,6 +743,7 @@
 				53FEDC8A2DB513D80027220E /* GlobalData.swift in Sources */,
 				5303F06E2DA4FFDF00B4D528 /* BasicTransitionAnimator.swift in Sources */,
 				5303F06F2DA4FFDF00B4D528 /* UIView+Constraints.swift in Sources */,
+				B4CAEC962E27DB8D009EAE79 /* ReturnModel.swift in Sources */,
 				4F13E93E237DD5D9005BCAE9 /* AccountsListView.swift in Sources */,
 				53A15AFA2D9FD38C00BDA75D /* TabbarView.swift in Sources */,
 				B4888B782E266C0900B1876C /* AnnouncementModel.swift in Sources */,

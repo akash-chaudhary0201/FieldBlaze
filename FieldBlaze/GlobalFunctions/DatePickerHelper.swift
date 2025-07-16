@@ -3,7 +3,8 @@ import UIKit
 class DatePickerHelper {
 
     static func showInlineDatePicker(centerIn parentView: UIView,
-                                     targetLabel: UILabel) {
+                                     targetLabel: UILabel,
+                                     _ dateFormat: String) {
 
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -18,7 +19,7 @@ class DatePickerHelper {
 
         let doneButton = UIButton(type: .system)
         doneButton.setTitle("Done", for: .normal)
-        doneButton.cornerRadius = 10
+        doneButton.layer.cornerRadius = 10
         doneButton.translatesAutoresizingMaskIntoConstraints = false
 
         container.addSubview(datePicker)
@@ -37,32 +38,33 @@ class DatePickerHelper {
             doneButton.centerXAnchor.constraint(equalTo: container.centerXAnchor)
         ])
 
-        // Use a custom target object to keep the callback working
-        let handler = DatePickerHandler(datePicker: datePicker, label: targetLabel, container: container)
+        let handler = DatePickerHandler(datePicker: datePicker, label: targetLabel, container: container, dateFormat: dateFormat)
         doneButton.addTarget(handler, action: #selector(DatePickerHandler.doneButtonTapped(_:)), for: .touchUpInside)
 
-        // Store the handler in the button to retain it
         objc_setAssociatedObject(doneButton, "handler", handler, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }
 
-/// Helper class to handle the selector call properly
+
 private class DatePickerHandler: NSObject {
     let datePicker: UIDatePicker
     let label: UILabel
     let container: UIView
+    let dateFormat: String
 
-    init(datePicker: UIDatePicker, label: UILabel, container: UIView) {
+    init(datePicker: UIDatePicker, label: UILabel, container: UIView, dateFormat: String) {
         self.datePicker = datePicker
         self.label = label
         self.container = container
+        self.dateFormat = dateFormat
     }
 
     @objc func doneButtonTapped(_ sender: UIButton) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.dateFormat = dateFormat
         label.text = formatter.string(from: datePicker.date)
         label.textColor = .black
         container.removeFromSuperview()
     }
 }
+

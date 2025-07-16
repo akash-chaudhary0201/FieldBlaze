@@ -23,7 +23,7 @@ class AddStockItemSubView: UIViewController, UITextFieldDelegate {
     var allProducts:[FetchedProductsModel] = []
     
     let globalObj = GlobalClass.shared
-
+    
     var productDropDown = DropDown()
     
     override func viewDidLoad() {
@@ -32,12 +32,12 @@ class AddStockItemSubView: UIViewController, UITextFieldDelegate {
         searchProductLabel.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         Task{
-//            await ProductsService.getAllProducts()
+            await ProductsService.getAllProduct()
             
             self.allProducts = GlobalData.allProducts
+//            print("-------------------------\(self.allProducts)")
             
             productNames = self.allProducts.compactMap { $0.name }
-            
             setupDropDown(dropDown: productDropDown, anchor: dropDownAnchorView, dataSource: productNames, textFieldToUpdate: searchProductLabel)
         }
     }
@@ -90,7 +90,7 @@ class AddStockItemSubView: UIViewController, UITextFieldDelegate {
         }
         
         let singleProduct = ProductModelToSendAsStock(id: matchedProduct.id!, name: matchedProduct.name!, quantity: quantity)
-        globalObj.globlaStockItemArray.append(singleProduct)
+        GlobalData.globalSelectedStockItem.append(singleProduct)
         
         searchProductLabel.text = ""
         quantityLabel.text = ""

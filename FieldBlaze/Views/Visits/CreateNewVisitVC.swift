@@ -198,19 +198,12 @@ class CreateNewVisitVC: UIViewController {
     @IBAction func openDatePicker(_ sender: Any) {
         DatePickerHelper.showInlineDatePicker(
             centerIn: self.view,
-            targetLabel: dateLabel
+            targetLabel: dateLabel,
+            "yyyy-MM-dd"
         )
     }
     
     @IBAction func createVisitAction(_ sender: Any) {
-        let df = DateFormatter()
-        df.dateFormat = "dd-MM-yyyy"
-        let date = df.date(from: dateLabel.text!)!
-        
-        df.dateFormat = "yyyy-MM-dd"
-        let formattedDate = df.string(from: date)
-        
-        print(formattedDate)
         guard let visitDate = dateLabel.text, visitDate != "Select Date" else {
             let alert = UIAlertController(title: "Error", message: "Please select a date", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -238,7 +231,7 @@ class CreateNewVisitVC: UIViewController {
 
         let requestBody: [String: Any] = [
             "Name": selectedVisitType!,
-            "Date_DA__c": formattedDate,
+            "Date_DA__c": dateLabel.text!,
             "Account_RE__c": selectedCustomerId!,
             "Zone_RE__c":selectedZoneId!
         ]

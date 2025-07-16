@@ -21,8 +21,6 @@ class StockDetailsVC: UIViewController {
     
     var obj = StockTrackingService()
     
-    var singleStock:StockDetailsModel?
-    
     var stockLineItemsArray:[StockLineItemsModel] = []
     
     var isStockLineItemViewOpen:Bool = false
@@ -35,10 +33,12 @@ class StockDetailsVC: UIViewController {
         stockLineItemView.isHidden = true
         
         Task{
-            self.singleStock = await obj.getSingleStock(stockId!)
-            self.customerName.text =  self.singleStock?.customerName
-            self.stockDate.text = self.singleStock?.stockDate
-            self.stockName.text = self.singleStock?.stockName
+            await StockTrackingService.getSingleStock(stockId!)
+            if let singleStock = GlobalData.allStocks.first {
+                self.customerName.text =  singleStock.customerName
+                self.stockDate.text = singleStock.stockDate
+                self.stockName.text = singleStock.stockName
+            }
             
             //Calling function to get stock line items:
             await obj.getStockLineItems(stockId!)

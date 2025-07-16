@@ -23,12 +23,12 @@ class StocksVC: UIViewController {
         allStockTables?.dataSource = self
         
         allStockTables?.separatorStyle = .none
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         Task{
-            await obj.getAllStocks()
-//            print("Fetched stocks: \(obj.allStocks.count)")
-            self.allStocksArray = obj.allStocks
-//            print("All Stocks array:-------------------\(self.allStocksArray)")
+            await StockTrackingService.getAllStocks(Defaults.userId!)
+            self.allStocksArray = GlobalData.allStocks
             
             DispatchQueue.main.async {
                 self.allStockTables?.reloadData()

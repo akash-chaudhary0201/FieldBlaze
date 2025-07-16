@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import SwiftLoader
 
 class AddNewStockVC: UIViewController, UITextFieldDelegate {
     
@@ -21,14 +22,10 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
     //Sample data for stock items array:
     var sampleProducts: [ProductModelToSendAsStock] = []
     
-    //Object for stock services:
-    var objForStock = StockTrackingService()
-    
     //Variable to store request body:
     var requestBody:[String:Any] = [:]
     
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var customerTextField: UITextField!
     @IBOutlet weak var dropDownAnchorView: UIView!
     var accounts: [Customer] = []
@@ -48,8 +45,6 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
         
         customerTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        setUpDatePicker()
-        
         stockItemTable.separatorStyle = .none
         noStockItemLabel.isHidden = false
         stockItemTable.isHidden = true
@@ -60,7 +55,8 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.sampleProducts = globalObj.globlaStockItemArray
+        print("-----------------\(GlobalData.globalSelectedStockItem)")
+        self.sampleProducts = GlobalData.globalSelectedStockItem
         tabHeightConstant.constant = CGFloat(sampleProducts.count * 70)
         
         if sampleProducts.count != 0{
@@ -72,8 +68,6 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async {
             self.stockItemTable.reloadData()
         }
-        //
-        //        requestBody = getRequestBody(sampleProducts, self.accountId ?? "Ak", "2025-06-11")
     }
     
     func getRequestBody(_ products:[ProductModelToSendAsStock], _ accountId:String, _ date:String) -> [String:Any]{
@@ -118,26 +112,6 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
         )
     }
     
-    //Function to setup date picker:
-    func setUpDatePicker(){
-        datePicker.locale = .current
-        datePicker.date = Date()
-        datePicker.preferredDatePickerStyle = .inline
-        datePicker.isHidden = true
-        datePicker.backgroundColor = UIColor.systemGray6
-        datePicker.addTarget(self, action: #selector(dateSelected), for: .valueChanged)
-    }
-    
-    @objc func dateSelected(){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.dateFormat = "yyyy-mm-dd"
-        let selectedDate = dateFormatter.string(from: datePicker.date)
-        dateLabel.text = selectedDate
-        datePicker.isHidden = true
-    }
-    
     //Function for setup dropdown:
     func setupDropDown(dropDown: DropDown, anchor: UIView, dataSource: [String], textFieldToUpdate: UITextField) {
         dropDown.anchorView = anchor
@@ -150,8 +124,6 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
             
             if let selectedCustomer = self.accounts.first(where: { $0.name == item }) {
                 self.accountId = selectedCustomer.id
-                self.requestBody = self.getRequestBody(self.sampleProducts, self.accountId ?? "Ak", "2025-06-12")
-                
             }
         }
         
@@ -171,15 +143,14 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func openDatePicker(_ sender: Any) {
-        dateLabel.textColor = .black
-        datePicker.isHidden = false
+        DatePickerHelper.showInlineDatePicker(centerIn: self.view, targetLabel: dateLabel!, "yyyy-MM-dd")
     }
-    
     
     //Go back action:
     @IBAction func backAction(_ sender: Any) {
+        GlobalData.globalSelectedStockItem.removeAll()
         self.navigationController?.popViewController(animated: true)
-        globalObj.globlaStockItemArray.removeAll()
+        
     }
     
     @IBAction func openAddStockItems(_ sender: Any) {
@@ -190,7 +161,27 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func createStockAction(_ sender: Any) {
-        objForStock.createStock(requestBody)
+        
+        SwiftLoaderHelper.setLoader()
+        
+        self.sampleProducts = GlobalData.globalSelectedStockItem
+        
+        self.requestBody = self.getRequestBody(self.sampleProducts, accountId ?? "a", dateLabel.text!)
+        
+        print("Generated request body: \(requestBody)")
+        
+        GlobalPostRequest.commonPostFunction("v59.0/composite/tree/Inventory_Tracking__c", requestBody) { success, response in
+            DispatchQueue.main.async {
+                if success{
+                    SwiftLoader.hide()
+                    GlobalData.globalSelectedStockItem.removeAll()
+                    AlertFunction.showAlertAndPop("Stock Created Successfully", self)
+                }else{
+                    SwiftLoader.hide()
+                    AlertFunction.showAlertAndPop(title: "Error", "Error in creating a stock", self)
+                }
+            }
+        }
     }
     
 }
@@ -214,3 +205,9 @@ class StockItemCell:UITableViewCell{
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var itemQuantity: UILabel!
 }
+
+
+
+
+
+

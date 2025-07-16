@@ -62,11 +62,11 @@ class CreateSalesOrderController: UIViewController {
     }
     
     @IBAction func orderDateAction(_ sender: Any) {
-        DatePickerHelper.showInlineDatePicker(centerIn: self.view, targetLabel: orderDateLabel)
+        DatePickerHelper.showInlineDatePicker(centerIn: self.view, targetLabel: orderDateLabel, "yyyy-MM-dd")
     }
     
     @IBAction func deliveryDateAction(_ sender: Any) {
-        DatePickerHelper.showInlineDatePicker(centerIn: self.view, targetLabel: deliveryDateLabel)
+        DatePickerHelper.showInlineDatePicker(centerIn: self.view, targetLabel: deliveryDateLabel, "yyyy-MM-dd")
     }
     
     @IBAction func pricebookAction(_ sender: Any) {

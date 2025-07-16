@@ -25,7 +25,7 @@ class AllProductsVC: UIViewController {
     //Function to setup ui:
     func setUpUI(){
         Task{
-            await ProductsService.getAllProducts(priceBookId!)
+            await ProductsService.getAllProductsPriceBook(priceBookId!)
             print(GlobalData.allProducts)
             DispatchQueue.main.async {
                 self.allProductsTable.reloadData()
