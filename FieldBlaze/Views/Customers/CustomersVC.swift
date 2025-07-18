@@ -44,7 +44,7 @@ class CustomersVC: UIViewController {
         
         await  PriceBookService.getPriceBookNames()
         //        print("------------------------Books names array: \(obj.priceBookNames)")
-        await obj.getZoneNames()
+        await CustomerService.getZoneNames()
         await obj.getPaymentTermsNames()
         print("---------------------------------Payment Terms array:-----------\(obj.paymentTerms)")
     }

@@ -217,7 +217,7 @@
             <objects>
                 <viewController storyboardIdentifier="OrderDetailsVC" id="RhK-KI-lvY" customClass="OrderDetailsVC" customModule="FieldBlaze" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w4l-2A-PVH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1002"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJo-YQ-QZA">
@@ -256,7 +256,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="orD-zU-iCo">
-                                <rect key="frame" x="0.0" y="110" width="414" height="892"/>
+                                <rect key="frame" x="0.0" y="110" width="414" height="1890"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRS-IS-Ia8">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1321"/>
@@ -834,7 +834,7 @@
                             <constraint firstAttribute="bottom" secondItem="orD-zU-iCo" secondAttribute="bottom" id="fGx-Na-Ojz"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="414" height="1002"/>
+                    <size key="freeformSize" width="414" height="2000"/>
                     <connections>
                         <outlet property="amountAfterDiscount" destination="ojk-N6-dLz" id="rC1-0K-88u"/>
                         <outlet property="amountWithGst" destination="xab-ar-cuP" id="4Vt-8N-gGS"/>

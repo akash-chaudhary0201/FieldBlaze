@@ -62,10 +62,9 @@ class OrderDetailsVC: UIViewController {
                 }
             }
             singleOrder = obj.singleOrder
-            salesOrderLineItemsArray =  obj.salesOrderLineItemArray
-            print("------------------------Sales Order Line Count------------------: \(salesOrderLineItemsArray.count)")
+            salesOrderLineItemsArray =  GlobalData.salesOrderLineItem
             
-            orderLineTabHeight.constant = CGFloat(salesOrderLineItemsArray.count * 210)
+            orderLineTabHeight.constant = CGFloat( GlobalData.salesOrderLineItem.count * 210)
             
             DispatchQueue.main.async {
                 self.firstTable.reloadData()

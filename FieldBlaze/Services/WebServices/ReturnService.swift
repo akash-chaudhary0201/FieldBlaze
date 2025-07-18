@@ -28,6 +28,7 @@ class ReturnService{
             return
         }
         
+        
         GlobalData.allReturns.removeAll()
         
         do{

@@ -15,9 +15,7 @@ class CustomerService {
     var allCustomerArray:[Customer] = []
     
     var singleCustomer:Customer?
-    var zoneNames:[ZoneModel] = []
     var paymentTerms:[PaymentTermsModel] = []
-    var distributerNames:[DistributerModel] = []
     
     //New function to get all customers:
     func getAllCustomers() async{
@@ -89,7 +87,7 @@ class CustomerService {
     }
     
     //Function to get all zone names:
-    func getZoneNames() async{
+    public static func getZoneNames() async{
         let soqlQuery = "Select Id, Name from Zone__c"
         
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
@@ -107,19 +105,14 @@ class CustomerService {
             request.httpMethod = "GET"
             request.setValue("Bearer \(Defaults.accessToken!)", forHTTPHeaderField: "Authorization")
             
-            zoneNames.removeAll()
+            GlobalData.allZones.removeAll()
             
             let (data, _) = try await URLSession.shared.data(for: request)
             
             if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
                let records = jsonData["records"] as? [[String:Any]]{
-                //                print("Zones:-----------------------------------\(records)")
                 for record in records{
-                    if let name = record["Name"] as? String,
-                       let id = record["Id"] as? String{
-                        let singleZone = ZoneModel(zoneName: name, zoneId:id)
-                        zoneNames.append(singleZone)
-                    }
+                    GlobalData.allZones.append(ZoneModel(dict: record))
                 }
             }
         }catch{
@@ -128,7 +121,7 @@ class CustomerService {
     }
     
     //Function to get all distributers:
-    func getDistributers()async{
+    public static func getDistributers()async{
         let soqlQuery = "SELECT Id, Name FROM Account where Type  = 'Distributor'"
         
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
@@ -146,18 +139,14 @@ class CustomerService {
             request.httpMethod = "GET"
             request.setValue("Bearer \(Defaults.accessToken!)", forHTTPHeaderField: "Authorization")
             
-            distributerNames.removeAll()
+            GlobalData.allDistributer.removeAll()
             
             let (data, _) = try await URLSession.shared.data(for: request)
             
             if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
                let records = jsonData["records"] as? [[String:Any]]{
                 for record in records{
-                    if let name = record["Name"] as? String,
-                       let id = record["Id"] as? String{
-                        let singleDistributer = DistributerModel(distributerName: name, distributerId: id)
-                        distributerNames.append(singleDistributer)
-                    }
+                    GlobalData.allDistributer.append(DistributerModel(dict: record))
                 }
             }
         }catch{

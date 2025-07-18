@@ -39,7 +39,6 @@
 		53A15A7A2D9FC75C00BDA75D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15A702D9FC75C00BDA75D /* Extensions.swift */; };
 		53A15A7B2D9FC75C00BDA75D /* StringConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15A722D9FC75C00BDA75D /* StringConstant.swift */; };
 		53A15ACA2D9FC77D00BDA75D /* BaseWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15ABD2D9FC77D00BDA75D /* BaseWebService.swift */; };
-		53A15ACC2D9FC77D00BDA75D /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15ABE2D9FC77D00BDA75D /* HttpClient.swift */; };
 		53A15AD22D9FC78400BDA75D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15ACE2D9FC78400BDA75D /* CustomTextField.swift */; };
 		53A15AD32D9FC78400BDA75D /* DropDownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15ACF2D9FC78400BDA75D /* DropDownManager.swift */; };
 		53A15AD42D9FC78400BDA75D /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15AD02D9FC78400BDA75D /* Utility.swift */; };
@@ -141,7 +140,6 @@
 		53A15A712D9FC75C00BDA75D /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
 		53A15A722D9FC75C00BDA75D /* StringConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstant.swift; sourceTree = "<group>"; };
 		53A15ABD2D9FC77D00BDA75D /* BaseWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebService.swift; sourceTree = "<group>"; };
-		53A15ABE2D9FC77D00BDA75D /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		53A15ACD2D9FC78400BDA75D /* CustomDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateFormatter.swift; sourceTree = "<group>"; };
 		53A15ACE2D9FC78400BDA75D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		53A15ACF2D9FC78400BDA75D /* DropDownManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownManager.swift; sourceTree = "<group>"; };
@@ -224,6 +222,7 @@
 		B407D5402E20D64B00CC1CF3 /* Customers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Customers; sourceTree = "<group>"; };
 		B407D5592E20D6DC00CC1CF3 /* Home */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Home; sourceTree = "<group>"; };
 		B407D5652E20D8E300CC1CF3 /* Database */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Database; sourceTree = "<group>"; };
+		B463B2CF2E28CD1B006DF7BF /* Returns */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Returns; sourceTree = "<group>"; };
 		B4888B702E266AF100B1876C /* Announcements */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Announcements; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -391,6 +390,7 @@
 		5368A7602D9EA6B00080A196 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B463B2CF2E28CD1B006DF7BF /* Returns */,
 				B4888B702E266AF100B1876C /* Announcements */,
 				B407D5592E20D6DC00CC1CF3 /* Home */,
 				B407D5402E20D64B00CC1CF3 /* Customers */,
@@ -438,7 +438,6 @@
 				B407D4D52E20D02600CC1CF3 /* SchemeService.swift */,
 				B407D4D62E20D02600CC1CF3 /* OrdersService.swift */,
 				53A15ABD2D9FC77D00BDA75D /* BaseWebService.swift */,
-				53A15ABE2D9FC77D00BDA75D /* HttpClient.swift */,
 				53FEDB6E2DB25BC90027220E /* CustomerService.swift */,
 			);
 			path = WebServices;
@@ -560,6 +559,7 @@
 				B407D5402E20D64B00CC1CF3 /* Customers */,
 				B407D5592E20D6DC00CC1CF3 /* Home */,
 				B407D5652E20D8E300CC1CF3 /* Database */,
+				B463B2CF2E28CD1B006DF7BF /* Returns */,
 				B4888B702E266AF100B1876C /* Announcements */,
 			);
 			name = FieldBlaze;
@@ -757,7 +757,6 @@
 				53A15AD52D9FC78400BDA75D /* CustomDateFormatter.swift in Sources */,
 				53FEDB6F2DB25BC90027220E /* CustomerService.swift in Sources */,
 				53A15ACA2D9FC77D00BDA75D /* BaseWebService.swift in Sources */,
-				53A15ACC2D9FC77D00BDA75D /* HttpClient.swift in Sources */,
 				53BEA8D92DA7AF31002A151B /* TodaysVisitsVC.swift in Sources */,
 				4FD6C4A01B755242002F9F90 /* InitialViewController.swift in Sources */,
 			);

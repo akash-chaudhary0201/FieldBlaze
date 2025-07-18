@@ -102,10 +102,10 @@ class CreateNewVisitVC: UIViewController {
     //Function to setup zone dropdown:
     func setUpZoneDropdown(){
         Task{
-            await obj2.getZoneNames()
-            self.allZonesArray = obj2.zoneNames
+            await CustomerService.getZoneNames()
+            self.allZonesArray = GlobalData.allZones
             
-            self.allZoneNames = allZonesArray.map{$0.zoneName}
+            self.allZoneNames = allZonesArray.map{$0.zoneName ?? "a"}
             DropDownFunction.setupDropDown(dropDown: zoneDropDown, anchor: zoneDropDownview, dataSource: allZoneNames, labelToUpdate: zoneLabel)
             
             zoneDropDown.selectionAction = { index, item in

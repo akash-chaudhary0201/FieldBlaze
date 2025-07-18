@@ -7,6 +7,11 @@
 //
 
 struct ZoneModel{
-    var zoneName:String
-    var zoneId:String
+    var zoneName:String?
+    var zoneId:String?
+    
+    init(dict:[String:Any]){
+        self.zoneId = dict["Id"] as? String
+        self.zoneName = dict["Name"] as? String
+    }
 }

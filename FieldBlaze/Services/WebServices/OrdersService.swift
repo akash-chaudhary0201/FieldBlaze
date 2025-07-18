@@ -92,7 +92,6 @@ class OrdersService{
             
             if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
                 
-                salesOrderLineItemArray.removeAll()
                 GlobalData.salesOrderLineItem.removeAll()
                 
                 if let records = jsonData["records"] as? [[String: Any]] {

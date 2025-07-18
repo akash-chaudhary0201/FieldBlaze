@@ -66,9 +66,9 @@ class CreateBeatVC: UIViewController {
     //Function to setup zone dropdown:
     func setUpZoneDropDown(){
         Task{
-            await obj.getZoneNames()
-            self.allZones = obj.zoneNames
-            zoneNames = allZones.map { $0.zoneName }
+            await CustomerService.getZoneNames()
+            self.allZones = GlobalData.allZones
+            zoneNames = allZones.map { $0.zoneName ?? "a" }
             
             //Zone dropdown setup:
             DropDownFunction.setupDropDown(dropDown: zoneDropDown, anchor: zoneDropDownView, dataSource: zoneNames, labelToUpdate: zoneLabel)
@@ -94,9 +94,9 @@ class CreateBeatVC: UIViewController {
     //Function to setup distributer dropdown:
     func setUpDistributerDropDown(){
         Task{
-            await obj.getDistributers()
-            self.allDistributers = obj.distributerNames
-            self.distributersNames = allDistributers.map{$0.distributerName}
+            await CustomerService.getDistributers()
+            self.allDistributers = GlobalData.allDistributer
+            self.distributersNames = allDistributers.map{$0.distributerName ?? "a"}
             
             //DropDown:
             DropDownFunction.setupDropDown(dropDown: distributerDropDown, anchor: distributerDropDownView, dataSource: distributersNames, labelToUpdate: distributerLabel)
