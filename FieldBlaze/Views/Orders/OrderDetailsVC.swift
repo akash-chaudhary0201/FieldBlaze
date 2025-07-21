@@ -189,11 +189,11 @@ extension OrderDetailsVC:UITableViewDelegate,UITableViewDataSource{
             
             let singleSalesItem = salesOrderLineItemsArray[indexPath.row]
             cell.productNameLabel.text = singleSalesItem.productName
-            cell.salesPriceLabel.text = "\(singleSalesItem.cuSalesPrice!)"
-            cell.quantityLabel.text = "\(singleSalesItem.nuQuantity!)"
-            cell.amountWithGSTLabel.text = "\(singleSalesItem.cuAmountWithGST!)"
-            cell.amountAfterDiscountLabel.text = "\(singleSalesItem.cuAmountAfterDiscount!)"
-            cell.finalAmountLabel.text = "\(singleSalesItem.cuTotalPrice!)"
+            cell.salesPriceLabel.text = "\(singleSalesItem.cuSalesPrice ?? 0)"
+            cell.quantityLabel.text = "\(singleSalesItem.nuQuantity ?? 0)"
+            cell.amountWithGSTLabel.text = "\(singleSalesItem.cuAmountWithGST ?? 0)"
+            cell.amountAfterDiscountLabel.text = "\(singleSalesItem.cuAmountAfterDiscount ?? 0)"
+            cell.finalAmountLabel.text = "\(singleSalesItem.cuTotalPrice ?? 0)"
             
             cell.selectionStyle = .none
             

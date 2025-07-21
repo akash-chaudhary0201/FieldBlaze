@@ -86,6 +86,14 @@
 		B407D5272E20D28000CC1CF3 /* SwiftLoader in Frameworks */ = {isa = PBXBuildFile; productRef = B407D5262E20D28000CC1CF3 /* SwiftLoader */; };
 		B407D5602E20D70A00CC1CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B407D55F2E20D70A00CC1CF3 /* LaunchScreen.storyboard */; };
 		B41A4A802E210EF1006AA834 /* RiskStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A4A7F2E210EF1006AA834 /* RiskStockVC.swift */; };
+		B41AE3812E2E390200438056 /* ExpenseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41AE3802E2E38FC00438056 /* ExpenseService.swift */; };
+		B41AE3832E2E390D00438056 /* ExpenseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41AE3822E2E390A00438056 /* ExpenseModel.swift */; };
+		B45B3DB52E2A264B006398EF /* LeaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45B3DB42E2A2646006398EF /* LeaveService.swift */; };
+		B45B3DB72E2A2665006398EF /* LeaveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45B3DB62E2A2662006398EF /* LeaveModel.swift */; };
+		B45B3E312E2A4B0C006398EF /* NotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45B3E302E2A4B07006398EF /* NotesModel.swift */; };
+		B45B3E352E2A4B26006398EF /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45B3E342E2A4B1F006398EF /* NoteService.swift */; };
+		B45B3EC42E2A67F4006398EF /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45B3EC32E2A67EA006398EF /* UserService.swift */; };
+		B45B3EC62E2A6801006398EF /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45B3EC52E2A67FE006398EF /* UserModel.swift */; };
 		B47E41BE2E2532C400883779 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */; };
 		B47E41C02E253A4600883779 /* VisitsTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E41BF2E253A4600883779 /* VisitsTaskVC.swift */; };
 		B4888B782E266C0900B1876C /* AnnouncementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4888B772E266C0000B1876C /* AnnouncementModel.swift */; };
@@ -186,6 +194,14 @@
 		B407D51B2E20D12000CC1CF3 /* VisitStockDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitStockDetailsVC.swift; sourceTree = "<group>"; };
 		B407D55F2E20D70A00CC1CF3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B41A4A7F2E210EF1006AA834 /* RiskStockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskStockVC.swift; sourceTree = "<group>"; };
+		B41AE3802E2E38FC00438056 /* ExpenseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseService.swift; sourceTree = "<group>"; };
+		B41AE3822E2E390A00438056 /* ExpenseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseModel.swift; sourceTree = "<group>"; };
+		B45B3DB42E2A2646006398EF /* LeaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveService.swift; sourceTree = "<group>"; };
+		B45B3DB62E2A2662006398EF /* LeaveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveModel.swift; sourceTree = "<group>"; };
+		B45B3E302E2A4B07006398EF /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
+		B45B3E342E2A4B1F006398EF /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
+		B45B3EC32E2A67EA006398EF /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		B45B3EC52E2A67FE006398EF /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		B47E41BF2E253A4600883779 /* VisitsTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsTaskVC.swift; sourceTree = "<group>"; };
 		B4888B772E266C0000B1876C /* AnnouncementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementModel.swift; sourceTree = "<group>"; };
 		B4888B792E266C2500B1876C /* AnnouncementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementService.swift; sourceTree = "<group>"; };
@@ -201,18 +217,8 @@
 		D33B88402CA60F0E00892D80 /* QrCodeScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCodeScanController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		B4C7843F2E24E479000C1AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Untitled.swift,
-			);
-			target = 4FD6C4731B754AF1002F9F90 /* FieldBlaze */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B407D4AD2E20CFE300CC1CF3 /* GlobalFunctions */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (B4C7843F2E24E479000C1AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = GlobalFunctions; sourceTree = "<group>"; };
+		B407D4AD2E20CFE300CC1CF3 /* GlobalFunctions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = GlobalFunctions; sourceTree = "<group>"; };
 		B407D4E22E20D03A00CC1CF3 /* Approvals */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Approvals; sourceTree = "<group>"; };
 		B407D4E72E20D03A00CC1CF3 /* Beats */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Beats; sourceTree = "<group>"; };
 		B407D4EC2E20D03A00CC1CF3 /* Orders */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orders; sourceTree = "<group>"; };
@@ -222,6 +228,10 @@
 		B407D5402E20D64B00CC1CF3 /* Customers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Customers; sourceTree = "<group>"; };
 		B407D5592E20D6DC00CC1CF3 /* Home */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Home; sourceTree = "<group>"; };
 		B407D5652E20D8E300CC1CF3 /* Database */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Database; sourceTree = "<group>"; };
+		B41AE3842E2E391B00438056 /* Expenses */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Expenses; sourceTree = "<group>"; };
+		B45B3DA02E2A2551006398EF /* Collections */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Collections; sourceTree = "<group>"; };
+		B45B3DA92E2A260B006398EF /* Leaves */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Leaves; sourceTree = "<group>"; };
+		B45B3E362E2A4B2D006398EF /* Notes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Notes; sourceTree = "<group>"; };
 		B463B2CF2E28CD1B006DF7BF /* Returns */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Returns; sourceTree = "<group>"; };
 		B4888B702E266AF100B1876C /* Announcements */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Announcements; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -390,6 +400,10 @@
 		5368A7602D9EA6B00080A196 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B41AE3842E2E391B00438056 /* Expenses */,
+				B45B3E362E2A4B2D006398EF /* Notes */,
+				B45B3DA92E2A260B006398EF /* Leaves */,
+				B45B3DA02E2A2551006398EF /* Collections */,
 				B463B2CF2E28CD1B006DF7BF /* Returns */,
 				B4888B702E266AF100B1876C /* Announcements */,
 				B407D5592E20D6DC00CC1CF3 /* Home */,
@@ -425,6 +439,10 @@
 		53A15AC32D9FC77D00BDA75D /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
+				B41AE3802E2E38FC00438056 /* ExpenseService.swift */,
+				B45B3EC32E2A67EA006398EF /* UserService.swift */,
+				B45B3E342E2A4B1F006398EF /* NoteService.swift */,
+				B45B3DB42E2A2646006398EF /* LeaveService.swift */,
 				B4CAEC972E27DCEC009EAE79 /* ReturnService.swift */,
 				B4888B792E266C2500B1876C /* AnnouncementService.swift */,
 				B4C7843C2E24D9E7000C1AF6 /* PriceBook.swift */,
@@ -502,6 +520,10 @@
 		53FEDC8B2DB514070027220E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B41AE3822E2E390A00438056 /* ExpenseModel.swift */,
+				B45B3EC52E2A67FE006398EF /* UserModel.swift */,
+				B45B3E302E2A4B07006398EF /* NotesModel.swift */,
+				B45B3DB62E2A2662006398EF /* LeaveModel.swift */,
 				B4CAEC952E27DB88009EAE79 /* ReturnModel.swift */,
 				B4888B772E266C0000B1876C /* AnnouncementModel.swift */,
 				B407D4B52E20D01100CC1CF3 /* Approvals.swift */,
@@ -559,6 +581,10 @@
 				B407D5402E20D64B00CC1CF3 /* Customers */,
 				B407D5592E20D6DC00CC1CF3 /* Home */,
 				B407D5652E20D8E300CC1CF3 /* Database */,
+				B41AE3842E2E391B00438056 /* Expenses */,
+				B45B3DA02E2A2551006398EF /* Collections */,
+				B45B3DA92E2A260B006398EF /* Leaves */,
+				B45B3E362E2A4B2D006398EF /* Notes */,
 				B463B2CF2E28CD1B006DF7BF /* Returns */,
 				B4888B702E266AF100B1876C /* Announcements */,
 			);
@@ -683,12 +709,15 @@
 				53A15A742D9FC75C00BDA75D /* DeviceSize.swift in Sources */,
 				53A15A752D9FC75C00BDA75D /* InternetConnectionManager.swift in Sources */,
 				53A15A762D9FC75C00BDA75D /* Defaults.swift in Sources */,
+				B45B3DB72E2A2665006398EF /* LeaveModel.swift in Sources */,
 				B407D4D72E20D02700CC1CF3 /* ApprovalService.swift in Sources */,
 				B407D4D82E20D02700CC1CF3 /* OrdersService.swift in Sources */,
 				B407D4D92E20D02700CC1CF3 /* TaskServices.swift in Sources */,
 				B407D4DA2E20D02700CC1CF3 /* StockTrackingService.swift in Sources */,
 				B4C7843D2E24D9EA000C1AF6 /* PriceBook.swift in Sources */,
+				B45B3DB52E2A264B006398EF /* LeaveService.swift in Sources */,
 				B407D4DB2E20D02700CC1CF3 /* ContactsServices.swift in Sources */,
+				B45B3E352E2A4B26006398EF /* NoteService.swift in Sources */,
 				B407D4DC2E20D02700CC1CF3 /* VisitsService.swift in Sources */,
 				B407D4DD2E20D02700CC1CF3 /* SchemeService.swift in Sources */,
 				B4CAEC982E27DCF0009EAE79 /* ReturnService.swift in Sources */,
@@ -696,6 +725,7 @@
 				53A15A772D9FC75C00BDA75D /* Constant.swift in Sources */,
 				53A15A782D9FC75C00BDA75D /* Enum.swift in Sources */,
 				B407D51C2E20D12000CC1CF3 /* VisitStockDetailsVC.swift in Sources */,
+				B41AE3832E2E390D00438056 /* ExpenseModel.swift in Sources */,
 				B407D51E2E20D12000CC1CF3 /* StartCheckInVC.swift in Sources */,
 				B407D51F2E20D12000CC1CF3 /* SingleVisitVC.swift in Sources */,
 				B407D5202E20D12000CC1CF3 /* CreateNewVisitVC.swift in Sources */,
@@ -738,10 +768,13 @@
 				5303F0A92DA52CA400B4D528 /* AllData.swift in Sources */,
 				5303F06B2DA4FFDF00B4D528 /* Preferences.swift in Sources */,
 				5303F06C2DA4FFDF00B4D528 /* StatusBar.swift in Sources */,
+				B41AE3812E2E390200438056 /* ExpenseService.swift in Sources */,
 				B47E41C02E253A4600883779 /* VisitsTaskVC.swift in Sources */,
 				5303F06D2DA4FFDF00B4D528 /* TransitionContext.swift in Sources */,
+				B45B3E312E2A4B0C006398EF /* NotesModel.swift in Sources */,
 				53FEDC8A2DB513D80027220E /* GlobalData.swift in Sources */,
 				5303F06E2DA4FFDF00B4D528 /* BasicTransitionAnimator.swift in Sources */,
+				B45B3EC42E2A67F4006398EF /* UserService.swift in Sources */,
 				5303F06F2DA4FFDF00B4D528 /* UIView+Constraints.swift in Sources */,
 				B4CAEC962E27DB8D009EAE79 /* ReturnModel.swift in Sources */,
 				4F13E93E237DD5D9005BCAE9 /* AccountsListView.swift in Sources */,
@@ -751,6 +784,7 @@
 				53FEDC8D2DB514130027220E /* Customer.swift in Sources */,
 				53A15AD22D9FC78400BDA75D /* CustomTextField.swift in Sources */,
 				B4C784392E24D4A6000C1AF6 /* ProductsService.swift in Sources */,
+				B45B3EC62E2A6801006398EF /* UserModel.swift in Sources */,
 				53BEA8D32DA7AED9002A151B /* CustomTabBar.swift in Sources */,
 				53A15AD32D9FC78400BDA75D /* DropDownManager.swift in Sources */,
 				53A15AD42D9FC78400BDA75D /* Utility.swift in Sources */,

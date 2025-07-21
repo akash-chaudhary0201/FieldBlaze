@@ -12,12 +12,10 @@ class BeatService{
     let webRequest = BaseWebService()
     let endPoint = EndPoints()
     
-    var allBeatsArray:[BeatModel] = []
-    var singleBeatArray:[BeatModel] = []
-    
-    func getAllBeats() async{
+    //Function to get all beats:
+    public static func getAllBeats() async{
         let soqlQuery = """
-            select Id, OwnerId,  Name, Beat_Type_PI__c, Distributor_RE__r.Name from Beat_Plan__c where ownerId = '\(Defaults.userId!)'
+            select Id, OwnerId,  Name, Beat_Type_PI__c, Distributor_RE__r.Name, Zone_RE__r.Name from Beat_Plan__c where ownerId = '\(Defaults.userId!)' ORDER BY CreatedDate DESC NULLS LAST
             """
         
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
@@ -38,68 +36,18 @@ class BeatService{
             
             let (data, _) = try await URLSession.shared.data(for: request)
             
-            allBeatsArray.removeAll()
+            GlobalData.allBeats.removeAll()
             
             if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
                let beatRecords = jsonData["records"] as? [[String:Any]]{
                 
-                //                print(beatRecords)
-                
                 for record in beatRecords {
-                    let id = record["Id"] as? String ?? ""
-                    let name = record["Name"] as? String ?? ""
-                    let beatType = record["Beat_Type_PI__c"] as? String ?? ""
-                    let distributor = (record["Distributor_RE__r"] as? [String: Any])?["Name"] as? String
-                    
-                    let beat = BeatModel(id: id, beatName: name, beatType: beatType, distributerName: distributor ?? "NA")
-                    allBeatsArray.append(beat)
+                    GlobalData.allBeats.append(BeatModel(dict: record))
                 }
             }
         }catch{
             print("Error: \(error)")
         }
-    }
-    
-    
-    //Function to get single Beat:
-    func getSingleBeat(_ beatId:String) async -> BeatModel? {
-        let soqlQuery = """
-            select Id, OwnerId, Name, Beat_Type_PI__c, Distributor_RE__r.Name from Beat_Plan__c where Id = '\(beatId)'
-            """
-        
-        guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-              let instanceUrl = Defaults.instanceUrl else {
-            return nil
-        }
-        
-        let fullUrl = "\(instanceUrl)/services/data/v59.0/query/?q=\(encodedQuery)"
-        
-        guard let url = URL(string: fullUrl) else {
-            return nil
-        }
-        
-        do {
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue("Bearer \(Defaults.accessToken!)", forHTTPHeaderField: "Authorization")
-            
-            let (data, _) = try await URLSession.shared.data(for: request)
-            
-            if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-               let beatRecords = jsonData["records"] as? [[String: Any]],
-               let record = beatRecords.first {
-                
-                let id = record["Id"] as? String ?? ""
-                let name = record["Name"] as? String ?? ""
-                let beatType = record["Beat_Type_PI__c"] as? String ?? ""
-                let distributor = (record["Distributor_RE__r"] as? [String: Any])?["Name"] as? String ?? "NA"
-                
-                return BeatModel(id: id, beatName: name, beatType: beatType, distributerName: distributor)
-            }
-        } catch {
-            print("Error: \(error)")
-        }
-        return nil
     }
     
     //Function to create a new beat:
@@ -135,4 +83,44 @@ class BeatService{
         }
         task.resume()
     }
+    
+    //Function to get assigned accounts to a beat:
+    public static func getAllAssignedAccounts(_ beatId:String) async{
+        let soqlQuery = """
+            SELECT Id, Name, Account_RE__r.Name, Beat_Plan_RE__r.Zone_RE__c, Beat_Plan_RE__r.Zone_RE__r.Name 
+                FROM Assigned_Customer__c  WHERE Beat_Plan_RE__c = '\(beatId)'
+            """
+        
+        guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let instanceUrl = Defaults.instanceUrl else {
+            return
+        }
+        
+        let fullUrl = "\(instanceUrl)/services/data/v59.0/query/?q=\(encodedQuery)"
+        
+        guard let url = URL(string: fullUrl) else {
+            return
+        }
+        
+        do{
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue("Bearer \(Defaults.accessToken!)", forHTTPHeaderField: "Authorization")
+            
+            let (data, _) = try await URLSession.shared.data(for: request)
+            
+            GlobalData.assignedAccounts.removeAll()
+            
+            if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
+               let beatRecords = jsonData["records"] as? [[String:Any]]{
+                
+                for record in beatRecords {
+                    GlobalData.assignedAccounts.append(AssignedAccountModel(dict: record))
+                }
+            }
+        }catch{
+            print("Error: \(error)")
+        }
+    }
+    
 }

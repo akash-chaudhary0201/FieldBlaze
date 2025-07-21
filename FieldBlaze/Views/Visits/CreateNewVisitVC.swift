@@ -83,11 +83,10 @@ class CreateNewVisitVC: UIViewController {
     //Function to setup beat dropdown:
     func setUpBeatDropDown(){
         Task{
-            await obj.getAllBeats()
-            self.allBeatArray = obj.allBeatsArray
-            //            print("-------------\(allBeatArray)")
+            await BeatService.getAllBeats()
+            self.allBeatArray = GlobalData.allBeats
             
-            self.allBeatsName = allBeatArray.map{$0.beatName}
+            self.allBeatsName = allBeatArray.map{$0.beatName ?? "a"}
             DropDownFunction.setupDropDown(dropDown: beatDropDown, anchor: beatDropDownView, dataSource: allBeatsName, labelToUpdate: beatLabel)
             
             beatDropDown.selectionAction = { index, item in

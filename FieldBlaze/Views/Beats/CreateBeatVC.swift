@@ -37,6 +37,8 @@ class CreateBeatVC: UIViewController {
     @IBOutlet weak var distributerLabel: UILabel!
     @IBOutlet weak var distributerViewHeight: NSLayoutConstraint!
     var selectedDistributerId:String?
+    @IBOutlet weak var distributerTopSpaing: NSLayoutConstraint!
+    
     
     //Account outlets:s
     @IBOutlet weak var accountsTable: UITableView!
@@ -47,6 +49,8 @@ class CreateBeatVC: UIViewController {
     //Variable to store selected beat type:
     var selectedBeatType:String = "Zone"
     
+    @IBOutlet weak var createBeatButtonTopSpacing: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,6 +58,7 @@ class CreateBeatVC: UIViewController {
         
         distributerDropDownView.isHidden = true
         distributerViewHeight.constant = 0
+        distributerTopSpaing.constant = 0
         
         //Hiding accounts table by default:
         accountsTable.isHidden = true
@@ -61,6 +66,8 @@ class CreateBeatVC: UIViewController {
         
         setUpZoneDropDown()
         setUpDistributerDropDown()
+        
+        createBeatButtonTopSpacing.constant = 20
     }
     
     //Function to setup zone dropdown:
@@ -83,8 +90,9 @@ class CreateBeatVC: UIViewController {
                     await  self.obj.geAccountBasedOnZone(self.selectedZoneId!)
                     DispatchQueue.main.async{
                         self.accountsTable.isHidden = false
-                        self.accountTableHieght.constant = 500
+                        self.accountTableHieght.constant = CGFloat(GlobalData.allCustomers.count * 150)
                         self.accountsTable.reloadData()
+                        self.createBeatButtonTopSpacing.constant = 20
                     }
                 }
             }
@@ -109,8 +117,9 @@ class CreateBeatVC: UIViewController {
                     await self.obj.geAccountBasedOnDistributer(self.selectedDistributerId!)
                     DispatchQueue.main.async {
                         self.accountsTable.isHidden = false
-                        self.accountTableHieght.constant = 500
+                        self.accountTableHieght.constant = CGFloat(GlobalData.allCustomers.count * 150)
                         self.accountsTable.reloadData()
+                        self.createBeatButtonTopSpacing.constant = 20
                     }
                 }
             }
@@ -180,7 +189,6 @@ class CreateBeatVC: UIViewController {
             ]
         }
         
-//        Zone_RE__c
         // Create the main body
         let body: [String: Any] = [
             "records": [
@@ -220,24 +228,23 @@ class CreateBeatVC: UIViewController {
             SwiftLoaderHelper.setLoader()
             let requestBody = createApiBodyFunc()
             
-            obj2.createBeatPlan(requestBody) { st in
-                if st{
-                    DispatchQueue.main.async {
+            GlobalPostRequest.commonPostFunction("v52.0/composite/tree/Beat_Plan__c", requestBody) { success, response in
+                DispatchQueue.main.async {
+                    if success{
                         SwiftLoader.hide()
-                        self.navigationController?.popViewController(animated: true)
+                        AlertFunction.showAlertAndPop("Beat Created Successfully \(response!)", self)
                     }
                 }
             }
-            print("-----------------\(selectedBeatType)")
         }else{
             
             SwiftLoaderHelper.setLoader()
             let requestBody = createApiBodyFunc()
-            obj2.createBeatPlan(requestBody) { st in
-                if st{
-                    DispatchQueue.main.async {
+            GlobalPostRequest.commonPostFunction("v52.0/composite/tree/Beat_Plan__c", requestBody) { success, response in
+                DispatchQueue.main.async {
+                    if success{
                         SwiftLoader.hide()
-                        self.navigationController?.popViewController(animated: true)
+                        AlertFunction.showAlertAndPop("Beat Created Successfully \(response!)", self)
                     }
                 }
             }
@@ -251,7 +258,7 @@ class CreateBeatVC: UIViewController {
 extension CreateBeatVC:UITableViewDelegate, UITableViewDataSource, AccountTablDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        GlobalData.allCustomers.count
+        return GlobalData.allCustomers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -281,7 +288,6 @@ extension CreateBeatVC:UITableViewDelegate, UITableViewDataSource, AccountTablDe
             btn.setImage(UIImage(named: "addcheck"), for: .normal)
         }
     }
-    
 }
 
 protocol AccountTablDelegate:AnyObject{

@@ -10,6 +10,13 @@ import UIKit
 
 class AnnouncementDetailsVC: UIViewController {
     
+    //Varibale to store annoucemcne details:
+    var announcementDescription:String?
+    var announcementStartDate:String?
+    var announcementEndDate:String?
+    var announcementName:String?
+    var announcementType:String?
+    
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var type: UILabel!
     @IBOutlet weak var endDate: UILabel!
@@ -24,19 +31,12 @@ class AnnouncementDetailsVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        Task{
-            await AnnouncementService.getSingleAnnouncement(annId!)
-            
-            DispatchQueue.main.async {
-                if let announcement = GlobalData.allAnnouncements.first {
-                    self.name.text = announcement.annName
-                    self.type.text = announcement.annType
-                    self.endDate.text = announcement.annEndDate
-                    self.startDate.text = announcement.annStartDate
-                    self.desLabel.text = announcement.annDescription
-                }
-            }
-        }
+        
+        self.name.text = announcementName
+        self.type.text = announcementType
+        self.endDate.text = announcementEndDate
+        self.startDate.text = announcementStartDate
+        self.desLabel.text = announcementDescription
     }
     
     @IBAction func backAction(_ sender: Any) {

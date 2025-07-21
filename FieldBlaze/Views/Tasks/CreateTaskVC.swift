@@ -30,13 +30,7 @@ class CreateTaskVC: UIViewController {
         super.viewDidLoad()
         
         SetTextFields.setTextField(taskTitle, "Add Task Title")
-        
-        taskDescription.label.text = "Write the task's description"
-        taskDescription?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        taskDescription?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        taskDescription?.setNormalLabel(UIColor.gray, for: .normal)
-        taskDescription?.setFloatingLabel(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        taskDescription.translatesAutoresizingMaskIntoConstraints = false
+        SetTextFields.setTextAreas(taskDescription, "Write the task's description")
         
         //Calling dropdown function:
         DropDownFunction.setupDropDown(dropDown: priorityDropDown, anchor: priorityView, dataSource: priorties, labelToUpdate: priorityLabel)

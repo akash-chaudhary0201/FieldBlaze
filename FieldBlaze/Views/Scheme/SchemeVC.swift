@@ -34,7 +34,6 @@ class SchemeVC: UIViewController {
             self.filteredSchemeArray = self.allSchemesArray
             self.schemesTable.reloadData()
         }
-
     }
 
     @IBAction func schemeAction(_ sender: Any) {

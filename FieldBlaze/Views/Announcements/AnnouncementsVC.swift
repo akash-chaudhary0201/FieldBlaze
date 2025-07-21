@@ -66,6 +66,11 @@ extension AnnouncementsVC:UITableViewDelegate, UITableViewDataSource{
         let storyboard = UIStoryboard(name: "Announcements", bundle: nil)
         if let nextController = storyboard.instantiateViewController(withIdentifier: "AnnouncementDetailsVC") as? AnnouncementDetailsVC{
             nextController.annId = singleAnn.annId
+            nextController.announcementName = singleAnn.annName
+            nextController.announcementType = singleAnn.annType
+            nextController.announcementDescription = singleAnn.annDescription
+            nextController.announcementStartDate = singleAnn.annStartDate
+            nextController.announcementEndDate = singleAnn.annEndDate
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }

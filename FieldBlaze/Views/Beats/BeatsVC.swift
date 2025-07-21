@@ -26,8 +26,8 @@ class BeatsVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         Task{
-            await beatObject.getAllBeats()
-            self.allBeatsArray = beatObject.allBeatsArray
+            await BeatService.getAllBeats()
+            self.allBeatsArray = GlobalData.allBeats
             
             DispatchQueue.main.async {
                 SwiftLoader.hide()
@@ -72,6 +72,10 @@ extension BeatsVC:UITableViewDelegate, UITableViewDataSource{
         let storyboard = UIStoryboard(name: "Beats", bundle:  nil)
         if let nextController = storyboard.instantiateViewController(identifier: "ViewBeatVC") as? ViewBeatVC {
             nextController.beatId = singleBeat.id
+            nextController.zoneName = singleBeat.zoneName
+            nextController.distributerName = singleBeat.distributerName
+            nextController.beatName = singleBeat.beatName
+            nextController.beatType = singleBeat.beatType
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }

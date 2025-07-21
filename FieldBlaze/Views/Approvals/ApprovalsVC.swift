@@ -13,6 +13,8 @@ class ApprovalsVC: UIViewController {
     @IBOutlet weak var allApprovalsTable: UITableView!
     var filteredApprovalArray:[Approvals] = []
     
+    var userRole:String?
+    
     //Stack buttons:
     @IBOutlet weak var allButton: UIButton!
     @IBOutlet weak var leavesButton: UIButton!
@@ -25,9 +27,9 @@ class ApprovalsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        SwiftLoaderHelper.setLoader()
         allApprovalsTable.separatorStyle = .none
+        
+        userRole = UserDefaults.standard.string(forKey: "userRole")
         
         highlightButton(allButton)
     }
@@ -38,19 +40,25 @@ class ApprovalsVC: UIViewController {
     
     //Function to setup UI:
     func setUpui(){
-        Task{
-            await obj.getAlApprovalRequest(){ status in
-                if status{
-                    DispatchQueue.main.async {
-                        SwiftLoader.hide()
-                        self.allApprovalsTable.reloadData()
-                        self.filteredApprovalArray = GlobalData.allApprovalRequest
+        
+        if userRole == "Sales"{
+            AlertFunction.showAlertAndPop("You are not authorized to access this page", self)
+        }else{
+            SwiftLoaderHelper.setLoader()
+            Task{
+                await obj.getAlApprovalRequest(){ status in
+                    if status{
+                        DispatchQueue.main.async {
+                            SwiftLoader.hide()
+                            self.allApprovalsTable.reloadData()
+                            self.filteredApprovalArray = GlobalData.allApprovalRequest
+                        }
+                    }else{
+                        print("hellllllllll no")
                     }
-                }else{
-                    print("hellllllllll no")
                 }
+                
             }
-            
         }
     }
     
@@ -84,7 +92,7 @@ class ApprovalsVC: UIViewController {
         default:
             break
         }
-    
+        
     }
     
     //Function to filter approvals based on types:
@@ -98,8 +106,8 @@ class ApprovalsVC: UIViewController {
     //Function to give bg to selected buttons:
     func highlightButton(_ button: UIButton) {
         let highlightColor = UIColor(red: 62/255, green: 197/255, blue: 154/255, alpha: 1.0)
-            button.backgroundColor = highlightColor
-            button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = highlightColor
+        button.setTitleColor(.white, for: .normal)
     }
     
     func removeHighLight(_ buttons: [UIButton]) {
@@ -143,8 +151,6 @@ extension ApprovalsVC:UITableViewDelegate, UITableViewDataSource, isRejectButton
     }
     
     func rejectedButtonTapped(_ approvalId: String) {
-        //        print("-------------REJECTED---------------")
-        //        print("Approval Id: \(approvalId)")
         selectedButton = "Reject"
         let storyboard = UIStoryboard(name: "Approvals", bundle: nil)
         if let nextController = storyboard.instantiateViewController(withIdentifier: "ApprovalCommentVC") as? ApprovalCommentVC{
@@ -162,7 +168,6 @@ extension ApprovalsVC:UITableViewDelegate, UITableViewDataSource, isRejectButton
     }
     
     func approvalButtonTapped(_ approvalId: String) {
-        //        print("-------------APPROVED---------------")
         selectedButton = "Approve"
         let storyboard = UIStoryboard(name: "Approvals", bundle: nil)
         if let nextController = storyboard.instantiateViewController(withIdentifier: "ApprovalCommentVC") as? ApprovalCommentVC{

@@ -32,9 +32,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        _ = DatabaseManager.shared
-        
+            
         token = UserDefaults.standard.string(forKey: "accessToken")
         print("User Id: \(Defaults.userId!)")
         
@@ -71,8 +69,6 @@ class HomeVC: UIViewController {
         pagerView.interitemSpacing = -20
         pagerView.itemSize = CGSize(width: pagerView.frame.width * 0.75, height: pagerView.frame.height * 0.9)
         pagerView.transformer = FSPagerViewTransformer(type: .linear)
-    
-        
     }
     
     @IBAction func menuAction() {
@@ -199,7 +195,13 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             if let selectedVC = storyboard.instantiateViewController(withIdentifier: "TasksVC") as? TasksVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
-        }else if indexPath.row == 8{
+        }else if indexPath.row == 7{
+            let storyboard = UIStoryboard(name: "Expenses", bundle: nil)
+            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "ExpensesVC") as? ExpensesVC{
+                navigationController?.pushViewController(selectedVC, animated: true)
+            }
+        }
+        else if indexPath.row == 8{
             let storyboard = UIStoryboard(name: "Beats", bundle: nil)
             if let selectedVC = storyboard.instantiateViewController(withIdentifier: "BeatsVC") as? BeatsVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
@@ -215,6 +217,12 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             if let selectedVC = storyboard.instantiateViewController(withIdentifier: "ReturnsVC") as? ReturnsVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
+        }
+        else if indexPath.row == 13{
+            let storyboard = UIStoryboard(name: "Leaves", bundle: nil)
+            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "LeavesVC") as? LeavesVC{
+                navigationController?.pushViewController(selectedVC, animated: true)
+            }
         }else if indexPath.row == 9{
             let storyboard = UIStoryboard(name: "Visits", bundle: nil)
             if let selectedVC = storyboard.instantiateViewController(withIdentifier: "AllVisitsVC") as? AllVisitsVC{
@@ -223,6 +231,12 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         }else if indexPath.row == 14{
             let storyboard = UIStoryboard(name: "Announcements", bundle: nil)
             if let selectedVC = storyboard.instantiateViewController(withIdentifier: "AnnouncementsVC") as? AnnouncementsVC{
+                navigationController?.pushViewController(selectedVC, animated: true)
+            }
+        }
+        else if indexPath.row == 15{
+            let storyboard = UIStoryboard(name: "Notes", bundle: nil)
+            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "NotesVC") as? NotesVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
         }

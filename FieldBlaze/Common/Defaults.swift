@@ -19,6 +19,16 @@ class Defaults {
         }
     }
     
+    static var userRole:String?{
+        get {
+            return UserDefaults.standard.object(forKey: "userRole") as? String ?? EMPTY
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "userRole")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     static var domain: String? {
         get {
             return UserDefaults.standard.object(forKey: "Domain") as? String ?? EMPTY

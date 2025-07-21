@@ -38,7 +38,15 @@ class CheckInVC: UIViewController, CLLocationManagerDelegate {
                 Defaults.issuedAt = formatter.string(from: issuedAtDate)
             }
             Defaults.organizationId = credentials.organizationId ?? ""
-            
+        }
+        
+        Task{
+            await UserService.getLoggedInUser(Defaults.userId!) { status in
+                if status{
+                    Defaults.userRole = GlobalData.loggedInUserInfo.first?.userRole
+                    print("---------Role Addedd successfully---------------------------------------------------")
+                }
+            }
         }
     }
     

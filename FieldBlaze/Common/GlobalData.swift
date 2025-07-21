@@ -43,8 +43,22 @@ class GlobalData: NSObject {
     static var allZones = [ZoneModel]()
     //Distributers
     static var allDistributer = [DistributerModel]()
+    //Leaves
+    static var allLeaves = [LeaveModel]()
+    //Notes
+    static var allNotes = [NotesModel]()
+    //Beats
+    static var allBeats = [BeatModel]()
+    //Assigned customer to a beat:
+    static var assignedAccounts = [AssignedAccountModel]()
+    //Expense
+    static var allExpenses = [ExpenseModel]()
     
     
+    //--------------------------------------------------------------------//
+    
+    //Logged in user:
+    static var loggedInUserInfo = [UserModel]()
     
     //Glpbal array to store the details of the stock item selected:
     static var globalSelectedStockItem = [ProductModelToSendAsStock]()
