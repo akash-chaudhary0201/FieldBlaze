@@ -9,10 +9,11 @@
 import UIKit
 import SwiftLoader
 
-class AllVisitsVC: UIViewController {
+class AllVisitsVC: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var allVisitsTable: UITableView!
-    var allVisitsArray:[VisitsModel] = []
+    var filteredVisits:[VisitsModel] = []
+    @IBOutlet weak var visitSearchBar: UISearchBar!
     
     var obj = VisitsService()
     
@@ -33,7 +34,7 @@ class AllVisitsVC: UIViewController {
     func setUpUI(){
         Task{
             await obj.getAllVisits()
-//            print("--------------------------------\(GlobalData.allVisits)")
+            self.filteredVisits = GlobalData.allVisits
             DispatchQueue.main.async {
                 SwiftLoader.hide()
                 self.allVisitsTable.reloadData()
@@ -51,17 +52,32 @@ class AllVisitsVC: UIViewController {
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }
+    
+    //Search Functionality
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredVisits = GlobalData.allVisits
+        } else {
+            filteredVisits = GlobalData.allVisits.filter {
+                $0.accountName.lowercased().contains(searchText.lowercased())
+            }
+        }
+        DispatchQueue.main.async {
+            self.allVisitsTable.reloadData()
+        }
+    }
+
 }
 
 extension AllVisitsVC:UITableViewDelegate, UITableViewDataSource, reqApprovalBtnTapped{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GlobalData.allVisits.count
+        return filteredVisits.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = allVisitsTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! VisitsTableCell
-        let singleVisit = GlobalData.allVisits[indexPath.row]
+        let singleVisit = filteredVisits[indexPath.row]
         
         cell.accountName.text = singleVisit.accountName
         cell.visitName.text = singleVisit.visitName
@@ -88,7 +104,7 @@ extension AllVisitsVC:UITableViewDelegate, UITableViewDataSource, reqApprovalBtn
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let singleVisit = GlobalData.allVisits[indexPath.row]
+        let singleVisit = filteredVisits[indexPath.row]
         let storyboard = UIStoryboard(name: "Visits", bundle: nil)
         if let nextController = storyboard.instantiateViewController(withIdentifier: "SingleVisitVC") as? SingleVisitVC{
             nextController.visitId = singleVisit.visitId
@@ -98,7 +114,7 @@ extension AllVisitsVC:UITableViewDelegate, UITableViewDataSource, reqApprovalBtn
     
     func tableView(_ tableView:UITableView, commit editingStyle:UITableViewCell.EditingStyle, forRowAt indexPath:IndexPath){
         if editingStyle == .delete{
-            allVisitsArray.remove(at: indexPath.row)
+            filteredVisits.remove(at: indexPath.row)
             allVisitsTable.deleteRows(at: [indexPath], with: .fade)
         }
     }

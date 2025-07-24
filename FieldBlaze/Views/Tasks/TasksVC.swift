@@ -8,12 +8,14 @@
 
 import UIKit
 
-class TasksVC: UIViewController {
+class TasksVC: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var tasksTabl: UITableView!
+    @IBOutlet weak var taskSearchBar: UISearchBar!
     
     var obj = TaskServices()
     var allTasksArray:[TaskModel] = []
+    var filteredTasks:[TaskModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +32,27 @@ class TasksVC: UIViewController {
                     SwiftLoader.hide()
                 }
             }
-            self.allTasksArray = GlobalData.allTasks
+            self.filteredTasks = GlobalData.allTasks
             
             DispatchQueue.main.async {
                 self.tasksTabl.reloadData()
             }
+        }
+    }
+    
+    //Search Bar functionality:
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredTasks = []
+        if searchText.isEmpty {
+            filteredTasks = GlobalData.allTasks
+        } else {
+            filteredTasks = GlobalData.allTasks.filter { task in
+                guard let subject = task.subject else { return false }
+                return subject.lowercased().contains(searchText.lowercased())
+            }
+        }
+        DispatchQueue.main.async {
+            self.tasksTabl.reloadData()
         }
     }
     
@@ -54,12 +72,12 @@ class TasksVC: UIViewController {
 
 extension TasksVC:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allTasksArray.count
+        return filteredTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tasksTabl.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskCell
-        let singleTask = allTasksArray[indexPath.row]
+        let singleTask = filteredTasks[indexPath.row]
         
         let formateddDate = singleTask.date?.prefix(10)
         
@@ -73,7 +91,7 @@ extension TasksVC:UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let singleTask = allTasksArray[indexPath.row]
+        let singleTask = filteredTasks[indexPath.row]
         let storyboard = UIStoryboard(name: "Tasks", bundle: nil)
         if let nextController = storyboard.instantiateViewController(withIdentifier: "TaskDetailVC") as? TaskDetailVC{
             nextController.taskId = singleTask.id

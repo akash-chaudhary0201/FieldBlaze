@@ -21,7 +21,7 @@ var actionCollectionData: [ActionItem] = [
     ActionItem(actionTitle: "Work Day", actionImage: "WorkDay"),
     
     ActionItem(actionTitle: "Approvals", actionImage: "Approvals"),
-    ActionItem(actionTitle: "Task", actionImage: "tasks"),
+    ActionItem(actionTitle: "Task", actionImage: "homeTask"),
     ActionItem(actionTitle: "Expenses", actionImage: "Expenses"),
     ActionItem(actionTitle: "Beat Plan", actionImage: "Beatplan"),
     

@@ -62,21 +62,26 @@ class CreateLeaveVC: UIViewController {
         
         SwiftLoaderHelper.setLoader()
         
-        let bodyRequest:[String:Any] = [
-            "PI_LeaveType__c":leaveTypeLabel.text!,
-            "DA_StartDate__c":startDateLabel.text!,
-            "DA_End_Date__c":endDateLabel.text!,
-            "PI_Full_Day_Half_Day__c":fullHalfLabel.text!
-        ]
-        
-        GlobalPostRequest.commonPostFunction("v63.0/sobjects/Leave__c", bodyRequest) { success, response in
-            DispatchQueue.main.async {
-                if success{
-                    SwiftLoader.hide()
-                    AlertFunction.showAlertAndPop("\(response ?? "A")", self)
-                }else{
-                    SwiftLoader.hide()
-                    AlertFunction.showErrorAlert("\(response ?? "A")", self)
+        if leaveTypeLabel.text == "Leave Type" || startDateLabel.text == "Start Date" || endDateLabel.text == "End Date" || fullHalfLabel.text == "Full Day / Half Day"{
+            AlertFunction.showErrorAlert("Please Fill all the details", self)
+            SwiftLoader.hide()
+        }else{
+            let bodyRequest:[String:Any] = [
+                "PI_LeaveType__c":leaveTypeLabel.text!,
+                "DA_StartDate__c":startDateLabel.text!,
+                "DA_End_Date__c":endDateLabel.text!,
+                "PI_Full_Day_Half_Day__c":fullHalfLabel.text!
+            ]
+            
+            GlobalPostRequest.commonPostFunction("v63.0/sobjects/Leave__c", bodyRequest) { success, response in
+                DispatchQueue.main.async {
+                    if success{
+                        SwiftLoader.hide()
+                        AlertFunction.showAlertAndPop("Leave Submitted Successfully", self)
+                    }else{
+                        SwiftLoader.hide()
+                        AlertFunction.showErrorAlert("\(response ?? "A")", self)
+                    }
                 }
             }
         }

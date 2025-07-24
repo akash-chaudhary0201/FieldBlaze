@@ -13,8 +13,6 @@ class OrdersVC: UIViewController {
 
     @IBOutlet weak var ordersTable: UITableView!
     
-    var obj = OrdersService()
-    
     //Array to store all order:
     var allOrders:[Orders] = []
 
@@ -39,7 +37,7 @@ class OrdersVC: UIViewController {
         SwiftLoader.setConfig(config: config)
         SwiftLoader.show(title: "Loading...", animated: true)
         
-        await obj.getAllOrders(){ status in
+        await OrdersService.getAllOrders(Defaults.userId!){ status in
             if status{
                 SwiftLoader.hide()
             }

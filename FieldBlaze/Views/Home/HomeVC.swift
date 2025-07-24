@@ -239,6 +239,11 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             if let selectedVC = storyboard.instantiateViewController(withIdentifier: "NotesVC") as? NotesVC{
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
+        }else if indexPath.row == 16{
+            let storyboard = UIStoryboard(name: "DSR", bundle: nil)
+            if let selectedVC = storyboard.instantiateViewController(withIdentifier: "DSRVC") as? DSRVC{
+                navigationController?.pushViewController(selectedVC, animated: true)
+            }
         }
         
     }

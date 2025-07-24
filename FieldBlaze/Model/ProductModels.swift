@@ -11,17 +11,23 @@ import Foundation
 struct FetchedProductsModel{
     var id:String?
     var name:String?
-    var productPrice:Int?
     
     
     init(dict:[String:Any]){
-        self.id = ""
-        self.name = ""
-        if let productDict = dict["Product__r"] as? [String: Any] {
-            self.id = productDict["Id"] as? String ?? ""
-            self.name = productDict["Name"] as? String ?? ""
-        }
-        self.productPrice = dict["CU_List_Price__c"] as? Int
+        self.id = dict["Id"] as? String
+        self.name = dict["Name"] as? String
+    }
+}
+
+struct FetchedProductPriceBook{
+    var id:String?
+    var name:String?
+    var listPrice:Double?
+    
+    init(dict: [String: Any]) {
+        self.id = dict["Id"] as? String ?? ""
+        self.name = dict["Name"] as? String ?? ""
+        self.listPrice = dict["CU_List_Price__c"] as? Double
     }
 }
 

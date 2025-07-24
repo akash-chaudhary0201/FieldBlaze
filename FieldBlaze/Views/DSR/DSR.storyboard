@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--DSRVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="DSRVC" id="Y6W-OH-hqX" customClass="DSRVC" customModule="FieldBlaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5U9-Ee-CsT">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUT-80-2A2">
+                                        <rect key="frame" x="24" y="61" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="fiJ-Vj-RmB"/>
+                                            <constraint firstAttribute="height" constant="30" id="foC-Ll-r4b"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="back" title=""/>
+                                        <connections>
+                                            <action selector="backAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ICi-CV-Sg7"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Visit Report" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3L-7u-ILx">
+                                        <rect key="frame" x="64" y="64.666666666666671" width="158" height="23"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.24255436659999999" green="0.77296984199999996" blue="0.60255998369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="fqD-uE-WhK"/>
+                                    <constraint firstItem="xUT-80-2A2" firstAttribute="leading" secondItem="5U9-Ee-CsT" secondAttribute="leading" constant="24" id="qoD-4K-2kx"/>
+                                    <constraint firstAttribute="bottom" secondItem="xUT-80-2A2" secondAttribute="bottom" constant="19" id="s3F-gN-qAI"/>
+                                    <constraint firstItem="Z3L-7u-ILx" firstAttribute="centerY" secondItem="xUT-80-2A2" secondAttribute="centerY" id="tKT-HG-PzM"/>
+                                    <constraint firstItem="Z3L-7u-ILx" firstAttribute="leading" secondItem="xUT-80-2A2" secondAttribute="trailing" constant="10" id="ypF-8C-eaq"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dA-vw-CBs">
+                                <rect key="frame" x="96.666666666666686" y="428.66666666666669" width="200" height="45"/>
+                                <color key="backgroundColor" red="0.24255436659999999" green="0.77296984199999996" blue="0.60255998369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="JSQ-la-YDn"/>
+                                    <constraint firstAttribute="height" constant="45" id="glk-om-mH2"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Download DSR"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="downloadDSRAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="mhm-kL-xaq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5U9-Ee-CsT" secondAttribute="trailing" id="3f6-c3-Vd7"/>
+                            <constraint firstItem="9dA-vw-CBs" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="Ac6-oY-gu0"/>
+                            <constraint firstItem="5U9-Ee-CsT" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="e8O-f3-5Gh"/>
+                            <constraint firstItem="5U9-Ee-CsT" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="tFg-zL-Iiy"/>
+                            <constraint firstItem="9dA-vw-CBs" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="ycK-sq-bzV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dsrButton" destination="9dA-vw-CBs" id="Hh6-6c-ClQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50" y="5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="21.333333969116211" height="21.333333969116211"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

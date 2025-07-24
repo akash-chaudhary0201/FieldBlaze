@@ -138,7 +138,15 @@ extension ApprovalsVC:UITableViewDelegate, UITableViewDataSource, isRejectButton
         
         cell.submittedBy.text = singleApprovalRequest.createdBy
         cell.approvalName.text = singleApprovalRequest.approvalName
-        cell.approvalType.text = singleApprovalRequest.approvalType
+       
+        
+        if singleApprovalRequest.approvalType == "Leave__c"{
+            cell.approvalType.text = "Leave"
+        }else if singleApprovalRequest.approvalType == "Expenses__c"{
+            cell.approvalType.text = "Expense"
+        }else if singleApprovalRequest.approvalType == "Visit__c"{
+            cell.approvalType.text = "Visit"
+        }
         cell.submittedDate.text = singleApprovalRequest.createdDate
         cell.approvalStatus.text = singleApprovalRequest.approvalStatus
         

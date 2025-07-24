@@ -483,6 +483,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="krE-0B-Sh3">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="90"/>
                                                     <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TableviewCellBackground" translatesAutoresizingMaskIntoConstraints="NO" id="7Tp-Xs-Wju">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="90"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="10"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Akash Chaudhary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzL-Ul-nmY">
                                                             <rect key="frame" x="20" y="10" width="134" height="19.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
@@ -546,14 +554,18 @@
                                                     <constraints>
                                                         <constraint firstItem="TzL-Ul-nmY" firstAttribute="top" secondItem="krE-0B-Sh3" secondAttribute="top" constant="10" id="0HU-oG-UGX"/>
                                                         <constraint firstAttribute="trailing" secondItem="thD-y2-qAu" secondAttribute="trailing" constant="10" id="Ce5-Th-Qjr"/>
+                                                        <constraint firstItem="7Tp-Xs-Wju" firstAttribute="top" secondItem="krE-0B-Sh3" secondAttribute="top" id="Fnf-oH-2HX"/>
                                                         <constraint firstItem="TzL-Ul-nmY" firstAttribute="leading" secondItem="krE-0B-Sh3" secondAttribute="leading" constant="20" id="GLN-6K-InJ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7Tp-Xs-Wju" secondAttribute="trailing" id="LRH-OV-4VM"/>
                                                         <constraint firstItem="8dz-H9-ahI" firstAttribute="leading" secondItem="tbw-0d-mSH" secondAttribute="leading" id="NgC-EL-YhK"/>
                                                         <constraint firstItem="thD-y2-qAu" firstAttribute="centerY" secondItem="TzL-Ul-nmY" secondAttribute="centerY" id="RwX-dD-YsB"/>
+                                                        <constraint firstItem="7Tp-Xs-Wju" firstAttribute="leading" secondItem="krE-0B-Sh3" secondAttribute="leading" id="Ugw-BE-Efs"/>
                                                         <constraint firstItem="r9s-iM-zyq" firstAttribute="centerY" secondItem="8dz-H9-ahI" secondAttribute="centerY" id="ajL-Ef-ZKB"/>
                                                         <constraint firstAttribute="trailing" secondItem="r9s-iM-zyq" secondAttribute="trailing" constant="10" id="btf-MV-Ibd"/>
                                                         <constraint firstItem="tbw-0d-mSH" firstAttribute="top" secondItem="TzL-Ul-nmY" secondAttribute="bottom" constant="5" id="lGi-l3-Sdv"/>
                                                         <constraint firstItem="tbw-0d-mSH" firstAttribute="leading" secondItem="TzL-Ul-nmY" secondAttribute="leading" id="rVK-B4-Uyj"/>
                                                         <constraint firstItem="8dz-H9-ahI" firstAttribute="top" secondItem="tbw-0d-mSH" secondAttribute="bottom" constant="8" symbolic="YES" id="u3E-9G-twd"/>
+                                                        <constraint firstAttribute="bottom" secondItem="7Tp-Xs-Wju" secondAttribute="bottom" id="uhw-hr-ZKD"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -563,7 +575,7 @@
                                                             <real key="value" value="1"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" red="0.24255436659999999" green="0.77296984199999996" blue="0.60255998369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemGray3Color"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
@@ -628,6 +640,7 @@
                     </view>
                     <connections>
                         <outlet property="allVisitsTable" destination="zwP-RN-J68" id="Tvl-vF-1Pu"/>
+                        <outlet property="visitSearchBar" destination="ua7-wk-ZXw" id="GES-Y5-987"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BnB-jy-lhU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3144,6 +3157,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="TableviewCellBackground" width="321" height="140"/>
         <image name="back" width="32" height="32"/>
         <image name="circle" catalog="system" width="128" height="123"/>
         <image name="circle.inset.filled" catalog="system" width="128" height="123"/>

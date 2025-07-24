@@ -29,7 +29,7 @@ class CustomersVC: UIViewController {
     
     func  setupUI()  async{
         
-        await obj.getAllCustomers()
+        await CustomerService.getAllCustomers(Defaults.userId!)
         
         DispatchQueue.main.async {
             self.tableView?.reloadData()

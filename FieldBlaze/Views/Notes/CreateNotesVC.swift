@@ -21,6 +21,18 @@ class CreateNotesVC: UIViewController {
 
         SetTextFields.setTextField(titleTextField, "Add Title")
         SetTextFields.setTextAreas(descriptionTextArea, "Write you note here...")
+        
+        addTapGestureToDismissKeyboard()
+    }
+    
+    func addTapGestureToDismissKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     

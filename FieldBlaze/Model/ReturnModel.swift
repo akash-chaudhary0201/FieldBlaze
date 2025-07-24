@@ -31,3 +31,10 @@ struct ReturnLineItemModel{
         self.itemQuantity = dict["Quantity__c"] as? Double
     }
 }
+
+struct ItmeToReturnModel{
+    var itemId:String?
+    var itemName:String?
+    var itemQuantity:String?
+    var returnType:String?
+}

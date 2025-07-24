@@ -71,6 +71,7 @@ extension AnnouncementsVC:UITableViewDelegate, UITableViewDataSource{
             nextController.announcementDescription = singleAnn.annDescription
             nextController.announcementStartDate = singleAnn.annStartDate
             nextController.announcementEndDate = singleAnn.annEndDate
+            nextController.announceImageUrl = singleAnn.annImageUrl
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }

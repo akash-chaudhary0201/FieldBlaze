@@ -199,7 +199,7 @@
                                 <rect key="frame" x="0.0" y="110" width="393" height="742"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WUP-nS-fSB">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="419"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="499"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Announcement Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5C-yK-bwM">
                                                 <rect key="frame" x="10" y="15" width="170" height="21"/>
@@ -312,9 +312,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slider1" translatesAutoresizingMaskIntoConstraints="NO" id="jvN-lm-g3N">
-                                                <rect key="frame" x="10" y="279" width="373" height="120"/>
+                                                <rect key="frame" x="10" y="279" width="373" height="200"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="120" id="FwL-7C-4Mx"/>
+                                                    <constraint firstAttribute="height" constant="200" id="FwL-7C-4Mx"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
@@ -390,6 +390,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="announcementImage" destination="jvN-lm-g3N" id="NIR-ch-1uO"/>
                         <outlet property="desLabel" destination="1Ec-kI-lLK" id="seQ-Dp-y03"/>
                         <outlet property="endDate" destination="E2L-Nc-M6C" id="htQ-iR-z1a"/>
                         <outlet property="name" destination="YxG-ib-9Ab" id="ryH-rb-pC3"/>

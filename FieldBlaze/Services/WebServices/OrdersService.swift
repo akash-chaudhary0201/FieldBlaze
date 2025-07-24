@@ -20,10 +20,10 @@ class OrdersService{
     var orderForSingleCustomer:[Orders] = []
     
     //Function to get all orders:
-    func getAllOrders(completion:@escaping(Bool) -> Void) async {
+    public static func getAllOrders(_ userId:String, completion:@escaping(Bool) -> Void) async {
         let soqlQuery = """
         SELECT Id, Name, RE_Account__r.Name, DA_Order_Date__c, DA_Order_Delivery_Date__c, Total_Amount__c, Sales_Person__r.Name 
-        FROM Sales_Order__c 
+        FROM Sales_Order__c   where CreatedById = '\(userId)'
         ORDER BY DA_Order_Date__c DESC
         """
         

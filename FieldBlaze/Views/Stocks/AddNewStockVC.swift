@@ -70,6 +70,7 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    //Function to create request body:
     func getRequestBody(_ products:[ProductModelToSendAsStock], _ accountId:String, _ date:String) -> [String:Any]{
         var stockLineItems:[[String:Any]] = []
         
@@ -99,7 +100,7 @@ class AddNewStockVC: UIViewController, UITextFieldDelegate {
     }
     
     func setUpUI() async{
-        await obj.getAllCustomers()
+        await CustomerService.getAllCustomers(Defaults.userId!)
         
         self.accounts = GlobalData.allCustomers
         customerNames = self.accounts.compactMap { $0.name }

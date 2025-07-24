@@ -89,6 +89,11 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TableviewCellBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Qwc-xQ-bIO">
                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="168"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="10"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nci-wv-lbQ">
                                                             <rect key="frame" x="10" y="10" width="191" height="16"/>
@@ -196,6 +201,14 @@
                                                         <constraint firstItem="uxH-yM-sUy" firstAttribute="width" secondItem="d2V-So-sFx" secondAttribute="width" multiplier="0.5" id="zZ4-DP-8oI"/>
                                                         <constraint firstItem="MMp-89-dcR" firstAttribute="top" secondItem="dNf-b8-FGx" secondAttribute="bottom" constant="8" id="zqw-vt-oG8"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>

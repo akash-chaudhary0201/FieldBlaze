@@ -9,13 +9,13 @@
 import UIKit
 import SwiftLoader
 
-class BeatsVC: UIViewController {
+class BeatsVC: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var beatsTable: UITableView!
+    @IBOutlet weak var beatSearchBar: UISearchBar!
     
     var beatObject = BeatService()
-    
-    var allBeatsArray:[BeatModel] = []
+    var filteredBeats:[BeatModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class BeatsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         Task{
             await BeatService.getAllBeats()
-            self.allBeatsArray = GlobalData.allBeats
+            self.filteredBeats = GlobalData.allBeats
             
             DispatchQueue.main.async {
                 SwiftLoader.hide()
@@ -36,6 +36,20 @@ class BeatsVC: UIViewController {
         }
     }
     
+    //Search Bar functionality:
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredBeats = GlobalData.allBeats
+        } else {
+            filteredBeats = GlobalData.allBeats.filter {
+                $0.beatName?.lowercased().contains(searchText.lowercased()) ?? false
+            }
+        }
+        DispatchQueue.main.async {
+            self.beatsTable.reloadData()
+        }
+    }
+
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -52,12 +66,12 @@ class BeatsVC: UIViewController {
 
 extension BeatsVC:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allBeatsArray.count
+        return filteredBeats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = beatsTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BestTabCell
-        let singleBeat = allBeatsArray[indexPath.row]
+        let singleBeat = filteredBeats[indexPath.row]
         
         cell.beatName.text = singleBeat.beatName
         cell.beatType.text = singleBeat.beatType
@@ -68,7 +82,7 @@ extension BeatsVC:UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let singleBeat = allBeatsArray[indexPath.row]
+        let singleBeat = filteredBeats[indexPath.row]
         let storyboard = UIStoryboard(name: "Beats", bundle:  nil)
         if let nextController = storyboard.instantiateViewController(identifier: "ViewBeatVC") as? ViewBeatVC {
             nextController.beatId = singleBeat.id

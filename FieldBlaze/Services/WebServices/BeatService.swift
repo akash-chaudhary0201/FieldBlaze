@@ -87,8 +87,8 @@ class BeatService{
     //Function to get assigned accounts to a beat:
     public static func getAllAssignedAccounts(_ beatId:String) async{
         let soqlQuery = """
-            SELECT Id, Name, Account_RE__r.Name, Beat_Plan_RE__r.Zone_RE__c, Beat_Plan_RE__r.Zone_RE__r.Name 
-                FROM Assigned_Customer__c  WHERE Beat_Plan_RE__c = '\(beatId)'
+            SELECT Id, Name,Account_RE__r.Id, Account_RE__r.Name,  Beat_Plan_RE__r.Zone_RE__c, Beat_Plan_RE__r.Zone_RE__r.Name 
+                FROM Assigned_Customer__c   WHERE Beat_Plan_RE__c = '\(beatId)'
             """
         
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),

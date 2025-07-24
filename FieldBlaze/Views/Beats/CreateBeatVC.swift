@@ -68,6 +68,7 @@ class CreateBeatVC: UIViewController {
         setUpDistributerDropDown()
         
         createBeatButtonTopSpacing.constant = 20
+        
     }
     
     //Function to setup zone dropdown:
@@ -87,7 +88,7 @@ class CreateBeatVC: UIViewController {
                 print("Selected Zone Id: \(self.selectedZoneId!)")
                 self.selectedAccountId.removeAll()
                 Task{
-                    await  self.obj.geAccountBasedOnZone(self.selectedZoneId!)
+                    await  self.obj.geAccountBasedOnZone(self.selectedZoneId!, Defaults.userId!)
                     DispatchQueue.main.async{
                         self.accountsTable.isHidden = false
                         self.accountTableHieght.constant = CGFloat(GlobalData.allCustomers.count * 150)

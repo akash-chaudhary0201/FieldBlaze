@@ -28,10 +28,16 @@ struct BeatModel{
 //Model for assigned customers to a beat:
 struct AssignedAccountModel{
     var accountName:String?
+    var accounId:String?
+    var zoneId:String?
     
     init(dict:[String:Any]){
         if let name = dict["Account_RE__r"] as? [String:Any]{
             self.accountName = name["Name"] as? String
+            self.accounId = name["Id"] as? String
+        }
+        if let zone = dict["Beat_Plan_RE__r"] as? [String:Any]{
+            self.zoneId = zone["Zone_RE__c"] as? String
         }
     }
 }

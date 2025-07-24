@@ -18,9 +18,9 @@ class CustomerService {
     var paymentTerms:[PaymentTermsModel] = []
     
     //New function to get all customers:
-    func getAllCustomers() async{
+    public static func getAllCustomers(_ userId:String) async{
         let soqlQuery = """
-                SELECT Id, Name, CreatedDate,  ParentId, Type, PI_Payment_Terms__c, RE_Price_Book__r.Id, RE_Price_Book__r.Name, BillingAddress FROM Account ORDER BY CreatedDate DESC
+                SELECT Id, Name, CreatedDate,  ParentId, Type, PI_Payment_Terms__c, RE_Price_Book__r.Id, RE_Price_Book__r.Name, BillingAddress FROM Account where OwnerId = '\(userId)' ORDER BY CreatedDate DESC
             """
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let instanceUrl = Defaults.instanceUrl else {
@@ -193,9 +193,9 @@ class CustomerService {
     }
     
     //Function to get all Account based on zone:
-    func geAccountBasedOnZone(_ zoneId:String)async{
+    func geAccountBasedOnZone(_ zoneId:String, _ userId:String)async{
         let soqlQuery = """
-                          SELECT Id, Name, CreatedDate, Owner.Name,  ParentId, Type, PI_Payment_Terms__c, Phone,  RE_Price_Book__r.Id, RE_Price_Book__r.Name, BillingCity FROM Account where RE_Zone__r.Id = '\(zoneId)' ORDER BY CreatedDate DESC
+                          SELECT Id, Name, CreatedDate, Owner.Name, OwnerId,   ParentId, Type, PI_Payment_Terms__c, Phone,  RE_Price_Book__r.Id, RE_Price_Book__r.Name, BillingCity FROM Account where RE_Zone__r.Id = '\(zoneId)' and OwnerId  = '\(userId)' ORDER BY CreatedDate DESC
             """
         
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),

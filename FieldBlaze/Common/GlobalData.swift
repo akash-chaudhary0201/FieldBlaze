@@ -20,6 +20,7 @@ class GlobalData: NSObject {
     //Products
     static var allProducts = [FetchedProductsModel]()
     static var productsAsStock = [ProductModelToSendAsStock]()
+    static var productAccordingToPB = [FetchedProductPriceBook]()
     //Contacts
     static var allContacts = [ContactsModel]()
     //Price book
@@ -53,6 +54,8 @@ class GlobalData: NSObject {
     static var assignedAccounts = [AssignedAccountModel]()
     //Expense
     static var allExpenses = [ExpenseModel]()
+    //DSR
+    static var dsr = [DSRModel]()
     
     
     //--------------------------------------------------------------------//
@@ -62,4 +65,7 @@ class GlobalData: NSObject {
     
     //Glpbal array to store the details of the stock item selected:
     static var globalSelectedStockItem = [ProductModelToSendAsStock]()
+    
+    //Global array to store selecte item to return:
+    static var selectedReturnItem = [ItmeToReturnModel]()
 }

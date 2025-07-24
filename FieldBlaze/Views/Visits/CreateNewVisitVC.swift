@@ -18,7 +18,7 @@ class CreateNewVisitVC: UIViewController {
     @IBOutlet weak var selectIndividualImage: UIImageView!
     @IBOutlet weak var selectIndividualLabel: UILabel!
     
-    var selectedVisitType:String?
+    var selectedVisitType:String = "Beat"
     
     //------------Beat - Wise outlets:----------------
     //Outlets of beat dropdown:
@@ -59,9 +59,6 @@ class CreateNewVisitVC: UIViewController {
     var allCustomerName:[String] = []
     var selectedCustomerId:String?
     
-    //Object for beats service:
-    var obj = BeatService()
-    
     //Object to get all zone names and all customer names::
     var obj2 = CustomerService()
     
@@ -93,7 +90,11 @@ class CreateNewVisitVC: UIViewController {
                 self.selectBeatId = self.allBeatArray[index].id
                 self.beatLabel.text = item
                 self.beatLabel.textColor = .black
-                print("Selected Zone Id: \(self.selectBeatId!)")
+                //                print("Selected Zone Id: \(self.selectBeatId!)")
+                Task{
+                    await  BeatService.getAllAssignedAccounts(self.selectBeatId!)
+                    print(GlobalData.assignedAccounts)
+                }
             }
         }
     }
@@ -111,7 +112,7 @@ class CreateNewVisitVC: UIViewController {
                 self.selectedZoneId = self.allZonesArray[index].zoneId
                 self.zoneLabel.text = item
                 self.zoneLabel.textColor = .black
-                print("----Selected zone id: \(self.selectedZoneId!)")
+                //                print("----Selected zone id: \(self.selectedZoneId!)")
                 self.setUpCustomerDropDown()
             }
         }
@@ -120,7 +121,7 @@ class CreateNewVisitVC: UIViewController {
     //Function to setup customers dropdown:
     func setUpCustomerDropDown(){
         Task{
-            await obj2.geAccountBasedOnZone(selectedZoneId ?? "ak")
+            await obj2.geAccountBasedOnZone(selectedZoneId ?? "ak",Defaults.userId!)
             self.allCustomerName = GlobalData.allCustomers.map{$0.name ?? "ak"}
             
             DropDownFunction.setupDropDown(dropDown: customerDropDown, anchor: customerDropDownView, dataSource: allCustomerName, labelToUpdate: customerLabel)
@@ -129,7 +130,7 @@ class CreateNewVisitVC: UIViewController {
                 self.selectedCustomerId = GlobalData.allCustomers[index].id
                 self.customerLabel.text = item
                 self.customerLabel.textColor = .black
-                print("----customer id: \(self.selectedCustomerId!)")
+                //                print("----customer id: \(self.selectedCustomerId!)")
             }
         }
     }
@@ -203,46 +204,61 @@ class CreateNewVisitVC: UIViewController {
     }
     
     @IBAction func createVisitAction(_ sender: Any) {
-        guard let visitDate = dateLabel.text, visitDate != "Select Date" else {
-            let alert = UIAlertController(title: "Error", message: "Please select a date", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        //
-        guard let visitZone = zoneLabel.text, visitZone != "Select Zone" else {
-            let alert = UIAlertController(title: "Error", message: "Please select a zone", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        //
-        guard let customer = customerLabel.text, customer != "Select Customer" else {
-            let alert = UIAlertController(title: "Error", message: "Please select a Customer", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-            return
-        }
         
-        print("Ak")
-        //
-        SwiftLoaderHelper.setLoader()
-
-        let requestBody: [String: Any] = [
-            "Name": selectedVisitType!,
-            "Date_DA__c": dateLabel.text!,
-            "Account_RE__c": selectedCustomerId!,
-            "Zone_RE__c":selectedZoneId!
-        ]
-        GlobalPostRequest.commonPostFunction("v63.0/sobjects/Visit__c", requestBody) { success, response in
-            if success{
-                DispatchQueue.main.async{
-                    SwiftLoader.hide()
-                    print("---------------------------------------------------------\(response!)")
-                    self.navigationController?.popViewController(animated: true)
-                }
+        if selectedVisitType == "Individual"{
+            if dateLabel.text == "Select Date" || zoneLabel.text == "Select Zone" || customerLabel.text == "Select Customer"{
+                AlertFunction.showErrorAlert("Please fill all details", self)
             }else{
-                print("Errrorrr---------------------------------------\(response!)")
+                SwiftLoaderHelper.setLoader()
+                
+                let requestBody: [String: Any] = [
+                    "Name": selectedVisitType,
+                    "Date_DA__c": dateLabel.text!,
+                    "Account_RE__c": selectedCustomerId ?? "a",
+                    "Zone_RE__c":selectedZoneId ?? "a"
+                ]
+                GlobalPostRequest.commonPostFunction("v63.0/sobjects/Visit__c", requestBody) { success, response in
+                    if success{
+                        DispatchQueue.main.async{
+                            SwiftLoader.hide()
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }else{
+                        print("Error \(response!)")
+                    }
+                }
+            }
+        }else if selectedVisitType == "Beat" {
+            if  beatLabel.text == "Select Beat Name" {
+                AlertFunction.showErrorAlert("Please fill all details", self)
+            } else {
+                SwiftLoaderHelper.setLoader()
+                let dispatchGroup = DispatchGroup()
+                
+                for account in GlobalData.assignedAccounts {
+                    
+                    dispatchGroup.enter()
+                    
+                    let requestBody: [String: Any] = [
+                        "Name": selectedVisitType,
+                        "Date_DA__c": dateLabel.text!,
+                        "Account_RE__c": account.accounId!,
+                        "OwnerId": Defaults.userId!,
+                        "Zone_RE__c":account.zoneId!
+                    ]
+                    GlobalPostRequest.commonPostFunction("v63.0/sobjects/Visit__c", requestBody) { success, response in
+                        if success {
+                            print("Visit created")
+                        } else {
+                            print("Error in visit Creation")
+                        }
+                        dispatchGroup.leave()
+                    }
+                }
+                dispatchGroup.notify(queue: .main) {
+                    SwiftLoader.hide()
+                    AlertFunction.showAlertAndPop("Visit Created Successfully", self)
+                }
             }
         }
         

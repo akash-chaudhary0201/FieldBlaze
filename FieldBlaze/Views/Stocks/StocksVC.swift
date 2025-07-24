@@ -8,13 +8,13 @@
 
 import UIKit
 
-class StocksVC: UIViewController {
+class StocksVC: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var allStockTables: UITableView?
+    @IBOutlet weak var stockSearchBar: UISearchBar!
+
     
-    var obj = StockTrackingService()
-    
-    var allStocksArray:[StockDetailsModel] = []
+    var filteredStocks:[StockDetailsModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class StocksVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         Task{
             await StockTrackingService.getAllStocks(Defaults.userId!)
-            self.allStocksArray = GlobalData.allStocks
+            self.filteredStocks = GlobalData.allStocks
             
             DispatchQueue.main.async {
                 self.allStockTables?.reloadData()
@@ -46,17 +46,31 @@ class StocksVC: UIViewController {
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }
+    
+    //Search Functionality
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredStocks = GlobalData.allStocks
+        } else {
+            filteredStocks = GlobalData.allStocks.filter {
+                $0.customerName?.lowercased().contains(searchText.lowercased()) ?? false
+            }
+        }
+        DispatchQueue.main.async {
+            self.allStockTables?.reloadData()
+        }
+    }
 }
 
 extension StocksVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allStocksArray.count
+        return filteredStocks.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StockeTabCell", for: indexPath) as! StockeTabCell
-        let singleStock = allStocksArray[indexPath.row]
+        let singleStock = filteredStocks[indexPath.row]
         
         cell.customerName.text = singleStock.customerName
         cell.stockDate.text = singleStock.stockDate
@@ -68,7 +82,7 @@ extension StocksVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let singleStock = allStocksArray[indexPath.row]
+        let singleStock = filteredStocks[indexPath.row]
         let storyboard = UIStoryboard(name: "Stocks", bundle: nil)
         if let nextController = storyboard.instantiateViewController(withIdentifier: "StockDetailsVC") as? StockDetailsVC {
             nextController.stockId = singleStock.id

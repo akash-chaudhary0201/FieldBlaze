@@ -49,8 +49,15 @@
                                     <constraint firstAttribute="height" constant="110" id="m4G-mC-jlG"/>
                                 </constraints>
                             </view>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="hCa-qJ-6ef">
+                                <rect key="frame" x="0.0" y="130" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="haI-R8-Rww"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cCF-dm-zTP">
-                                <rect key="frame" x="20" y="130" width="353" height="654"/>
+                                <rect key="frame" x="20" y="206" width="353" height="578"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="hk9-fd-b7Y" customClass="AllNotesCell" customModule="FieldBlaze" customModuleProvider="target">
@@ -81,15 +88,22 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TableviewCellBackground" translatesAutoresizingMaskIntoConstraints="NO" id="dC8-L3-kgj">
+                                                            <rect key="frame" x="0.0" y="0.0" width="353" height="80"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="dC8-L3-kgj" firstAttribute="leading" secondItem="sg4-a7-lh2" secondAttribute="leading" id="0jn-PN-HEx"/>
                                                         <constraint firstItem="mCs-EH-SQl" firstAttribute="leading" secondItem="ItZ-pP-dqK" secondAttribute="leading" id="4V5-8C-Bvx"/>
                                                         <constraint firstItem="mCs-EH-SQl" firstAttribute="top" secondItem="ItZ-pP-dqK" secondAttribute="bottom" constant="5" id="9we-DY-TJ3"/>
+                                                        <constraint firstAttribute="bottom" secondItem="dC8-L3-kgj" secondAttribute="bottom" id="XID-TQ-jQF"/>
+                                                        <constraint firstItem="dC8-L3-kgj" firstAttribute="top" secondItem="sg4-a7-lh2" secondAttribute="top" id="c06-kp-giy"/>
                                                         <constraint firstItem="3oW-Qj-j0e" firstAttribute="top" secondItem="mCs-EH-SQl" secondAttribute="bottom" constant="5" id="ekP-0V-eAg"/>
                                                         <constraint firstItem="3oW-Qj-j0e" firstAttribute="leading" secondItem="mCs-EH-SQl" secondAttribute="leading" id="j0E-6L-kMo"/>
                                                         <constraint firstItem="ItZ-pP-dqK" firstAttribute="top" secondItem="sg4-a7-lh2" secondAttribute="top" constant="10" id="jCd-Rm-Gxl"/>
                                                         <constraint firstItem="ItZ-pP-dqK" firstAttribute="leading" secondItem="sg4-a7-lh2" secondAttribute="leading" constant="10" id="qQE-fa-yqh"/>
+                                                        <constraint firstAttribute="trailing" secondItem="dC8-L3-kgj" secondAttribute="trailing" id="xfn-w1-Faj"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -146,9 +160,12 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="hCa-qJ-6ef" firstAttribute="leading" secondItem="eHf-cz-XnQ" secondAttribute="leading" id="DO7-WC-GFg"/>
+                            <constraint firstItem="hCa-qJ-6ef" firstAttribute="top" secondItem="eHf-cz-XnQ" secondAttribute="bottom" constant="20" id="DxP-GQ-rd0"/>
+                            <constraint firstItem="hCa-qJ-6ef" firstAttribute="trailing" secondItem="eHf-cz-XnQ" secondAttribute="trailing" id="Fug-LS-RBd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bWM-3N-ujL" secondAttribute="trailing" constant="20" id="RLh-Md-fJF"/>
                             <constraint firstAttribute="trailing" secondItem="eHf-cz-XnQ" secondAttribute="trailing" id="VvB-zN-hh0"/>
-                            <constraint firstItem="cCF-dm-zTP" firstAttribute="top" secondItem="eHf-cz-XnQ" secondAttribute="bottom" constant="20" id="ZD1-dr-8c2"/>
+                            <constraint firstItem="cCF-dm-zTP" firstAttribute="top" secondItem="hCa-qJ-6ef" secondAttribute="bottom" constant="20" id="Ydi-q5-kBe"/>
                             <constraint firstItem="bWM-3N-ujL" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-20" id="dBG-4r-BRg"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="cCF-dm-zTP" secondAttribute="bottom" id="dfl-cT-yCc"/>
                             <constraint firstItem="eHf-cz-XnQ" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="dlr-6f-9e0"/>
@@ -415,13 +432,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="TableviewCellBackground" width="321" height="140"/>
         <image name="back" width="21.333333969116211" height="21.333333969116211"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

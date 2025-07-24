@@ -29,6 +29,7 @@ class LeavesVC: UIViewController {
         Task{
             await LeaveService.getAllleaves(Defaults.userId!) { status in
                 DispatchQueue.main.async {
+//                    print(GlobalData.allLeaves)
                     SwiftLoader.hide()
                     self.leavesTable.reloadData()
                 }
@@ -48,7 +49,9 @@ class LeavesVC: UIViewController {
     }
 }
 
-extension LeavesVC:UITableViewDelegate, UITableViewDataSource{
+extension LeavesVC:UITableViewDelegate, UITableViewDataSource, LeaveApprovalProtocol{
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return GlobalData.allLeaves.count
     }
@@ -62,8 +65,17 @@ extension LeavesVC:UITableViewDelegate, UITableViewDataSource{
         cell.leaveType.text = singleLeave.leaveType
         cell.leaveDate.text = "\(singleLeave.leaveStartDate ?? "a") \(singleLeave.leaveEndDate ?? "a")"
         cell.leaveStatus.text = singleLeave.leaveStatus
+        cell.leaveId = singleLeave.leaveId
+        
+        if singleLeave.leaveStatus == nil{
+            cell.approvalButton.isHidden = false
+        }else{
+            cell.approvalButton.isHidden = true
+        }
         
         cell.selectionStyle = .none
+        
+        cell.delegate = self
 
         return cell
     }
@@ -81,6 +93,39 @@ extension LeavesVC:UITableViewDelegate, UITableViewDataSource{
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }
+    
+    func approvalButtonTapped(_ leaveId: String) {
+        let requestBody: [String: Any] = [
+            "requests": [
+                [
+                    "actionType": "Submit",
+                    "contextId": leaveId,
+                    "comments":"NA",
+                    "contextActorId": Defaults.userId,
+                    "processDefinitionNameOrId": "Leave_Approval_Process",
+                    "skipEntryCriteria": "true"
+                ]
+            ]
+        ]
+        SwiftLoaderHelper.setLoader()
+        
+        GlobalPostRequest.commonPostFunction("v63.0/process/approvals", requestBody) { success, response in
+            if success{
+                DispatchQueue.main.async {
+                    SwiftLoader.hide()
+                    print(response ?? "1")
+                    self.setUpUI()
+                }
+            }else{
+                print(response ?? "1")
+                print("Errorrrrrrrrrrrrrrrrrrrrrrrrrrr")
+            }
+        }
+    }
+}
+
+protocol LeaveApprovalProtocol:AnyObject{
+    func approvalButtonTapped(_ leaveId:String)
 }
 
 
@@ -90,4 +135,16 @@ class AllLeavesCell:UITableViewCell{
     @IBOutlet weak var leaveDate: UILabel!
     @IBOutlet weak var leaveType: UILabel!
     @IBOutlet weak var leaveName: UILabel!
+    @IBOutlet weak var approvalButton: UIButton!
+    
+    
+    var leaveId:String?
+    
+    var delegate:LeaveApprovalProtocol?
+    
+    
+    @IBAction func approvalButtonAction(_ sender: Any) {
+        delegate?.approvalButtonTapped(leaveId!)
+    }
+    
 }

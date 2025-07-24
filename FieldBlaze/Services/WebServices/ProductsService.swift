@@ -34,13 +34,13 @@ class ProductsService{
             
             let(data, _) = try await URLSession.shared.data(for: request)
             
-            GlobalData.allProducts.removeAll()
+            GlobalData.productAccordingToPB.removeAll()
             
             if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
                let stockRecords = jsonData["records"] as? [[String:Any]]{
                 
                 for singleRecord in stockRecords{
-                    GlobalData.allProducts.append(FetchedProductsModel(dict: singleRecord))
+                    GlobalData.productAccordingToPB.append(FetchedProductPriceBook(dict: singleRecord))
                 }
             }
         }catch{
@@ -51,7 +51,7 @@ class ProductsService{
     //Function to get all the products:
     public static func getAllProduct() async {
         let soqlQuery = """
-             SELECT Id, Name, Product_Code__c, Product__r.Id,Product__r.Name,Product__r.Product_SKU__c, Product__r.Display_URL__c, Price_Book__r.Id,Price_Book__r.Name, CU_List_Price__c FROM Price_Book_Entry__c
+             Select Id, Name from Product__c 
             """
         
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),

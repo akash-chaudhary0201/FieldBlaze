@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class AnnouncementDetailsVC: UIViewController {
     
@@ -16,12 +17,15 @@ class AnnouncementDetailsVC: UIViewController {
     var announcementEndDate:String?
     var announcementName:String?
     var announcementType:String?
+    var announceImageUrl:String?
     
+    //Outlets:
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var type: UILabel!
     @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var announcementImage: UIImageView!
     
     var annId:String?
     
@@ -37,6 +41,9 @@ class AnnouncementDetailsVC: UIViewController {
         self.endDate.text = announcementEndDate
         self.startDate.text = announcementStartDate
         self.desLabel.text = announcementDescription
+        
+        let imageUrl = URL(string: announceImageUrl ?? "a")
+        announcementImage.sd_setImage(with: imageUrl)
     }
     
     @IBAction func backAction(_ sender: Any) {

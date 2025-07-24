@@ -49,7 +49,7 @@
                                     <constraint firstItem="ffM-iI-l5I" firstAttribute="leading" secondItem="H0d-MI-BVT" secondAttribute="trailing" constant="14" id="xl8-eA-rwb"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="90r-Es-w8y">
+                            <searchBar contentMode="redraw" placeholder="Search Tasks" translatesAutoresizingMaskIntoConstraints="NO" id="90r-Es-w8y">
                                 <rect key="frame" x="0.0" y="130" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -70,6 +70,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DLq-Pf-or5">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="70"/>
                                                     <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TableviewCellBackground" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-OV-cPi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="70"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="10"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n8f-IL-EOB">
                                                             <rect key="frame" x="10" y="5" width="33" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -98,14 +106,18 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="tbW-Si-S04" firstAttribute="leading" secondItem="DLq-Pf-or5" secondAttribute="leading" constant="10" id="2zc-dQ-Uyz"/>
+                                                        <constraint firstItem="KLO-OV-cPi" firstAttribute="leading" secondItem="DLq-Pf-or5" secondAttribute="leading" id="7MP-qo-A1D"/>
                                                         <constraint firstItem="iHQ-Uz-Awz" firstAttribute="leading" secondItem="DLq-Pf-or5" secondAttribute="leading" constant="10" id="IUc-qw-A0V"/>
                                                         <constraint firstItem="n8f-IL-EOB" firstAttribute="leading" secondItem="DLq-Pf-or5" secondAttribute="leading" constant="10" id="Q8F-lv-7ex"/>
+                                                        <constraint firstAttribute="trailing" secondItem="KLO-OV-cPi" secondAttribute="trailing" id="SOY-9z-pg3"/>
                                                         <constraint firstAttribute="bottom" secondItem="tbW-Si-S04" secondAttribute="bottom" constant="8" id="UZS-Ws-t2R"/>
                                                         <constraint firstItem="iHQ-Uz-Awz" firstAttribute="top" secondItem="n8f-IL-EOB" secondAttribute="bottom" constant="2" id="Z1X-ly-JFY"/>
                                                         <constraint firstItem="0J1-OH-3aZ" firstAttribute="centerY" secondItem="n8f-IL-EOB" secondAttribute="centerY" id="dgq-aJ-ppp"/>
+                                                        <constraint firstItem="KLO-OV-cPi" firstAttribute="top" secondItem="DLq-Pf-or5" secondAttribute="top" id="etg-5b-IlB"/>
                                                         <constraint firstItem="n8f-IL-EOB" firstAttribute="top" secondItem="DLq-Pf-or5" secondAttribute="top" constant="5" id="rmR-EQ-Tdl"/>
                                                         <constraint firstAttribute="trailing" secondItem="iHQ-Uz-Awz" secondAttribute="trailing" constant="10" id="vHb-1H-6le"/>
                                                         <constraint firstAttribute="trailing" secondItem="0J1-OH-3aZ" secondAttribute="trailing" constant="10" id="wRr-cG-ki5"/>
+                                                        <constraint firstAttribute="bottom" secondItem="KLO-OV-cPi" secondAttribute="bottom" id="z3u-Ss-krF"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -115,7 +127,7 @@
                                                             <real key="value" value="1"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" red="0.24255436659999999" green="0.77296984199999996" blue="0.60255998369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" systemColor="systemGray3Color"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
@@ -179,6 +191,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="taskSearchBar" destination="90r-Es-w8y" id="q4i-sQ-IGE"/>
                         <outlet property="tasksTabl" destination="QwK-w5-Mh6" id="OVI-I3-uMO"/>
                     </connections>
                 </viewController>
@@ -458,7 +471,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Task Priority" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QdF-nO-smQ">
                                         <rect key="frame" x="21" y="19.5" width="145.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.47967541219999998" green="0.4797811508" blue="0.47553920750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" systemColor="systemGray3Color"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -480,7 +493,7 @@
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.47843137250000001" green="0.47843137250000001" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemGray3Color"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -545,10 +558,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="TableviewCellBackground" width="321" height="140"/>
         <image name="back" width="32" height="32"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -47,12 +47,12 @@ extension AllProductsVC:UITabBarDelegate, UITableViewDataSource, addButtonProtoc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = allProductsTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AllProductsClass
         
-        let singleProduct = GlobalData.allProducts[indexPath.row]
+        let singleProduct = GlobalData.productAccordingToPB[indexPath.row]
         
         cell.selectionStyle = .none
         
         cell.productName.text = singleProduct.name
-        cell.productPrice.text = "\(singleProduct.productPrice!)"
+        cell.productPrice.text = "\(singleProduct.listPrice!)"
         cell.productId = singleProduct.id
         
         cell.delegate = self
