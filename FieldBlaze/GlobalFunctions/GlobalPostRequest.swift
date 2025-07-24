@@ -36,7 +36,7 @@ class GlobalPostRequest{
             }
             
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
                 completion(true, json)
             } catch {
                 print("Error parsing response: \(error)")

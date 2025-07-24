@@ -64,8 +64,10 @@ class CreateTaskVC: UIViewController {
                     SwiftLoader.hide()
                     if success {
                         AlertFunction.showAlertAndPop("Task Addedd Successfully", self)
+                        print("\(response ?? "a")")
                     } else {
                         AlertFunction.showErrorAlert("Error in Adding Task", self)
+                        print("\(response ?? "a")")
                     }
                 }
             }

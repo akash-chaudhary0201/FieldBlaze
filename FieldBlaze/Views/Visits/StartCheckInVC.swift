@@ -50,7 +50,7 @@ class StartCheckInVC: UIViewController, CLLocationManagerDelegate {
     
     //Function to update date and time:
     private func updateDateTimeLabels() {
-        dateLabe.text = GetTimeAndDate.getDate(dateFormat: "dd-mm-yyyy")
+        dateLabe.text = GetTimeAndDate.getDate(dateFormat: "dd-MM-yyyy")
         timeLabel.text = GetTimeAndDate.getTime(timeFormat: "hh:mm a")
     }
     
@@ -76,7 +76,6 @@ class StartCheckInVC: UIViewController, CLLocationManagerDelegate {
                 print("Error in reverse geocoding: \(error.localizedDescription)")
                 return
             }
-            
             guard let placemark = placemarks?.first else {
                 print("No placemarks found")
                 return
@@ -86,8 +85,6 @@ class StartCheckInVC: UIViewController, CLLocationManagerDelegate {
                 addressString += subLocality
             }
             self.addressLabel?.text = addressString
-            
-//            print("Full Address: \(addressString)")
         }
     }
     
