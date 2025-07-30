@@ -336,15 +336,15 @@
                                                         <rect key="frame" x="87" y="36" width="219" height="128"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z20-hM-aV3">
-                                                                <rect key="frame" x="8" y="0.0" width="219" height="128"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="219" height="128"/>
                                                             </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="Z20-hM-aV3" firstAttribute="top" secondItem="Dwz-ts-5FO" secondAttribute="top" id="Mj5-n0-BKl"/>
                                                             <constraint firstAttribute="bottom" secondItem="Z20-hM-aV3" secondAttribute="bottom" id="aZJ-qb-xND"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Z20-hM-aV3" secondAttribute="trailing" constant="-8" id="i8e-aS-xjj"/>
-                                                            <constraint firstItem="Z20-hM-aV3" firstAttribute="leading" secondItem="Dwz-ts-5FO" secondAttribute="leading" constant="8" id="vZb-1y-W1s"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Z20-hM-aV3" secondAttribute="trailing" id="i8e-aS-xjj"/>
+                                                            <constraint firstItem="Z20-hM-aV3" firstAttribute="leading" secondItem="Dwz-ts-5FO" secondAttribute="leading" id="vZb-1y-W1s"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>

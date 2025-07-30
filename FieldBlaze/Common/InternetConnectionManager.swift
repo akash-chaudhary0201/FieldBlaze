@@ -11,7 +11,6 @@ import SystemConfiguration
 
 public class InternetConnectionManager {
     
-    
     private init() {
         
     }

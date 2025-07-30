@@ -12,6 +12,7 @@ import SideMenu
 import MobileSync
 
 class HomeVC: UIViewController {
+    
     @IBOutlet weak var actionsCollection: UICollectionView!
     @IBOutlet weak var greenView: UIView!
     @IBOutlet weak var sideMenuView: UIView?
