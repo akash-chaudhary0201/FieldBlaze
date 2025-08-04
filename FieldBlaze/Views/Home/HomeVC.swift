@@ -32,6 +32,11 @@ class HomeVC: UIViewController {
     var imageNames = ["slider1", "slider2", "slider3"]
     
     override func viewDidLoad() {
+        
+        Task{
+            await DescribeService.getDetails()
+        }
+        
         super.viewDidLoad()
             
         token = UserDefaults.standard.string(forKey: "accessToken")

@@ -9,11 +9,10 @@
 import UIKit
 import DropDown
 
-class CreateSalesOrderController: UIViewController {
+class CreateSalesOrderController: UIViewController, UITextFieldDelegate {
     
     //Customer view:
     @IBOutlet weak var customerView: UIView!
-    @IBOutlet weak var customerLabel: UILabel!
     
     //Order view:
     @IBOutlet weak var orderDateView: UIView!
@@ -27,17 +26,38 @@ class CreateSalesOrderController: UIViewController {
     @IBOutlet weak var pricebookView: UIView!
     @IBOutlet weak var pricebookLabel: UILabel!
     var pricebookDropDown = DropDown()
-    var obj = CustomerService()
     var allPricebookNames:[String] = []
     var selectedPriceBookId:String = ""
     
+    //Customer view:
+    var customerName:[String] = []
+    var customerDropDown = DropDown()
+    var selectedCustomerId:String = ""
+    @IBOutlet weak var selectCustomerTextField: UITextField!
+    var filteredCustomers: [Customer] = []
+
+    
     override func viewDidLoad() {
         
-        updateUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        selectCustomerTextField.delegate = self
+        updatePriceBook()
+        updateCustomer()
+        
+        setupCustomerDropDown()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+            view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     //Function to update ui
-    func updateUI(){
+    func updatePriceBook(){
         Task{
             await PriceBookService.getPriceBookNames()
             self.allPricebookNames = GlobalData.allPriceBooks.map{$0.priceBookName!}
@@ -53,8 +73,56 @@ class CreateSalesOrderController: UIViewController {
         }
     }
     
+    func updateCustomer() {
+        Task {
+            await CustomerService.getAllCustomers(Defaults.userId!)
+            self.customerName = GlobalData.allCustomers.compactMap { $0.name }
+            self.customerDropDown.dataSource = self.customerName
+        }
+    }
+    
+    
+    func setupCustomerDropDown() {
+        customerDropDown.anchorView = selectCustomerTextField
+        customerDropDown.direction = .bottom
+        customerDropDown.bottomOffset = CGPoint(x: 0, y: selectCustomerTextField.frame.height)
+        
+        customerDropDown.selectionAction = {  index, item in
+            
+            self.selectCustomerTextField.text = item
+            self.selectCustomerTextField.textColor = .black
+
+            let selectedCustomer = self.filteredCustomers[index]
+            self.selectedCustomerId = selectedCustomer.id ?? ""
+            print("Selected Customer ID: \(self.selectedCustomerId)")
+        }
+
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
+        filterCustomers(with: currentText)
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        filterCustomers(with: "")
+        return true
+    }
+    
+    private func filterCustomers(with query: String) {
+        filteredCustomers = query.isEmpty
+            ? GlobalData.allCustomers
+            : GlobalData.allCustomers.filter { $0.name?.lowercased().contains(query.lowercased()) == true }
+
+        self.customerName = filteredCustomers.compactMap { $0.name }
+        self.customerDropDown.dataSource = self.customerName
+        self.customerDropDown.show()
+    }
+    
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        self.customerName.removeAll()
     }
     
     //All buttons action:------------------------------------------------

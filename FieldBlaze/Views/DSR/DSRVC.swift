@@ -42,11 +42,8 @@ class DSRVC: UIViewController {
             DispatchQueue.main.async {
                 SwiftLoader.hide()
                 if success, let fileURL = fileURL {
-                    let message = "DSR downloaded to Files app under 'On My iPad' > [Your App Name]"
+                    let message = "DSR downloaded"
                     AlertFunction.showAlertAndPop(message, self)
-                    //                        if let viewController = UIApplication.shared.windows.first?.rootViewController {
-                    //                            openFile(at: fileURL, from: viewController)
-                    //                        }
                 } else {
                     AlertFunction.showErrorAlert("Error in downloading DSR", self)
                 }

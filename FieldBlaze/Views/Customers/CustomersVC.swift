@@ -22,6 +22,9 @@ class CustomersVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         Task{
             await setupUI()
         }
@@ -43,10 +46,8 @@ class CustomersVC: UIViewController {
         }
         
         await  PriceBookService.getPriceBookNames()
-        //        print("------------------------Books names array: \(obj.priceBookNames)")
         await CustomerService.getZoneNames()
-        await obj.getPaymentTermsNames()
-        print("---------------------------------Payment Terms array:-----------\(obj.paymentTerms)")
+        
     }
     
     func addTapGestureToDismissKeyboard() {
@@ -107,8 +108,6 @@ extension CustomersVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-
 
 class CustomersCell: UITableViewCell {
     @IBOutlet var vw: UIView?

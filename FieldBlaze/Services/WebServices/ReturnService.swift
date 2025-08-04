@@ -94,4 +94,47 @@ class ReturnService{
             completion(false)
         }
     }
+    
+    public static func getReturnForAccoun(_ accountId:String) async {
+        let soqlQuery = """
+            SELECT Id, Date__c,Name,Account__r.Name, Account__r.Id,CreatedDate FROM Return__c WHERE Account__r.Id = '\(accountId)' ORDER BY CreatedDate DESC NULLS LAST
+            """
+        
+        guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let instanceUrl = Defaults.instanceUrl else {
+            
+            return
+        }
+        
+        let fullUrl = "\(instanceUrl)/services/data/v59.0/query/?q=\(encodedQuery)"
+        
+        guard let url = URL(string: fullUrl) else {
+            
+            return
+        }
+        
+        
+        GlobalData.customerReturn.removeAll()
+        
+        do{
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("Bearer \(Defaults.accessToken!)", forHTTPHeaderField: "Authorization")
+            
+            let (data, _) = try await URLSession.shared.data(for: request)
+            
+            if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
+               let returnRecords = jsonData["records"] as? [[String:Any]]{
+                
+                for singleRecord in returnRecords{
+                    GlobalData.customerReturn.append(ReturnModel(dict: singleRecord))
+                }
+                
+            }
+            
+        }catch{
+            print("Error")
+            
+        }
+    }
 }

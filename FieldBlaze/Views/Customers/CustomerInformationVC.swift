@@ -13,24 +13,24 @@ class CustomerInformationVC: UIViewController {
     @IBOutlet weak var collectionView: UIView!
     @IBOutlet weak var customerDetailCollection: UICollectionView!
     
-    @IBOutlet weak var customerDetailsView: UIView!
+    @IBOutlet weak var containerView: UIView!
+    
+    var currentChildVC: UIViewController?
     
     var detailCollectionArray:[String] = ["Detail", "Contacts", "Orders", "Beat Plan", "Visits", "Stocks", "Returns"]
     var customerName:String?
     var customerId:String?
     
+    var selectedIndex: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //------------------------------
-        let storyboard = UIStoryboard(name:"Customers", bundle: nil)
-        guard let secondVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC else { return }
-        secondVC.accountId = self.customerId
+        customerDetailCollection.allowsMultipleSelection = false
         
-        addChild(secondVC)
-        secondVC.view.frame = customerDetailsView.bounds
-        customerDetailsView.addSubview(secondVC.view)
-        secondVC.didMove(toParent: self)
+        let indexPath = IndexPath(item: 0, section: 0)
+        customerDetailCollection.selectItem(at: indexPath, animated: false, scrollPosition: .left)
+        self.collectionView(customerDetailCollection, didSelectItemAt: indexPath)
     }
     
     @IBAction func goBackAction(_ sender: Any) {
@@ -45,65 +45,99 @@ extension CustomerInformationVC:UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = customerDetailCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DetailCustomerCell
-        cell.detailLabel.text = detailCollectionArray[indexPath.row]
-        cell.cellView.backgroundColor = UIColor(red: 62/255, green: 197/255, blue: 154/255, alpha: 255/255)
-        cell.cellView.cornerRadius = 10
-        
+        let title = detailCollectionArray[indexPath.row]
+        cell.configure(text: title, isSelected: indexPath.row == selectedIndex)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        customerDetailCollection.reloadData()
         
-        //Logic to remove previously added views:
-        for child in children {
-            child.willMove(toParent: nil)
-            child.view.removeFromSuperview()
-            child.removeFromParent()
+        if let current = currentChildVC {
+            current.willMove(toParent: nil)
+            current.view.removeFromSuperview()
+            current.removeFromParent()
         }
         
-        //Logic to add view now:
-        let storyboard = UIStoryboard(name: "Customers", bundle: nil)
+        let selectedItem = detailCollectionArray[indexPath.row]
         var newVC: UIViewController?
         
-        switch indexPath.row {
-        case 0:
-            if let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC {
-                detailVC.accountId = customerId  
-                newVC = detailVC
+        let storyboard = UIStoryboard(name: "Customers", bundle: nil)
+        
+        switch selectedItem {
+        case "Detail":
+            if let vc = storyboard.instantiateViewController(withIdentifier: "DetailVC") as? DetailVC {
+                vc.accountId = self.customerId
+                newVC = vc
             }
-        case 1:
-            if let contactVC = storyboard.instantiateViewController(withIdentifier: "CustomersContactVC") as? CustomersContactVC{
-                contactVC.accountId = customerId
-                newVC = contactVC
+        case "Contacts":
+            if let vc = storyboard.instantiateViewController(withIdentifier: "CustomerContactVC") as? CustomerContactVC {
+                vc.accountId = self.customerId
+                newVC = vc
+            }
+        case "Orders":
+            if let vc = storyboard.instantiateViewController(withIdentifier: "CustomerOrderVC") as? CustomerOrderVC {
+                vc.accountId = self.customerId
+                newVC = vc
+            }
+        case "Beat Plan":
+            newVC = storyboard.instantiateViewController(withIdentifier: "CustomerBeatVC")
+        case "Visits":
+            if let vc = storyboard.instantiateViewController(withIdentifier: "CustomerVisitVC") as? CustomerVisitVC {
+                vc.accountId = self.customerId
+                newVC = vc
+            }
+        case "Stocks":
+            if let vc = storyboard.instantiateViewController(withIdentifier: "CustomerStockVC") as? CustomerStockVC {
+                vc.accountId = self.customerId
+                newVC = vc
+            }
+        case "Returns":
+            if let vc = storyboard.instantiateViewController(withIdentifier: "CustomerReturnVC") as? CustomerReturnVC {
+                vc.accountId = self.customerId
+                newVC = vc
             }
         default:
-            print("Not implemented yet")
-            return
+            break
         }
         
-        if let secondVC = newVC {
-            addChild(secondVC)
-            secondVC.view.frame = customerDetailsView.bounds
-            customerDetailsView.addSubview(secondVC.view)
-            secondVC.didMove(toParent: self)
-        }
+        guard let childVC = newVC else { return }
+        
+        addChild(childVC)
+        childVC.view.frame = containerView.bounds
+        containerView.addSubview(childVC.view)
+        childVC.didMove(toParent: self)
+        
+        currentChildVC = childVC
     }
 }
 
 class DetailCustomerCell:UICollectionViewCell{
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var cellView: UIView!
+    
+    let bottomBorder = UIView()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        bottomBorder.backgroundColor = UIColor(red: 62/255, green: 197/255, blue: 154/255, alpha: 255/255)
+        bottomBorder.translatesAutoresizingMaskIntoConstraints = false
+        cellView.addSubview(bottomBorder)
+        
+        NSLayoutConstraint.activate([
+            bottomBorder.heightAnchor.constraint(equalToConstant: 2),
+            bottomBorder.bottomAnchor.constraint(equalTo: cellView.bottomAnchor),
+            bottomBorder.leadingAnchor.constraint(equalTo: cellView.leadingAnchor),
+            bottomBorder.trailingAnchor.constraint(equalTo: cellView.trailingAnchor)
+        ])
+    }
+    
+    func configure(text: String, isSelected: Bool) {
+        detailLabel.text = text
+        detailLabel.textColor = isSelected ? UIColor(red: 62/255, green: 197/255, blue: 154/255, alpha: 255/255) : .black
+        bottomBorder.isHidden = !isSelected
+    }
 }
 
-struct CustomerTableStruct {
-    let title: String
-    let value: String
-}
-
-class CustomerOrderCell:UITableViewCell{
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var salesPersonLabel: UILabel!
-    @IBOutlet weak var customerNameLabel: UILabel!
-    @IBOutlet weak var orderDateLabel: UILabel!
-    @IBOutlet weak var orderNumberLabel: UILabel!
-}

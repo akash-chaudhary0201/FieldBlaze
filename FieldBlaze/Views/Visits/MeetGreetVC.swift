@@ -16,9 +16,6 @@ class MeetGreetVC: UIViewController {
     var accountId:String?
     var visitId:String?
     
-    //Object to get all contacts:
-    var obj = ContactsServices()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +32,7 @@ class MeetGreetVC: UIViewController {
     //Function to setup:
     func setUpUI(){
         Task{
-            await obj.getContactsBasedOnAccoundId(accountId!)
+            await ContactsServices.getContactsBasedOnAccoundId(accountId!)
             DispatchQueue.main.async {
                 self.contactTableHeight.constant  = CGFloat(GlobalData.allContacts.count * 60)
                 self.allContactsTable.reloadData()

@@ -140,4 +140,42 @@ class StockTrackingService{
         }
     }
     
+    //Function to get all stocks for a specific account:
+    public static func getStockForAccount(_ accountId:String) async {
+        let soqlQuery = """
+            SELECT Id, Account__r.Name, Account__r.Id, Date__c,Name,OwnerId FROM Inventory_Tracking__c WHERE Account__r.Id = '\(accountId)' ORDER BY CreatedDate DESC NULLS LAST
+            """
+        
+        guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let instanceUrl = Defaults.instanceUrl else {
+            return
+        }
+        
+        let fullUrl = "\(instanceUrl)/services/data/v59.0/query/?q=\(encodedQuery)"
+        
+        guard let url = URL(string: fullUrl) else {
+            return
+        }
+        
+        do{
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("Bearer \(Defaults.accessToken!)", forHTTPHeaderField: "Authorization")
+            
+            let(data, _) = try await URLSession.shared.data(for: request)
+            
+            GlobalData.customerStocks.removeAll()
+            
+            if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
+               let stockRecords = jsonData["records"] as? [[String:Any]]{
+                
+                for singleRecord in stockRecords{
+                    GlobalData.customerStocks.append(StockDetailsModel(dict: singleRecord))
+                }
+            }
+        }catch{
+            print("Error in fetching details", error)
+        }
+    }
+    
 }

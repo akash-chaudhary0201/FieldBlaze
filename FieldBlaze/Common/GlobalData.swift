@@ -17,6 +17,7 @@ class GlobalData: NSObject {
     //Visits
     static var todaysVisits = [VisitsModel]()
     static var allVisits = [VisitsModel]()
+    static var customerVisits = [VisitsModel]()
     //Products
     static var allProducts = [FetchedProductsModel]()
     static var productsAsStock = [ProductModelToSendAsStock]()
@@ -27,6 +28,7 @@ class GlobalData: NSObject {
     static var allPriceBooks = [PriceBookModel]()
     //Sales order
     static var allOrder = [Orders]()
+    static var customerOrders = [Orders]()
     static var salesOrderLineItem = [SalesOrderLineItemsModel]()
     //Schemes
     static var allSchemes = [SchemeModel]()
@@ -36,9 +38,11 @@ class GlobalData: NSObject {
     static var allAnnouncements = [AnnouncementModel]()
     //Stocks
     static var allStocks = [StockDetailsModel]()
+    static var customerStocks = [StockDetailsModel]()
     static var stockLineItems = [StockLineItemsModel]()
     //Returns
     static var allReturns = [ReturnModel]()
+    static var customerReturn = [ReturnModel]()
     static var returnLineItems = [ReturnLineItemModel]()
     //Zones
     static var allZones = [ZoneModel]()
@@ -56,6 +60,10 @@ class GlobalData: NSObject {
     static var allExpenses = [ExpenseModel]()
     //DSR
     static var dsr = [DSRModel]()
+    //Payment terms:
+    static var allPaymentTerms = [PaymentTermsModel]()
+    //Account type:
+    static var accountType = [AccountTypeModel]()
     
     
     //--------------------------------------------------------------------//

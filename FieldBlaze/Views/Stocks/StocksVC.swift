@@ -13,7 +13,6 @@ class StocksVC: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var allStockTables: UITableView?
     @IBOutlet weak var stockSearchBar: UISearchBar!
 
-    
     var filteredStocks:[StockDetailsModel] = []
     
     override func viewDidLoad() {

@@ -12,9 +12,6 @@ import SwiftLoader
 class OrdersVC: UIViewController {
 
     @IBOutlet weak var ordersTable: UITableView!
-    
-    //Array to store all order:
-    var allOrders:[Orders] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +41,15 @@ class OrdersVC: UIViewController {
         }
         ordersTable.reloadData()
     }
-
+    
+    
+    @IBAction func goToCreateOrder(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Orders", bundle: nil)
+        if let selectedVC = storyboard.instantiateViewController(identifier: "CreateSalesOrderController") as? CreateSalesOrderController{
+            self.navigationController?.pushViewController(selectedVC, animated: true)
+        }
+    }
+    
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

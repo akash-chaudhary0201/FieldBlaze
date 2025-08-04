@@ -40,7 +40,6 @@ class DetailVC: UIViewController {
     
     func setUpUI() async{
         currentCustomer = await obj.getCustomerBasedOnAccountId(accountId!)
-//        print("Customer---------------------------\(currentCustomer!)")
         
         DispatchQueue.main.async {
             self.detTable.reloadData()

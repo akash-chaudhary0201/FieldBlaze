@@ -7,262 +7,239 @@
 //
 
 import UIKit
-import MaterialComponents.MaterialTextControls_OutlinedTextFields
+import MaterialComponents
+import DropDown
+import SwiftLoader
 
 class CreateCustomerVC: UIViewController {
-    @IBOutlet var accountnameTxtFld: MDCOutlinedTextField?
-    @IBOutlet var parentAccountIdTxtFld: MDCOutlinedTextField?
-    @IBOutlet var mobileNoTxtFld: MDCOutlinedTextField?
-    @IBOutlet var accountTypeTxtFld: MDCOutlinedTextField?
-    @IBOutlet var whatsappNumberTxtFld: MDCOutlinedTextField?
-    @IBOutlet var firstNameTxtFld: MDCOutlinedTextField?
-    @IBOutlet var LastNameTxtFld: MDCOutlinedTextField?
-    @IBOutlet var PANTxtFld: MDCOutlinedTextField?
-    @IBOutlet var GSTTxtFld: MDCOutlinedTextField?
-    @IBOutlet var paymentTermsTxtFld: MDCOutlinedTextField?
-    @IBOutlet var priceBookTxtFld: MDCOutlinedTextField?
-    @IBOutlet var zoneTxtFld: MDCOutlinedTextField?
-    @IBOutlet var billingStreetTxtFld: MDCOutlinedTextField?
-    @IBOutlet var billingCityTxtFld: MDCOutlinedTextField?
-    @IBOutlet var billingZipCodeTxtFld: MDCOutlinedTextField?
-    @IBOutlet var billingStateTxtFld: MDCOutlinedTextField?
-    @IBOutlet var billingCountryTxtFld: MDCOutlinedTextField?
-    @IBOutlet var shippingStreetTxtFld: MDCOutlinedTextField?
-    @IBOutlet var shippingcityTxtFld: MDCOutlinedTextField?
-    @IBOutlet var shippingZipCodeTxtFld: MDCOutlinedTextField?
-    @IBOutlet var shippingStateTxtFld: MDCOutlinedTextField?
-    @IBOutlet var shippingCountryTxtFld: MDCOutlinedTextField?
-    @IBOutlet var descriptionTxtFld: MDCOutlinedTextField?
-    @IBOutlet var isActiveBtn: UIButton?
-    @IBOutlet var isPrimaryBtn: UIButton?
-    @IBOutlet var isSameAsBillingBtn: UIButton?
-    @IBOutlet var submitBtn: UIButton?
     
-    var isActiveYes: Bool = false
-    var isPrimaryYes: Bool = false
-    var isSameAsBillingYes: Bool = false
+    //All outlets:
+    @IBOutlet weak var accountName: MDCOutlinedTextField!
+    @IBOutlet weak var parentAccountId: UIView!
+    @IBOutlet weak var mobile: MDCOutlinedTextField!
+    @IBOutlet weak var firstName: MDCOutlinedTextField!
+    @IBOutlet weak var zone: UIView!
+    @IBOutlet weak var lastName: MDCOutlinedTextField!
+    @IBOutlet weak var accountType: UIView!
+    @IBOutlet weak var paymentTerms: UIView!
+    @IBOutlet weak var creditLimit: MDCOutlinedTextField!
+    @IBOutlet weak var numberOfEmployees: MDCOutlinedTextField!
+    @IBOutlet weak var pan: MDCOutlinedTextField!
+    @IBOutlet weak var gst: MDCOutlinedTextField!
+    @IBOutlet weak var billingStreet: MDCOutlinedTextField!
+    @IBOutlet weak var billingCity: MDCOutlinedTextField!
+    @IBOutlet weak var billingZip: MDCOutlinedTextField!
+    @IBOutlet weak var billingState: MDCOutlinedTextField!
+    @IBOutlet weak var billingCountry: MDCOutlinedTextField!
+    @IBOutlet weak var shippingStreet: MDCOutlinedTextField!
+    @IBOutlet weak var shippingCity: MDCOutlinedTextField!
+    @IBOutlet weak var shippinhZip: MDCOutlinedTextField!
+    @IBOutlet weak var shippingState: MDCOutlinedTextField!
+    @IBOutlet weak var shippingCountry: MDCOutlinedTextField!
+    @IBOutlet weak var shippingStateCode: MDCOutlinedTextField!
+    @IBOutlet weak var billingStateCode: MDCOutlinedTextField!
+    @IBOutlet weak var shippingGst: MDCOutlinedTextField!
+    @IBOutlet weak var billingGst: MDCOutlinedTextField!
+    @IBOutlet weak var descriptionTextField: MDCOutlinedTextField!
     
-    var isActive: Bool = false {
-        didSet {
-            if isActive {
-                isActiveYes = true
-                isActiveBtn?.setImage(UIImage(named: "addcheck"), for: UIControl.State.normal)
-            } else {
-                isActiveYes = false
-                isActiveBtn?.setImage(UIImage(named: "uncheck"), for: UIControl.State.normal)
-            }
-        }
-    }
+    @IBOutlet weak var sameAsBillingButton: UIButton!
     
-    var isPrimary: Bool = false {
-        didSet {
-            if isPrimary {
-                isPrimaryYes = true
-                isPrimaryBtn?.setImage(UIImage(named: "addcheck"), for: UIControl.State.normal)
-            } else {
-                isPrimaryYes = false
-                isPrimaryBtn?.setImage(UIImage(named: "uncheck"), for: UIControl.State.normal)
-            }
-        }
-    }
+    var isSameAsBilling:Bool = true
     
-    var isSameAsBilling: Bool = false {
-        didSet {
-            if isSameAsBilling {
-                isSameAsBillingYes = true
-                isSameAsBillingBtn?.setImage(UIImage(named: "addcheck"), for: UIControl.State.normal)
-            } else {
-                isSameAsBillingYes = false
-                isSameAsBillingBtn?.setImage(UIImage(named: "uncheck"), for: UIControl.State.normal)
-            }
-        }
-    }
+    var parentAccountDropDown = DropDown()
+    var selectedParentId:String?
+    
+    var zoneDropDown = DropDown()
+    var selectedZoneId:String?
+    var zoneName:[String] = []
+    @IBOutlet weak var zoneView: UIView!
+    @IBOutlet weak var zoneLabel: UILabel!
+    
+    var accountTypeDropDown = DropDown()
+    var selectedAccountTypeId:String?
+    var accountTypeNames:[String] = []
+    @IBOutlet weak var accountTypeLabel: UILabel!
+    @IBOutlet weak var accountTypeView: UIView!
+    
+    var paymentTermsDropDown = DropDown()
+    var selectedPaymentTermsId:String?
+    var paymentTermsNames:[String] = []
+    @IBOutlet weak var paymentTermsView: UIView!
+    @IBOutlet weak var paymentTermsLabel: UILabel!
+    
+    var i:Int = 0
+    
+    var akash = ["Akash", "Akash"]
+    
+    var textFieldArray:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addTapGestureToDismissKeyboard()
-        setupUI()
+        
+        let textFields: [MDCOutlinedTextField?] = [
+            accountName,
+            mobile,
+            firstName,
+            lastName,
+            creditLimit,
+            numberOfEmployees,
+            pan,
+            gst,
+            billingStreet,
+            billingCity,
+            billingZip,
+            billingState,
+            billingCountry,
+            shippingStreet,
+            shippingCity,
+            shippinhZip,
+            shippingState,
+            shippingCountry,
+            shippingStateCode,
+            billingStateCode,
+            shippingGst,
+            billingGst,
+            descriptionTextField
+        ]
+        
+        let textLabels = [
+            "Account Name", "Mobile", "First Name", "Last Name", "Credit Limit", "Number of Employees",
+            "PAN", "GST", "Billing Street", "Billing City", "Billing Zip", "Billing State", "Billing Country",
+            "Shipping Street", "Shipping City", "Shipping Zip", "Shipping State", "Shipping Country",
+            "Shipping State Code", "Billing State Code", "Shipping GST", "Billing GST", "Description"
+        ]
+        
+        for (index, field) in textFields.enumerated() {
+            SetTextFields.setTextField(field, textLabels[index])
+        }
+        
+        setUpParenDropDown()
+        setUpZoneDropDown()
+        setUpAccountTypeDropDown()
+        setUpPaymentTermsDropDown()
     }
     
-    func setupUI() {
-        submitBtn?.layer.cornerRadius = 25.0
-        submitBtn?.layer.masksToBounds = true
+    //setup account id dropdown:
+    func setUpParenDropDown(){
         
-        accountnameTxtFld?.label.text = "Account Name"
-        accountnameTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        accountnameTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        accountnameTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        accountnameTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        accountnameTxtFld?.setLeadingAssistiveLabelColor(UIColor.systemGray, for: .normal)
-        
-        parentAccountIdTxtFld?.label.text = "Parent Account ID"
-        parentAccountIdTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        parentAccountIdTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        parentAccountIdTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        parentAccountIdTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        parentAccountIdTxtFld?.setLeadingAssistiveLabelColor(UIColor.systemGray, for: .normal)
-        
-        mobileNoTxtFld?.label.text = "Mobile"
-        mobileNoTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        mobileNoTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        mobileNoTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        mobileNoTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        mobileNoTxtFld?.setLeadingAssistiveLabelColor(UIColor.systemGray, for: .normal)
-        
-        accountTypeTxtFld?.label.text = "Account Type"
-        accountTypeTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        accountTypeTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        accountTypeTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        accountTypeTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        accountTypeTxtFld?.setLeadingAssistiveLabelColor(UIColor.systemGray, for: .normal)
-        
-        whatsappNumberTxtFld?.label.text = "WhatsApp Number"
-        whatsappNumberTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        whatsappNumberTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        whatsappNumberTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        whatsappNumberTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        whatsappNumberTxtFld?.setLeadingAssistiveLabelColor(UIColor.systemGray, for: .normal)
-        
-        firstNameTxtFld?.label.text = "First Name"
-        firstNameTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        firstNameTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        firstNameTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        firstNameTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        firstNameTxtFld?.setLeadingAssistiveLabelColor(UIColor.systemGray, for: .normal)
-        
-        LastNameTxtFld?.label.text = "Last Name"
-        LastNameTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        LastNameTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        LastNameTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        LastNameTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        LastNameTxtFld?.setLeadingAssistiveLabelColor(UIColor.systemGray, for: .normal)
-        
-        PANTxtFld?.label.text = "PAN(ABCDE1234F)"
-        PANTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        PANTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        PANTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        PANTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        PANTxtFld?.setLeadingAssistiveLabelColor(UIColor.systemGray, for: .normal)
-        
-        GSTTxtFld?.label.text = "GST(07ABCDE1234F1Z1)"
-        GSTTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        GSTTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        GSTTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        GSTTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        GSTTxtFld?.setLeadingAssistiveLabelColor(UIColor.systemGray, for: .normal)
-        
-        paymentTermsTxtFld?.label.text = "Payment Terms"
-        paymentTermsTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        paymentTermsTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        paymentTermsTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        paymentTermsTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        priceBookTxtFld?.label.text = "Price Book"
-        priceBookTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        priceBookTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        priceBookTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        priceBookTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        zoneTxtFld?.label.text = "Zone"
-        zoneTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        zoneTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        zoneTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        zoneTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        billingStreetTxtFld?.label.text = "Billing Street"
-        billingStreetTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        billingStreetTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        billingStreetTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        billingStreetTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        billingCityTxtFld?.label.text = "Billing City"
-        billingCityTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        billingCityTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        billingCityTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        billingCityTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        billingZipCodeTxtFld?.label.text = "Billing Zip/Postal Code"
-        billingZipCodeTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        billingZipCodeTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        billingZipCodeTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        billingZipCodeTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        billingStateTxtFld?.label.text = "Billing State/Province"
-        billingStateTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        billingStateTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        billingStateTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        billingStateTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        billingCountryTxtFld?.label.text = "Billing Country"
-        billingCountryTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        billingCountryTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        billingCountryTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        billingCountryTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        shippingStreetTxtFld?.label.text = "Shipping Street"
-        shippingStreetTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        shippingStreetTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        shippingStreetTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        shippingStreetTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        shippingcityTxtFld?.label.text = "Shipping City"
-        shippingcityTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        shippingcityTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        shippingcityTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        shippingcityTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        shippingZipCodeTxtFld?.label.text = "Shipping Zip/Postal Code"
-        shippingZipCodeTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        shippingZipCodeTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        shippingZipCodeTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        shippingZipCodeTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        shippingStateTxtFld?.label.text = "Shipping State/Province"
-        shippingStateTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        shippingStateTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        shippingStateTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        shippingStateTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        shippingCountryTxtFld?.label.text = "Shipping Country"
-        shippingCountryTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        shippingCountryTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        shippingCountryTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        shippingCountryTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        
-        descriptionTxtFld?.label.text = "Account Description"
-        descriptionTxtFld?.setOutlineColor(UIColor(red: 78.0 / 255.0, green: 78.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0), for: .normal)
-        descriptionTxtFld?.setOutlineColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
-        descriptionTxtFld?.setNormalLabelColor(UIColor.gray, for: .normal)
-        descriptionTxtFld?.setFloatingLabelColor(UIColor(red: 62.0 / 255.0, green: 197.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0), for: .editing)
     }
     
-    func addTapGestureToDismissKeyboard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
+    //setup zonedrop down:
+    func setUpZoneDropDown(){
+        Task{
+            await CustomerService.getZoneNames()
+            self.zoneName = GlobalData.allZones.map{$0.zoneName!}
+            
+            DropDownFunction.setupDropDown(dropDown: zoneDropDown, anchor: zoneView, dataSource: zoneName, labelToUpdate: zoneLabel)
+        }
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+    //account type dropdown:
+    func setUpAccountTypeDropDown(){
+        
+        self.accountTypeNames = GlobalData.accountType.map{$0.accounType!}
+        DropDownFunction.setupDropDown(dropDown: accountTypeDropDown, anchor: accountTypeView, dataSource:accountTypeNames , labelToUpdate: accountTypeLabel)
     }
     
-    @IBAction func activeAction(_ sender: UIButton) {
-        isActive = !isActive
+    //payment terms dropdown:
+    func setUpPaymentTermsDropDown(){
+        self.paymentTermsNames = GlobalData.allPaymentTerms.map{$0.paymentTermName}
+        DropDownFunction.setupDropDown(dropDown: paymentTermsDropDown, anchor: paymentTermsView, dataSource: paymentTermsNames, labelToUpdate: paymentTermsLabel)
     }
     
-    @IBAction func primaryAction(_ sender: UIButton) {
-        isPrimary = !isPrimary
+    //DropDown Actions:
+    @IBAction func zoneDropAction(_ sender: Any) {
+        zoneDropDown.show()
     }
     
-    @IBAction func sameAsBilingAction(_ sender: UIButton) {
-        isSameAsBilling = !isSameAsBilling
+    @IBAction func parentIdDropAction(_ sender: Any) {
+        parentAccountDropDown.show()
     }
     
-    @IBAction func backAction() {
+    @IBAction func accountTypeDropAction(_ sender: Any) {
+        //        print(GlobalData.accountType)
+        accountTypeDropDown.show()
+    }
+    
+    @IBAction func paymentTermsDropAction(_ sender: Any) {
+        //        print(GlobalData.allPaymentTerms)
+        paymentTermsDropDown.show()
+    }
+    
+    @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func submitAction() {
+    @IBAction func sameAsBillingAction(_ sender: Any) {
+        if isSameAsBilling {
+            
+            shippingStreet.text = ""
+            shippingCity.text = ""
+            shippinhZip.text = ""
+            shippingState.text = ""
+            shippingCountry.text = ""
+            sameAsBillingButton.setImage(UIImage(systemName: "square"), for: .normal)
+            sameAsBillingButton.tintColor = .black
+        } else {
+            shippingStreet.text = billingStreet.text
+            shippingCity.text = billingCity.text
+            shippinhZip.text = billingZip.text
+            shippingState.text = billingState.text
+            shippingCountry.text = billingCountry.text
+            sameAsBillingButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+            sameAsBillingButton.tintColor = UIColor(red: 62/255, green: 197/255, blue: 154/255, alpha: 255/255)
+        }
+        
+        isSameAsBilling.toggle()
     }
+    
+    @IBAction func createCustomerAction(_ sender: Any) {
+        
+        if accountName.text == ""{
+            AlertFunction.showErrorAlert("Please Enter Name", self)
+        }else{
+            SwiftLoaderHelper.setLoader()
+            let requestBody:[String:Any] = [
+                "Name": accountName.text!,
+                "Phone" : mobile.text ?? "",
+                "TX_First_Name__c" : firstName.text ?? "",
+                "TX_Last_Name__c" : lastName.text ?? "",
+                "RE_Zone__c": "",
+                "Type" : "",
+                "PI_Payment_Terms__c" : "",
+                "Credit_Limit__c" : creditLimit.text ?? "",
+                "NumberOfEmployees" : numberOfEmployees.text ?? "",
+                "TX_PAN__c": pan.text ?? "",
+                "TX_GST__c" : gst.text ?? "",
+                "BillingStreet":billingStreet.text ?? "",
+                "BillingCity" : billingCity.text ?? "",
+                "BillingPostalCode" : billingZip.text ?? "",
+                "BillingState" : billingState.text ?? "",
+                "BillingCountry" : billingState.text ?? "",
+                "ShippingStreet" : shippingStreet.text ?? "",
+                "ShippingCity" : shippingCity.text ?? "",
+                "ShippingPostalCode" : shippinhZip.text ?? "",
+                "ShippingState" : shippingState.text ?? "",
+                "ShippingCountry" : shippingCountry.text ?? "",
+                "Billing_State_Code__c" : billingStateCode.text ?? "",
+                "Shipping_State_Code__c" : shippingStateCode.text ?? "",
+                "GSTIN_No__c" : billingGst.text ?? "",
+                "Shipping_GSTIN_No__c" : shippingGst.text ?? ""
+            ]
+            GlobalPostRequest.commonPostFunction("v63.0/sobjects/Account", requestBody) { success, response in
+                DispatchQueue.main.async {
+                    if success{
+                        SwiftLoader.hide()
+                        AlertFunction.showAlertAndPop("Account Created Successfully", self)
+                    }else{
+                        AlertFunction.showErrorAlert("\(response ?? "a")", self)
+                        SwiftLoader.hide()
+                        print("Error")
+                    }
+                }
+            }
+        }
 
+    }
+    
 }

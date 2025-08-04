@@ -96,7 +96,6 @@ extension ReturnsVC:UITableViewDelegate, UITableViewDataSource{
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }
-    
 }
 
 

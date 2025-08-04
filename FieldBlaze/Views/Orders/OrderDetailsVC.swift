@@ -55,22 +55,46 @@ class OrderDetailsVC: UIViewController {
         
         orderLineItemsTable.separatorStyle = .none
         
+        print(orderId ?? "----------------------")
+        
+        //        Task{
+        //            await obj.getOrderBasedOnOrderId(orderId!){status in
+        //                if status{
+        //                    print(GlobalData.allOrder.first)
+        //
+        //                }
+        //            }
+        //            singleOrder = obj.singleOrder
+        //            salesOrderLineItemsArray =  GlobalData.salesOrderLineItem
+        //
+        //            orderLineTabHeight.constant = CGFloat( GlobalData.salesOrderLineItem.count * 210)
+        //
+        //            DispatchQueue.main.async {
+        //                self.firstTable.reloadData()
+        //                self.billingTable.reloadData()
+        //                self.shippingTable.reloadData()
+        //                self.orderLineItemsTable.reloadData()
+        //            }
+        //        }
+        
+        setUpUi()
+    }
+    
+    func setUpUi(){
         Task{
-            await obj.getOrderBasedOnOrderId(orderId!){status in
-                if status{
-                    print("Completed")
+            await OrdersService.getOrderBasedOnOrderId(orderId!) { status in
+                DispatchQueue.main.async {
+                    if status{
+                        print(GlobalData.allOrder)
+                        print(GlobalData.salesOrderLineItem)
+                        self.salesOrderLineItemsArray =  GlobalData.salesOrderLineItem
+                        self.orderLineTabHeight.constant = CGFloat( GlobalData.salesOrderLineItem.count * 210)
+                        self.firstTable.reloadData()
+                        self.billingTable.reloadData()
+                        self.shippingTable.reloadData()
+                        self.orderLineItemsTable.reloadData()
+                    }
                 }
-            }
-            singleOrder = obj.singleOrder
-            salesOrderLineItemsArray =  GlobalData.salesOrderLineItem
-            
-            orderLineTabHeight.constant = CGFloat( GlobalData.salesOrderLineItem.count * 210)
-            
-            DispatchQueue.main.async {
-                self.firstTable.reloadData()
-                self.billingTable.reloadData()
-                self.shippingTable.reloadData()
-                self.orderLineItemsTable.reloadData()
             }
         }
     }

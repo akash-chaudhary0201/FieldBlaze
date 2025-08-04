@@ -32,6 +32,8 @@ class CustomerService {
             return
         }
         
+        GlobalData.allCustomers.removeAll()
+        
         do {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
@@ -154,43 +156,39 @@ class CustomerService {
         }
     }
     
-    //Function to get payment terms names:
-    func getPaymentTermsNames() async{
-        let soqlQuery = "Select PI_Payment_Terms__c from Account where PI_Payment_Terms__c!=null"
-        
-        guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-              let instanceUrl = Defaults.instanceUrl else {
-            return
-        }
-        let fullUrl = "\(instanceUrl)/services/data/v59.0/query/?q=\(encodedQuery)"
-        
-        guard let url = URL(string: fullUrl) else{
-            return
-        }
-        
-        do{
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue("Bearer \(Defaults.accessToken!)", forHTTPHeaderField: "Authorization")
-            
-            paymentTerms.removeAll()
-            
-            let (data, _) = try await URLSession.shared.data(for: request)
-            
-            if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
-               let records = jsonData["records"] as? [[String:Any]]{
-                //                print("Terms:-----------------------------------\(records)")
-                for record in records{
-                    if let name = record["PI_Payment_Terms__c"] as? String{
-                        let singlePaymentTerm = PaymentTermsModel(paymentTermName: name)
-                        paymentTerms.append(singlePaymentTerm)
-                    }
-                }
-            }
-        }catch{
-            print("Error: \(error)")
-        }
-    }
+//    //Function to get payment terms names:
+//    func getPaymentTermsNames() async{
+//        let soqlQuery = "Select PI_Payment_Terms__c from Account where PI_Payment_Terms__c!=null"
+//        
+//        guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+//              let instanceUrl = Defaults.instanceUrl else {
+//            return
+//        }
+//        let fullUrl = "\(instanceUrl)/services/data/v59.0/query/?q=\(encodedQuery)"
+//        
+//        guard let url = URL(string: fullUrl) else{
+//            return
+//        }
+//        
+//        do{
+//            var request = URLRequest(url: url)
+//            request.httpMethod = "GET"
+//            request.setValue("Bearer \(Defaults.accessToken!)", forHTTPHeaderField: "Authorization")
+//            
+//            GlobalData.allPaymentTerms.removeAll()
+//            
+//            let (data, _) = try await URLSession.shared.data(for: request)
+//            
+//            if let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any],
+//               let records = jsonData["records"] as? [[String:Any]]{
+//                for record in records{
+////                    GlobalData.allPaymentTerms.append(PaymentTermsModel)
+//                }
+//            }
+//        }catch{
+//            print("Error: \(error)")
+//        }
+//    }
     
     //Function to get all Account based on zone:
     func geAccountBasedOnZone(_ zoneId:String, _ userId:String)async{

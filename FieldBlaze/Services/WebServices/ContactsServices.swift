@@ -12,9 +12,9 @@ class ContactsServices{
     let webRequest = BaseWebService()
     let endPoint = EndPoints()
     
-    func getContactsBasedOnAccoundId(_ accountId:String) async{
+    public static func getContactsBasedOnAccoundId(_ accountId:String) async{
         let soqlQuery = """
-                SELECT Id, Name, Email, Department,    Account.Name, Account.Id FROM Contact where Account.Id = '\(accountId)'
+                SELECT Id, Name, Email, Phone, Department,  Account.Id, Account.Name FROM Contact where AccountId = '\(accountId)'
             """
         
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),

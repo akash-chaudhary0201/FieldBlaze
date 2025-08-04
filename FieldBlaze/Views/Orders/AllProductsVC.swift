@@ -26,7 +26,7 @@ class AllProductsVC: UIViewController {
     func setUpUI(){
         Task{
             await ProductsService.getAllProductsPriceBook(priceBookId!)
-            print(GlobalData.allProducts)
+            print(GlobalData.productAccordingToPB)
             DispatchQueue.main.async {
                 self.allProductsTable.reloadData()
             }
@@ -41,7 +41,7 @@ class AllProductsVC: UIViewController {
 extension AllProductsVC:UITabBarDelegate, UITableViewDataSource, addButtonProtocol{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GlobalData.allProducts.count
+        return GlobalData.productAccordingToPB.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -54,23 +54,26 @@ extension AllProductsVC:UITabBarDelegate, UITableViewDataSource, addButtonProtoc
         cell.productName.text = singleProduct.name
         cell.productPrice.text = "\(singleProduct.listPrice!)"
         cell.productId = singleProduct.id
+        cell.actualPrice = "\(singleProduct.listPrice ?? 0.0)"
         
         cell.delegate = self
 
         return cell
     }
     
-    func addButtonTapped(_ productId: String) {
+    func addButtonTapped(_ productId: String, _ actualPrice:String) {
+        
         let storyboard = UIStoryboard(name: "Orders", bundle: nil)
         if let nextController = storyboard.instantiateViewController(withIdentifier: "OrderLineItemVC") as? OrderLineItemVC{
             nextController.productId = productId
+            nextController.actualPrice = actualPrice
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }
 }
 
 protocol addButtonProtocol:AnyObject{
-    func addButtonTapped(_ productId:String)
+    func addButtonTapped(_ productId:String, _ actualPrice:String)
 }
 
 class AllProductsClass:UITableViewCell{
@@ -78,11 +81,12 @@ class AllProductsClass:UITableViewCell{
     @IBOutlet weak var productPrice: UILabel!
     
     var productId:String?
+    var actualPrice:String?
     
     var delegate:addButtonProtocol?
     
     @IBAction func addButtonAction(_ sender: Any) {
-        delegate?.addButtonTapped(productId!)
+        delegate?.addButtonTapped(productId!, actualPrice!)
     }
     
 }
