@@ -41,6 +41,14 @@ class CustomerReturnVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func goToCreateReturn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Returns", bundle: nil)
+        if let nextController = storyboard.instantiateViewController(withIdentifier: "CreateReturnVC") as? CreateReturnVC{
+            self.navigationController?.pushViewController(nextController, animated: true)
+        }
+    }
+    
 }
 
 extension CustomerReturnVC:UITableViewDelegate, UITableViewDataSource{

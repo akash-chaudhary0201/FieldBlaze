@@ -1,8 +1,8 @@
 //
-//  CreateCustomerVC.swift
+//  UpdateCustomerVC.swift
 //  FieldBlaze
 //
-//  Created by Sakshi on 14/04/25.
+//  Created by Akash Chaudhary  on 05/08/25.
 //  Copyright © 2025 FieldBlazeOrganizationName. All rights reserved.
 //
 
@@ -11,7 +11,9 @@ import MaterialComponents
 import DropDown
 import SwiftLoader
 
-class CreateCustomerVC: UIViewController {
+class UpdateCustomerVC: UIViewController {
+    
+    var accountId:String?
     
     //All outlets:
     @IBOutlet weak var accountName: MDCOutlinedTextField!
@@ -67,11 +69,11 @@ class CreateCustomerVC: UIViewController {
     @IBOutlet weak var paymentTermsView: UIView!
     @IBOutlet weak var paymentTermsLabel: UILabel!
     
-    var textFieldArray:[String] = []
-    
+    var currentCustomer:Customer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let textFields: [MDCOutlinedTextField?] = [
             accountName,
             mobile,
@@ -113,6 +115,35 @@ class CreateCustomerVC: UIViewController {
         setUpZoneDropDown()
         setUpAccountTypeDropDown()
         setUpPaymentTermsDropDown()
+        
+        Task{
+            await setUpUI()
+        }
+    }
+    
+    func setUpUI() async{
+        currentCustomer = await CustomerService.getCustomerBasedOnAccountId(accountId!)
+        
+        accountName.text = currentCustomer?.name
+        mobile.text = currentCustomer?.phone
+        firstName.text = currentCustomer?.txFirstName
+        lastName.text = currentCustomer?.txLastName
+        zoneLabel.text = currentCustomer?.reZoneName ?? "Zone"
+        accountTypeLabel.text = currentCustomer?.type ?? "Account Type"
+        paymentTermsLabel.text = currentCustomer?.piPaymentTerms ?? "Payment Terms"
+        pan.text = currentCustomer?.txPAN
+        gst.text = currentCustomer?.txGST
+        billingStreet.text = currentCustomer?.billingStreet
+        billingCity.text = currentCustomer?.billingCity
+        billingZip.text = currentCustomer?.billingPostalCode
+        billingState.text = currentCustomer?.billingState
+        billingCountry.text = currentCustomer?.billingCountry
+        shippingStreet.text = currentCustomer?.shippingStreet
+        shippingCity.text = currentCustomer?.shippingCity
+        shippinhZip.text = currentCustomer?.shippingPostalCode
+        shippingState.text = currentCustomer?.shippingState
+        shippingCountry.text = currentCustomer?.shippingCountry
+        descriptionTextField.text = currentCustomer?.description
     }
     
     //setup account id dropdown:
@@ -196,44 +227,6 @@ class CreateCustomerVC: UIViewController {
         
         isSameAsBilling.toggle()
     }
-    
-    @IBAction func createCustomerAction(_ sender: Any) {
-        
-        let requestBody:[String:Any] = [
-            "Name": accountName.text!,
-//            "Phone" : mobile.text ?? "",
-//            "Type" : accountTypeLabel.text == "Account Type" ? "" : accountTypeLabel.text ?? "",
-//            "TX_First_Name__c" : firstName.text ?? "",
-//            "TX_Last_Name__c" : lastName.text ?? "",
-//            "RE_Zone__c": selectedZoneId ?? "",
-//            "PI_Payment_Terms__c" : paymentTermsLabel.text == "Payment Terms" ? "" : paymentTermsLabel.text ?? "",
-//            "Credit_Limit__c" : creditLimit.text ?? "",
-//            "NumberOfEmployees" : numberOfEmployees.text ?? "",
-//            "TX_PAN__c": pan.text ?? "",
-//            "TX_GST__c" : gst.text ?? "",
-//            "BillingStreet":billingStreet.text ?? "",
-//            "BillingCity" : billingCity.text ?? "",
-//            "BillingPostalCode" : billingZip.text ?? "",
-//            "BillingState" : billingState.text ?? "",
-//            "BillingCountry" : billingState.text ?? "",
-//            "ShippingStreet" : shippingStreet.text ?? "",
-//            "ShippingCity" : shippingCity.text ?? "",
-//            "ShippingPostalCode" : shippinhZip.text ?? "",
-//            "ShippingState" : shippingState.text ?? "",
-//            "ShippingCountry" : shippingCountry.text ?? "",
-//            "Billing_State_Code__c" : billingStateCode.text ?? "",
-//            "Shipping_State_Code__c" : shippingStateCode.text ?? "",
-//            "GSTIN_No__c" : billingGst.text ?? "",
-//            "Shipping_GSTIN_No__c" : shippingGst.text ?? ""
-        ]
-        GlobalPostRequestEx.commonPostFunctionEx("v63.0/sobjects/Account", requestBody) { success, statusCode, response in
-            if success{
-                print(response ?? "Done")
-            }else{
-                print(response ?? "Error")
-            }
-        }
 
-    }
-    
+
 }

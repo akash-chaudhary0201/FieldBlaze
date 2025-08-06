@@ -21,7 +21,9 @@ class CustomerContactVC: UIViewController {
         noDataImage.isHidden = true
         allContactsTable.isHidden = true
         allContactsTable.separatorStyle = .none
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setUpUI()
     }
     
@@ -42,6 +44,16 @@ class CustomerContactVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func goToAddContact(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Visits", bundle: nil)
+        if let nextController = storyboard.instantiateViewController(withIdentifier: "AddContactVC") as? AddContactVC{
+            nextController.isComingFromCustomers = true
+            nextController.accountId = accountId
+            self.navigationController?.pushViewController(nextController, animated: true)
+        }
+    }
+    
 }
 
 extension CustomerContactVC:UITableViewDelegate, UITableViewDataSource{

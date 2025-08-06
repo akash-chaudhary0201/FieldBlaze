@@ -10,6 +10,7 @@ import UIKit
 import FSPagerView
 import SideMenu
 import MobileSync
+import SalesforceSDKCore
 
 class HomeVC: UIViewController {
     
@@ -20,6 +21,9 @@ class HomeVC: UIViewController {
     @IBOutlet weak var punchButton: UIButton!
     @IBOutlet weak var pagerView: FSPagerView!
     @IBOutlet weak var punchInLabl: UILabel?
+    
+    @IBOutlet weak var topView: UIView!
+    
     
     var exObj = OrdersService()
     
@@ -38,7 +42,7 @@ class HomeVC: UIViewController {
         }
         
         super.viewDidLoad()
-            
+        
         token = UserDefaults.standard.string(forKey: "accessToken")
         print("User Id: \(Defaults.userId!)")
         
@@ -77,11 +81,23 @@ class HomeVC: UIViewController {
         pagerView.transformer = FSPagerViewTransformer(type: .linear)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        topView.layer.cornerRadius = 0
+        topView.layer.masksToBounds = false
+        topView.clipsToBounds = false
+        
+        topView.layer.shadowColor = UIColor.black.cgColor
+        topView.layer.shadowOpacity = 0.15
+        topView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        topView.layer.shadowRadius = 5
+    }
+    
     @IBAction func menuAction() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let dashboardVC = storyboard.instantiateViewController(withIdentifier: "SideBarViewController") as! SideBarViewController
         
-        // Add Top Space to SideBar
         dashboardVC.additionalSafeAreaInsets.top = 0
         
         let menu = SideMenuNavigationController(rootViewController: dashboardVC)
@@ -106,11 +122,11 @@ class HomeVC: UIViewController {
         )
         self.present(checkInalert, animated: true, completion: nil)
         checkInalert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { _ in
-            //            print("Cancel tapped")
         }))
         checkInalert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
             Utility.logoutAction(isRedirectedToLogin: true)
         }))
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,7 +165,7 @@ extension HomeVC: FSPagerViewDataSource, FSPagerViewDelegate {
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-//        print("Tapped on banner at index: \(index)")
+        //        print("Tapped on banner at index: \(index)")
     }
 }
 
@@ -251,9 +267,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
                 navigationController?.pushViewController(selectedVC, animated: true)
             }
         }
-        
     }
-    
 }
 
 class ActionCollectionViewCell: UICollectionViewCell {

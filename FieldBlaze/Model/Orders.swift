@@ -80,3 +80,12 @@ struct SalesOrderLineItemsModel {
         self.cuTotalPrice = dict["CU_Total_Price__c"] as? Double
     }
 }
+
+struct SalesCartModel{
+    var productId:String
+    var productListPrice:String
+    var discountType:String
+    var discountAmount:String
+    var totalAmout:String
+    var amountAfterDiscount:String
+}

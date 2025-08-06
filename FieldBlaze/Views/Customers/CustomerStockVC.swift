@@ -43,6 +43,14 @@ class CustomerStockVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func goToCreateStock(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Stocks", bundle: nil)
+        if let nextController = storyboard.instantiateViewController(withIdentifier: "AddNewStockVC") as? AddNewStockVC{
+            self.navigationController?.pushViewController(nextController, animated: true)
+        }
+    }
+    
 }
 
 extension CustomerStockVC: UITableViewDelegate, UITableViewDataSource{

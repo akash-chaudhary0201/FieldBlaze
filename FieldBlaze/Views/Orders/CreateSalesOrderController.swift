@@ -50,6 +50,8 @@ class CreateSalesOrderController: UIViewController, UITextFieldDelegate {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
             view.addGestureRecognizer(tapGesture)
+        
+        print("---------------------\(GlobalData.salesOrderCart)")
     }
     
     @objc func dismissKeyboard() {

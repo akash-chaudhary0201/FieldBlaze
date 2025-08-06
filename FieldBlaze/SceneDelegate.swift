@@ -62,18 +62,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     static func getSceneDelegate() -> SceneDelegate {
         return UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
     }
-    
-//    private func setupStatusBarBackgroundColor() {
-//
-//        if let statusBarFrame = window?.windowScene?.statusBarManager?.statusBarFrame {
-//            let statusBarView = UIView(frame: statusBarFrame)
-//            statusBarView.backgroundColor = UIColor(red: 62.0/255.0,
-//                                                    green: 197.0/255.0,
-//                                                    blue: 154.0/255.0,
-//                                                    alpha: 1)
-//            window?.addSubview(statusBarView)
-//        }
-//    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         

@@ -43,12 +43,13 @@ class OrderLineItemVC: UIViewController, UITextFieldDelegate {
             view.addGestureRecognizer(tapGesture)
         
         //-----------------------------------------------------------------------
-        
         discountAmountTextField.addTarget(self, action: #selector(discountTextFieldDidChange(_:)), for: .editingChanged)
         quantityTextField.addTarget(self, action: #selector(quantityTextFieldDidChange(_:)), for: .editingChanged)
         //-----------------------------------------------------------------------
         
     }
+    
+    
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -68,7 +69,7 @@ class OrderLineItemVC: UIViewController, UITextFieldDelegate {
               let discountText = discountAmountTextField.text,
               let actualPrice = Double(actualPriceText),
               let discountPercent = Double(discountText) else {
-            amountAfterDiscount.text = "Invalid input"
+            amountAfterDiscount.text = "Please enter amount"
             return
         }
 
@@ -86,7 +87,7 @@ class OrderLineItemVC: UIViewController, UITextFieldDelegate {
               let quantityText = quantityTextField.text,
               let price = Double(priceText),
               let quantity = Double(quantityText) else {
-            totalAmount.text = "Invalid input"
+            totalAmount.text = "Please enter amount"
             return
         }
 
@@ -95,6 +96,12 @@ class OrderLineItemVC: UIViewController, UITextFieldDelegate {
         amountAfterDiscount.text = totalAmount.text
     }
     //-----------------------------------------------------------------------
-
+    
+    @IBAction func addItemToCart(_ sender: Any) {
+        let cartItem = SalesCartModel(productId: productId!, productListPrice: actualPrice, discountType: discountTypeLabel.text!, discountAmount: discountAmountTextField.text!, totalAmout: totalAmount.text!, amountAfterDiscount: amountAfterDiscount.text!)
+        
+        GlobalData.salesOrderCart.append(cartItem)
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 

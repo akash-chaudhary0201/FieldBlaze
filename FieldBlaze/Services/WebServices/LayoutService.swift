@@ -9,9 +9,8 @@ import UIKit
 import Foundation
 
 class LayoutService {
-    static func getLayoutDetails(completion: @escaping ([[String: Any]]) -> Void) {
+    static func getLayoutDetails(completion: @escaping ([LayoutSectionModel]) -> Void) {
         let originalUrl = "https://fbcom-dev-ed.develop.my.salesforce.com/services/data/v59.0/ui-api/layout/Account"
-
         guard let url = URL(string: originalUrl) else { return }
 
         var request = URLRequest(url: url)
@@ -20,14 +19,13 @@ class LayoutService {
 
         URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data, error == nil else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                print("Error")
                 return
             }
 
             do {
-                if let jsonData = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let sections = jsonData["sections"] as? [[String: Any]] {
-                    completion(sections)
+                if let jsonData = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                   print(jsonData)
                 }
             } catch {
                 print("Parsing error: \(error)")

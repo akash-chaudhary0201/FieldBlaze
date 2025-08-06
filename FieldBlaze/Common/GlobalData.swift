@@ -30,6 +30,7 @@ class GlobalData: NSObject {
     static var allOrder = [Orders]()
     static var customerOrders = [Orders]()
     static var salesOrderLineItem = [SalesOrderLineItemsModel]()
+    static var salesOrderCart = [SalesCartModel]()
     //Schemes
     static var allSchemes = [SchemeModel]()
     //Tasks

@@ -44,9 +44,6 @@
 		53A15AD42D9FC78400BDA75D /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15AD02D9FC78400BDA75D /* Utility.swift */; };
 		53A15AD52D9FC78400BDA75D /* CustomDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15ACD2D9FC78400BDA75D /* CustomDateFormatter.swift */; };
 		53A15AD82D9FC78E00BDA75D /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15AD62D9FC78E00BDA75D /* Validation.swift */; };
-		53A15AF92D9FD38C00BDA75D /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53A15AF62D9FD38C00BDA75D /* Tabbar.storyboard */; };
-		53A15AFA2D9FD38C00BDA75D /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A15AF72D9FD38C00BDA75D /* TabbarView.swift */; };
-		53BEA8D32DA7AED9002A151B /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BEA8D22DA7AED9002A151B /* CustomTabBar.swift */; };
 		53BEA8D92DA7AF31002A151B /* TodaysVisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BEA8D82DA7AF31002A151B /* TodaysVisitsVC.swift */; };
 		53FEDB6F2DB25BC90027220E /* CustomerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEDB6E2DB25BC90027220E /* CustomerService.swift */; };
 		53FEDC8A2DB513D80027220E /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEDC892DB513D80027220E /* GlobalData.swift */; };
@@ -98,6 +95,10 @@
 		B45B3EC62E2A6801006398EF /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45B3EC52E2A67FE006398EF /* UserModel.swift */; };
 		B47E41BE2E2532C400883779 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DDC0792E20EA70006D38DB /* libsqlite3.tbd */; };
 		B47E41C02E253A4600883779 /* VisitsTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E41BF2E253A4600883779 /* VisitsTaskVC.swift */; };
+		B47ECD472E41D42F000AE215 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47ECD442E41D42F000AE215 /* TabbarView.swift */; };
+		B47ECD482E41D42F000AE215 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47ECD452E41D42F000AE215 /* CustomTabBar.swift */; };
+		B47ECD492E41D42F000AE215 /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B47ECD432E41D42F000AE215 /* Tabbar.storyboard */; };
+		B47ECD4F2E420FFF000AE215 /* LayoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47ECD4E2E420FFA000AE215 /* LayoutModel.swift */; };
 		B4888B782E266C0900B1876C /* AnnouncementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4888B772E266C0000B1876C /* AnnouncementModel.swift */; };
 		B4888B7A2E266C2A00B1876C /* AnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4888B792E266C2500B1876C /* AnnouncementService.swift */; };
 		B495251F2E3B918700D9019A /* LayoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B495251E2E3B918200D9019A /* LayoutService.swift */; };
@@ -160,9 +161,6 @@
 		53A15ACF2D9FC78400BDA75D /* DropDownManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownManager.swift; sourceTree = "<group>"; };
 		53A15AD02D9FC78400BDA75D /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		53A15AD62D9FC78E00BDA75D /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
-		53A15AF62D9FD38C00BDA75D /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
-		53A15AF72D9FD38C00BDA75D /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
-		53BEA8D22DA7AED9002A151B /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		53BEA8D82DA7AF31002A151B /* TodaysVisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysVisitsVC.swift; sourceTree = "<group>"; };
 		53FEDB6E2DB25BC90027220E /* CustomerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerService.swift; sourceTree = "<group>"; };
 		53FEDC892DB513D80027220E /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
@@ -210,6 +208,10 @@
 		B45B3EC32E2A67EA006398EF /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		B45B3EC52E2A67FE006398EF /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		B47E41BF2E253A4600883779 /* VisitsTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsTaskVC.swift; sourceTree = "<group>"; };
+		B47ECD432E41D42F000AE215 /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
+		B47ECD442E41D42F000AE215 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		B47ECD452E41D42F000AE215 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		B47ECD4E2E420FFA000AE215 /* LayoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModel.swift; sourceTree = "<group>"; };
 		B4888B772E266C0000B1876C /* AnnouncementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementModel.swift; sourceTree = "<group>"; };
 		B4888B792E266C2500B1876C /* AnnouncementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementService.swift; sourceTree = "<group>"; };
 		B495251E2E3B918200D9019A /* LayoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutService.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 		4FD6C4761B754AF1002F9F90 /* FieldBlaze */ = {
 			isa = PBXGroup;
 			children = (
+				B47ECD462E41D42F000AE215 /* Tabbar */,
 				B407D5652E20D8E300CC1CF3 /* Database */,
 				B407D4AD2E20CFE300CC1CF3 /* GlobalFunctions */,
 				53FEDC8B2DB514070027220E /* Model */,
@@ -327,7 +330,6 @@
 				53A15A732D9FC75C00BDA75D /* Common */,
 				53A15AD12D9FC78400BDA75D /* Utility */,
 				53A15AD72D9FC78E00BDA75D /* Validation */,
-				53A15AF82D9FD38C00BDA75D /* Tabbar */,
 				5303F0632DA4FFDF00B4D528 /* CustomControls */,
 			);
 			path = FieldBlaze;
@@ -507,16 +509,6 @@
 			path = Validation;
 			sourceTree = "<group>";
 		};
-		53A15AF82D9FD38C00BDA75D /* Tabbar */ = {
-			isa = PBXGroup;
-			children = (
-				53A15AF62D9FD38C00BDA75D /* Tabbar.storyboard */,
-				53A15AF72D9FD38C00BDA75D /* TabbarView.swift */,
-				53BEA8D22DA7AED9002A151B /* CustomTabBar.swift */,
-			);
-			path = Tabbar;
-			sourceTree = "<group>";
-		};
 		53BEA8D42DA7AEFE002A151B /* Visits */ = {
 			isa = PBXGroup;
 			children = (
@@ -539,6 +531,7 @@
 		53FEDC8B2DB514070027220E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B47ECD4E2E420FFA000AE215 /* LayoutModel.swift */,
 				B49C9C192E409DDB00FA9416 /* AccountTypeModel.swift */,
 				B4BCAB922E30DEE3004FF8E0 /* DSRModel.swift */,
 				B41AE3822E2E390A00438056 /* ExpenseModel.swift */,
@@ -563,6 +556,16 @@
 				53FEDC8C2DB514130027220E /* Customer.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B47ECD462E41D42F000AE215 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				B47ECD432E41D42F000AE215 /* Tabbar.storyboard */,
+				B47ECD442E41D42F000AE215 /* TabbarView.swift */,
+				B47ECD452E41D42F000AE215 /* CustomTabBar.swift */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 		D3E2A4BF5A6076745AA7CBCD /* Pods */ = {
@@ -668,9 +671,9 @@
 				B77BD8A321125B510036B284 /* bootconfig.plist in Resources */,
 				B407D5602E20D70A00CC1CF3 /* LaunchScreen.storyboard in Resources */,
 				B407D5122E20D0F500CC1CF3 /* Visits.storyboard in Resources */,
-				53A15AF92D9FD38C00BDA75D /* Tabbar.storyboard in Resources */,
 				4F13E942237DD5EE005BCAE9 /* usersyncs.json in Resources */,
 				CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */,
+				B47ECD492E41D42F000AE215 /* Tabbar.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,6 +738,8 @@
 				B45B3DB72E2A2665006398EF /* LeaveModel.swift in Sources */,
 				B407D4D72E20D02700CC1CF3 /* ApprovalService.swift in Sources */,
 				B407D4D82E20D02700CC1CF3 /* OrdersService.swift in Sources */,
+				B47ECD472E41D42F000AE215 /* TabbarView.swift in Sources */,
+				B47ECD482E41D42F000AE215 /* CustomTabBar.swift in Sources */,
 				B407D4D92E20D02700CC1CF3 /* TaskServices.swift in Sources */,
 				B49C9C182E409AF700FA9416 /* DescribeService.swift in Sources */,
 				B407D4DA2E20D02700CC1CF3 /* StockTrackingService.swift in Sources */,
@@ -779,6 +784,7 @@
 				B407D4CC2E20D01100CC1CF3 /* Approvals.swift in Sources */,
 				B407D4CD2E20D01100CC1CF3 /* ContactsModel.swift in Sources */,
 				B407D4CE2E20D01100CC1CF3 /* Orders.swift in Sources */,
+				B47ECD4F2E420FFF000AE215 /* LayoutModel.swift in Sources */,
 				4F13E93C237DD5D9005BCAE9 /* ContactsForAccountModel.swift in Sources */,
 				4F13E93F237DD5D9005BCAE9 /* ContactDetailModel.swift in Sources */,
 				4F13E93D237DD5D9005BCAE9 /* ContactsForAccountListView.swift in Sources */,
@@ -805,14 +811,12 @@
 				B4BCAB932E30DEE6004FF8E0 /* DSRModel.swift in Sources */,
 				B4CAEC962E27DB8D009EAE79 /* ReturnModel.swift in Sources */,
 				4F13E93E237DD5D9005BCAE9 /* AccountsListView.swift in Sources */,
-				53A15AFA2D9FD38C00BDA75D /* TabbarView.swift in Sources */,
 				B4888B782E266C0900B1876C /* AnnouncementModel.swift in Sources */,
 				53A15AD82D9FC78E00BDA75D /* Validation.swift in Sources */,
 				53FEDC8D2DB514130027220E /* Customer.swift in Sources */,
 				53A15AD22D9FC78400BDA75D /* CustomTextField.swift in Sources */,
 				B4C784392E24D4A6000C1AF6 /* ProductsService.swift in Sources */,
 				B45B3EC62E2A6801006398EF /* UserModel.swift in Sources */,
-				53BEA8D32DA7AED9002A151B /* CustomTabBar.swift in Sources */,
 				53A15AD32D9FC78400BDA75D /* DropDownManager.swift in Sources */,
 				53A15AD42D9FC78400BDA75D /* Utility.swift in Sources */,
 				53A15AD52D9FC78400BDA75D /* CustomDateFormatter.swift in Sources */,

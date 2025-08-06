@@ -39,7 +39,7 @@ class DetailVC: UIViewController {
     }
     
     func setUpUI() async{
-        currentCustomer = await obj.getCustomerBasedOnAccountId(accountId!)
+        currentCustomer = await CustomerService.getCustomerBasedOnAccountId(accountId!)
         
         DispatchQueue.main.async {
             self.detTable.reloadData()
@@ -54,6 +54,14 @@ class DetailVC: UIViewController {
         } else {
             addressTableHeight.constant = 0
             isAddressTableOpen = false
+        }
+    }
+    
+    @IBAction func goToUpdateAccount(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Customers", bundle: nil)
+        if let nextController = storyboard.instantiateViewController(withIdentifier: "UpdateCustomerVC") as? UpdateCustomerVC{
+            nextController.accountId = self.accountId
+            self.navigationController?.pushViewController(nextController, animated: true)
         }
     }
     

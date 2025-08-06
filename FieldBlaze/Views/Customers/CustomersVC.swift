@@ -25,28 +25,28 @@ class CustomersVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        Task{
-            await setupUI()
-        }
+        setupUI()
     }
     
-    func  setupUI()  async{
+    func  setupUI()  {
         
-        await CustomerService.getAllCustomers(Defaults.userId!)
-        
-        DispatchQueue.main.async {
-            self.tableView?.reloadData()
+        Task{
+            await CustomerService.getAllCustomers(Defaults.userId!)
+            
+            DispatchQueue.main.async {
+                self.tableView?.reloadData()
+            }
+            
+            floatingButton?.layer.cornerRadius = 25
+            if isFromHomeScreen {
+                backBtn?.isHidden = false
+            } else {
+                backBtn?.isHidden = true
+            }
+            
+            await  PriceBookService.getPriceBookNames()
+            await CustomerService.getZoneNames()
         }
-        
-        floatingButton?.layer.cornerRadius = 25
-        if isFromHomeScreen {
-            backBtn?.isHidden = false
-        } else {
-            backBtn?.isHidden = true
-        }
-        
-        await  PriceBookService.getPriceBookNames()
-        await CustomerService.getZoneNames()
         
     }
     
@@ -89,7 +89,6 @@ extension CustomersVC: UITableViewDelegate, UITableViewDataSource {
         cell.typeLabl?.text = (customerDict.type?.isEmpty == false) ? customerDict.type : "N/A"
         cell.addOrderBtn?.layer.masksToBounds = false
         cell.addOrderBtn?.layer.cornerRadius = 7
-        //        cell.delegate = self
         return cell
     }
     
@@ -106,6 +105,29 @@ extension CustomersVC: UITableViewDelegate, UITableViewDataSource {
             nextController.customerId = customerDict.id!
             self.navigationController?.pushViewController(nextController, animated: true)
         }
+    }
+    
+    //Right to left swipe action:
+    func tableView(_ tableView: UITableView,
+                   leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+        
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] (_, _, completionHandler) in
+            
+            guard let self = self else { return }
+            let customerDict = GlobalData.allCustomers[indexPath.row]
+            let storyboard = UIStoryboard(name: "Customers", bundle: .main)
+            if let updateVC = storyboard.instantiateViewController(withIdentifier: "UpdateCustomerVC") as? UpdateCustomerVC {
+                updateVC.accountId = customerDict.id
+                self.navigationController?.pushViewController(updateVC, animated: true)
+            }
+            completionHandler(true)
+        }
+        
+        editAction.backgroundColor = .systemBlue
+        editAction.image = UIImage(systemName: "pencil")
+        
+        return UISwipeActionsConfiguration(actions: [editAction])
     }
 }
 

@@ -9,8 +9,7 @@
 import UIKit
 import MaterialComponents.MaterialTextControls_OutlinedTextFields
 import DropDown
-
-//9058984009
+import SwiftLoader
 
 class AddContactVC: UIViewController {
     
@@ -21,6 +20,8 @@ class AddContactVC: UIViewController {
     @IBOutlet weak var roleTextField: MDCOutlinedTextField!
     @IBOutlet weak var phoneTextField: MDCOutlinedTextField!
     @IBOutlet weak var emailTextField: MDCOutlinedTextField!
+    
+    var isComingFromCustomers:Bool = false
     
     var titleArray:[String] = ["Mr.", "Mrs.", "Ms.", "Dr.", "Prof.", "Mx."]
     
@@ -56,21 +57,49 @@ class AddContactVC: UIViewController {
     
     @IBAction func addContactAction(_ sender: Any) {
         
-        var fullName = "\(firstNameTextField.text!) \(lastNameTextField.text!)"
+        SwiftLoaderHelper.setLoader()
         
-        let contactDict: [String: Any] = [
-            "Id": "",
-            "Name": fullName,
-            "Email": emailTextField.text ?? "",
-            "Phone": phoneTextField.text ?? "",
-            "Department": roleTextField.text ?? "",
-            "AccountId": accountId!
-        ]
+        if titleLabel.text == "Tile" || firstNameTextField.text == "" || lastNameTextField.text == "" || phoneTextField.text == "" || emailTextField.text == "" || roleTextField.text == ""{
+            
+            DispatchQueue.main.async {
+                AlertFunction.showErrorAlert("Please enter all values", self)
+                SwiftLoader.hide()
+            }
+        }
         
-        let newContact = ContactsModel(dict: contactDict)
-        GlobalData.allContacts.append(newContact)
-        
-        self.navigationController?.popViewController(animated: true)
+        if isComingFromCustomers{
+            let requestBody:[String:Any] = [
+                "Salutation": titleLabel.text ?? "",
+                "FirstName": firstNameTextField.text ?? "",
+                "LastName": lastNameTextField.text!,
+                "Phone": phoneTextField.text ?? "",
+                "Email": emailTextField.text ?? "",
+                "Department": roleTextField.text ?? "",
+                "AccountId": accountId!,
+                "OwnerId": Defaults.userId!
+            ]
+            
+            GlobalPostRequestEx.commonPostFunctionEx("v63.0/sobjects/Contact", requestBody) { success, statusCode, response in
+                DispatchQueue.main.async {
+                    if success{
+                        AlertFunction.showAlertAndPop("Contact Added Successfully", self)
+                        SwiftLoader.hide()
+                    }else {
+                        if let errorArray = response as? [[String: Any]],
+                           let message = errorArray.first?["message"] as? String {
+                            AlertFunction.showErrorAlert("\(message)", self)
+                            SwiftLoader.hide()
+                        } else {
+                            print("API Failed with unknown error")
+                            SwiftLoader.hide()
+                        }
+                    }
+                }
+            }
+            
+        }else{
+            AlertFunction.showErrorAlert("Use Database", self)
+        }
     }
     
 }

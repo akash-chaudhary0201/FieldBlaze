@@ -46,10 +46,10 @@ class CustomerVisitVC: UIViewController {
     }
     
     @IBAction func goToCreateNewVisit(_ sender: Any) {
-        //        let storyboard = UIStoryboard(name: "Visits", bundle: nil)
-        //        if let nextController = storyboard.instantiateViewController(withIdentifier: "CreateNewVisitVC") as? CreateNewVisitVC{
-        //            self.navigationController?.pushViewController(nextController, animated: true)
-        //        }
+                let storyboard = UIStoryboard(name: "Visits", bundle: nil)
+                if let nextController = storyboard.instantiateViewController(withIdentifier: "CreateNewVisitVC") as? CreateNewVisitVC{
+                    self.navigationController?.pushViewController(nextController, animated: true)
+                }
     }
     
 }

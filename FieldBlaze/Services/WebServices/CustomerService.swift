@@ -54,7 +54,7 @@ class CustomerService {
     }
     
     //Function to get a customer based on account id:
-    func getCustomerBasedOnAccountId(_ accountId:String) async -> Customer?{
+    public static func getCustomerBasedOnAccountId(_ accountId:String) async -> Customer?{
         let soqlQuery = "SELECT Id, Name, PH_WhatsApp_Number__c, Parent.Name,  Phone, Description, TX_Last_Name__c, TX_First_Name__c, TX_PAN__c, TX_GST__c, ParentId, CB_Is_Active__c, CB_Is_Primary__c,   Type, PI_Payment_Terms__c, RE_Price_Book__r.Id, RE_Price_Book__r.Name, RE_Zone__r.Name ,BillingStreet, BillingCity, BillingPostalCode, BillingState, BillingCountry, CB_SameAsBilling__c, ShippingCity, ShippingCountry, ShippingPostalCode, ShippingState, ShippingStreet FROM Account Where Id = '\(accountId)'"
         guard let encodedQuery = soqlQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let instanceUrl = Defaults.instanceUrl else {
@@ -78,7 +78,6 @@ class CustomerService {
                let customerDictArray = jsonData["records"] as? [[String: Any]],
                let firstCustomerDict = customerDictArray.first {
                 let customer = Customer(dict: firstCustomerDict)
-                self.singleCustomer = customer
                 return customer
                 
             }

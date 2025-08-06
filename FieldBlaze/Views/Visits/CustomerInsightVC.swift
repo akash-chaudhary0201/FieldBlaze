@@ -36,7 +36,7 @@ class CustomerInsightVC: UIViewController {
     //Function to update ui:
     func updateUI(){
         Task{
-            self.currentCustomer = await obj.getCustomerBasedOnAccountId(accountId!)
+            self.currentCustomer = await CustomerService.getCustomerBasedOnAccountId(accountId!)
             DispatchQueue.main.async {
                 self.accountName.text = self.currentCustomer?.name
                 self.accountPhone.text = self.currentCustomer?.phone

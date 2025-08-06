@@ -8,35 +8,72 @@
 import UIKit
 import SideMenu
 
-class TabbarView: UITabBarController {
-
+class TabbarView: UIViewController {
+    
+    //Home:
+    @IBOutlet weak var homeImage: UIImageView!
+    @IBOutlet weak var homeLabel: UILabel!
+    
+    //Today visits:
+    @IBOutlet weak var todayVisitsImage: UIImageView!
+    @IBOutlet weak var todayVisitsLabel: UILabel!
+    
+    //Customers:
+    @IBOutlet weak var customerImage: UIImageView!
+    @IBOutlet weak var customerLabel: UILabel!
+    
+    @IBOutlet weak var containerView: UIView!
+    
+    private var currentChildVC: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setValue(CustomTabBar(), forKey: "tabBar")
-        
-        tabBar.tintColor = UIColor("3EC59A", alpha: 1)
-        tabBar.unselectedItemTintColor = UIColor.darkText
-        tabBar.layer.cornerRadius = 20
-        tabBar.layer.masksToBounds = true
-        
-        setupViewControllers()
+        switchToTab(index: 0)
+    
     }
     
-    func setupViewControllers() {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-        homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "home_unselected"), selectedImage: UIImage(named: "home_selected"))
-        
-        let VisitsStoryBoard = UIStoryboard(name: "Visits", bundle: nil)
-        let visitsVC = VisitsStoryBoard.instantiateViewController(withIdentifier: "TodaysVisitsVC") as! TodaysVisitsVC
-        visitsVC.tabBarItem = UITabBarItem(title: "Today Visits", image: UIImage(named: "visits_unselected"), selectedImage: UIImage(named: "visits_selected"))
-        
-        let CustomerStoryBoard = UIStoryboard(name: "Customers", bundle: nil)
-        let customersVC = CustomerStoryBoard.instantiateViewController(withIdentifier: "CustomersVC") as! CustomersVC
-        customersVC.isFromHomeScreen = false
-        customersVC.tabBarItem = UITabBarItem(title: "Customers", image: UIImage(named: "customers_unselected"), selectedImage: UIImage(named: "customers_selected"))
-        
-        viewControllers = [homeVC, visitsVC, customersVC]
+    @IBAction func tabButtonTapped(_ sender: UIButton){
+        let tag = sender.tag
+        print("Select buttons: tag: \(tag)")
+        switchToTab(index: tag)
     }
+    
+    //Swift to tab function:
+    private func switchToTab(index: Int) {
+    
+        if let currentVC = currentChildVC {
+            currentVC.willMove(toParent: nil)
+            currentVC.view.removeFromSuperview()
+            currentVC.removeFromParent()
+        }
+        
+        var storyboardName = ""
+        var viewControllerID = ""
+        
+        switch index {
+        case 0:
+            storyboardName = "Home"
+            viewControllerID = "HomeVC"
+        case 1:
+            storyboardName = "Visits"
+            viewControllerID = "TodaysVisitsVC"
+        case 2:
+            storyboardName = "Customers"
+            viewControllerID = "CustomersVC"
+        default:
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+        let newVC = storyboard.instantiateViewController(withIdentifier: viewControllerID)
+        
+        addChild(newVC)
+        newVC.view.frame = containerView.bounds
+        containerView.addSubview(newVC.view)
+        newVC.didMove(toParent: self)
+        
+        currentChildVC = newVC
+    }
+    
 }
